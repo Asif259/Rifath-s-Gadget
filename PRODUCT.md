@@ -41,8 +41,8 @@ No stock means nothing to push: the laptop is found for one customer's budget an
 ## Evidence on Hand
 
 - 8 real deliveries, 56 photos: `public/deliveries/<1-8>/` (`n.jpg`, thumbnails `tn.jpg`). Facts per delivery in `src/content.ts` list only what the photos show (brand, battery cycles, warranty screens, accessories).
-- No customer reviews supplied yet. Do not write or imply any.
-- No prices, model numbers beyond what photos show, or sales counts. Do not invent them.
+- Per-delivery post text in `public/deliveries/<id>/description.md`: model, full specs, saving below market price (৳20,000 to ৳36,000), the buyer's first request where stated, and the buyer's review (7 of 8 deliveries). Use only these; never write or imply other reviews.
+- No selling prices or sales counts. Do not invent them.
 
 ## Product Principles
 

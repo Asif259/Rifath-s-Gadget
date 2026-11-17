@@ -1,153 +1,504 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-17T00:00:00Z",
+  "generatedAt": "2026-11-17T12:00:00Z",
   "title": "Design System: Rifath's Gadget",
   "extensions": {
     "colorMeta": {
-      "page": { "role": "neutral", "displayName": "Handover Off-White", "canonical": "#fafaf7", "tonalRamp": ["#26261f", "#43433a", "#64645a", "#8a8a7f", "#b2b2a8", "#d6d6cf", "#ecece6", "#fafaf7"] },
-      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#ffffff", "tonalRamp": ["#262626", "#444444", "#666666", "#8c8c8c", "#b3b3b3", "#d6d6d6", "#efefef", "#ffffff"] },
-      "tint": { "role": "neutral", "displayName": "Table Tint", "canonical": "#f2f2ed", "tonalRamp": ["#25251f", "#42423a", "#62625a", "#87877e", "#aeaea5", "#d0d0c8", "#e6e6e1", "#f2f2ed"] },
-      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#0b0f14", "tonalRamp": ["#0b0f14", "#1a2029", "#2a3038", "#434a54", "#5b6470", "#8a919b", "#c3c7cc", "#eef0f2"] },
-      "ink-2": { "role": "neutral", "displayName": "Ink Soft", "canonical": "#2a3038", "tonalRamp": ["#0b0f14", "#1a2029", "#2a3038", "#434a54", "#5b6470", "#8a919b", "#c3c7cc", "#eef0f2"] },
-      "muted": { "role": "neutral", "displayName": "Muted Slate", "canonical": "#5b6470", "tonalRamp": ["#0b0f14", "#1a2029", "#2a3038", "#434a54", "#5b6470", "#8a919b", "#c3c7cc", "#eef0f2"] },
-      "line": { "role": "neutral", "displayName": "Hairline", "canonical": "#e6e6e1", "tonalRamp": ["#25251f", "#42423a", "#62625a", "#87877e", "#aeaea5", "#d6d6cf", "#e6e6e1", "#f5f5f1"] },
-      "line-2": { "role": "neutral", "displayName": "Hairline Strong", "canonical": "#d6d6cf", "tonalRamp": ["#25251f", "#42423a", "#62625a", "#87877e", "#aeaea5", "#d6d6cf", "#e6e6e1", "#f5f5f1"] },
-      "send-blue": { "role": "primary", "displayName": "Send Blue", "canonical": "#1f6bff", "tonalRamp": ["#08204d", "#0d3384", "#1449b8", "#1656d6", "#1f6bff", "#5c93ff", "#a8c6ff", "#e8f0ff"] },
-      "send-blue-press": { "role": "primary", "displayName": "Send Blue Pressed", "canonical": "#1656d6", "tonalRamp": ["#08204d", "#0d3384", "#1449b8", "#1656d6", "#1f6bff", "#5c93ff", "#a8c6ff", "#e8f0ff"] }
+      "page": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#FAFAF7",
+        "tonalRamp": [
+          "#26261f",
+          "#43433a",
+          "#64645a",
+          "#8a8a7f",
+          "#b2b2a8",
+          "#d6d6cf",
+          "#ecece6",
+          "#fafaf7"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface White",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#262626",
+          "#444444",
+          "#666666",
+          "#8c8c8c",
+          "#b3b3b3",
+          "#d6d6d6",
+          "#efefef",
+          "#ffffff"
+        ]
+      },
+      "tint": {
+        "role": "neutral",
+        "displayName": "Bone Tint",
+        "canonical": "#F2F2ED",
+        "tonalRamp": [
+          "#26261f",
+          "#43433a",
+          "#64645a",
+          "#8a8a7f",
+          "#b2b2a8",
+          "#d6d6cf",
+          "#ecece6",
+          "#fafaf7"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#E6E6E1",
+        "tonalRamp": [
+          "#26261f",
+          "#43433a",
+          "#64645a",
+          "#8a8a7f",
+          "#b2b2a8",
+          "#d6d6cf",
+          "#ecece6",
+          "#fafaf7"
+        ]
+      },
+      "line-2": {
+        "role": "neutral",
+        "displayName": "Hairline Strong",
+        "canonical": "#D6D6CF",
+        "tonalRamp": [
+          "#26261f",
+          "#43433a",
+          "#64645a",
+          "#8a8a7f",
+          "#b2b2a8",
+          "#d6d6cf",
+          "#ecece6",
+          "#fafaf7"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#0B0F14",
+        "tonalRamp": [
+          "#0b0f14",
+          "#1a2029",
+          "#2a3038",
+          "#434a54",
+          "#5b6470",
+          "#8a919b",
+          "#c3c7cc",
+          "#eef0f2"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "canonical": "#2A3038",
+        "tonalRamp": [
+          "#0b0f14",
+          "#1a2029",
+          "#2a3038",
+          "#434a54",
+          "#5b6470",
+          "#8a919b",
+          "#c3c7cc",
+          "#eef0f2"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Slate",
+        "canonical": "#5B6470",
+        "tonalRamp": [
+          "#0b0f14",
+          "#1a2029",
+          "#2a3038",
+          "#434a54",
+          "#5b6470",
+          "#8a919b",
+          "#c3c7cc",
+          "#eef0f2"
+        ]
+      },
+      "blue": {
+        "role": "primary",
+        "displayName": "Action Blue",
+        "canonical": "#1F6BFF",
+        "tonalRamp": [
+          "#08204d",
+          "#0d3384",
+          "#1449b8",
+          "#1656d6",
+          "#1f6bff",
+          "#5c93ff",
+          "#a8c6ff",
+          "#eaf1ff"
+        ]
+      },
+      "blue-press": {
+        "role": "primary",
+        "displayName": "Action Blue Pressed",
+        "canonical": "#1656D6",
+        "tonalRamp": [
+          "#08204d",
+          "#0d3384",
+          "#1449b8",
+          "#1656d6",
+          "#1f6bff",
+          "#5c93ff",
+          "#a8c6ff",
+          "#eaf1ff"
+        ]
+      },
+      "blue-tint": {
+        "role": "primary",
+        "displayName": "Blue Wash",
+        "canonical": "#EAF1FF",
+        "tonalRamp": [
+          "#08204d",
+          "#0d3384",
+          "#1449b8",
+          "#1656d6",
+          "#1f6bff",
+          "#5c93ff",
+          "#a8c6ff",
+          "#eaf1ff"
+        ]
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero promise (two lines, second in Muted Slate) and the closing title." },
-      "display-bn": { "displayName": "Display (Bangla)", "purpose": "Bangla hero promise; looser leading, near-zero tracking." },
-      "headline": { "displayName": "Headline", "purpose": "Section titles, max 22ch." },
-      "title": { "displayName": "Title", "purpose": "Benefit, step, card and FAQ titles." },
-      "figure": { "displayName": "Figure", "purpose": "Live budget amount in the order slip; tabular numerals." },
-      "body": { "displayName": "Body", "purpose": "Running copy, ledes at max 52ch." },
-      "body-bn": { "displayName": "Body (Bangla)", "purpose": "Bangla running copy." },
-      "label": { "displayName": "Label", "purpose": "Form legends, caption names, button text." },
-      "caption": { "displayName": "Caption", "purpose": "Photo facts, footer, slip note." }
+      "heading-1": {
+        "displayName": "Heading 1",
+        "purpose": "Hero promise only; two lines, max 680px, #000 to #666 gradient."
+      },
+      "heading-2": {
+        "displayName": "Heading 2",
+        "purpose": "Section titles, tagline sentence, closing title."
+      },
+      "heading-3": {
+        "displayName": "Heading 3",
+        "purpose": "Saving amount on the deal sheet."
+      },
+      "heading-4": {
+        "displayName": "Heading 4",
+        "purpose": "Buyer's request on the deal sheet; live budget figure."
+      },
+      "heading-5": {
+        "displayName": "Heading 5",
+        "purpose": "Model name in the viewer and deal sheet."
+      },
+      "heading-6": {
+        "displayName": "Heading 6",
+        "purpose": "Card, step and delivery titles."
+      },
+      "title-1": {
+        "displayName": "Title 1",
+        "purpose": "Large secondary title."
+      },
+      "title-2": {
+        "displayName": "Title 2",
+        "purpose": "Hero lede, FAQ questions, close body."
+      },
+      "title-3": {
+        "displayName": "Title 3",
+        "purpose": "Form labels and legends."
+      },
+      "title-4": {
+        "displayName": "Title 4",
+        "purpose": "Small title."
+      },
+      "body-1": {
+        "displayName": "Body 1",
+        "purpose": "Brand name, emphasized body."
+      },
+      "body-2": {
+        "displayName": "Body 2",
+        "purpose": "Medium body, 'below market' label."
+      },
+      "body-3": {
+        "displayName": "Body 3",
+        "purpose": "Running copy and review quotes on the deal sheet."
+      },
+      "body-4": {
+        "displayName": "Body 4",
+        "purpose": "Buyer names, tab names."
+      },
+      "body-6": {
+        "displayName": "Body 6",
+        "purpose": "Review quotes in delivery cards and viewer."
+      },
+      "button-lg": {
+        "displayName": "Button Lg",
+        "purpose": "Hero CTA."
+      },
+      "button-md": {
+        "displayName": "Button Md",
+        "purpose": "Standard buttons."
+      },
+      "button-sm": {
+        "displayName": "Button Sm",
+        "purpose": "Nav CTA."
+      },
+      "caption-1": {
+        "displayName": "Caption 1",
+        "purpose": "Nav links, language switch, choice pills, proof line."
+      },
+      "caption-2": {
+        "displayName": "Caption 2",
+        "purpose": "Photo facts, form note, counters."
+      },
+      "caption-3": {
+        "displayName": "Caption 3",
+        "purpose": "Small strong caption."
+      },
+      "caption-4": {
+        "displayName": "Caption 4",
+        "purpose": "Tab model line, translated note."
+      }
     },
     "shadows": [
-      { "name": "thumb-ring", "value": "0 0 0 2px #0b0f14", "purpose": "Outline ring on the selected viewer thumbnail. Not elevation; the system has no drop shadows." }
+      {
+        "name": "nav-float",
+        "value": "0 8px 24px rgba(11, 15, 20, 0.06)",
+        "purpose": "Floating nav pill, with 72% white fill and backdrop-filter: saturate(1.6) blur(16px)."
+      },
+      {
+        "name": "sheet-float",
+        "value": "0 24px 48px rgba(11, 15, 20, 0.06)",
+        "purpose": "Hero deal sheet only."
+      },
+      {
+        "name": "segment-lift",
+        "value": "0 1px 2px rgba(11, 15, 20, 0.08)",
+        "purpose": "Active deal tab and active language segment."
+      },
+      {
+        "name": "range-thumb",
+        "value": "inset 0 0 0 2px #1F6BFF, 0 1px 3px rgba(11, 15, 20, 0.16)",
+        "purpose": "Budget slider thumb."
+      },
+      {
+        "name": "thumb-ring",
+        "value": "0 0 0 2px #0B0F14",
+        "purpose": "Selected viewer thumbnail; outline, not elevation."
+      }
     ],
     "motion": [
-      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Default ease for presses, zooms, entrances, FAQ and viewer fades." },
-      { "name": "press", "value": "transform: scale(0.97) 160ms ease-out", "purpose": "Every button and chip on :active." },
-      { "name": "photo-press", "value": "transform: scale(0.99) 160ms ease-out", "purpose": "Photo frame on :active." },
-      { "name": "photo-zoom", "value": "transform: scale(1.03) 500ms ease-out", "purpose": "Image inside a photo frame on fine-pointer hover." },
-      { "name": "hero-entrance", "value": "opacity 0 to 1, blur(12px) to 0, y 16px to 0; 0.9s ease-out; delay 0.15s + 0.09s per item", "purpose": "Hero photo wall, once on load. Headline: opacity + 12px rise over 0.7s." },
-      { "name": "chip-pill", "value": "spring, duration 0.35s, bounce 0.15", "purpose": "Shared-layout ink pill sliding between selected chips." },
-      { "name": "viewer-expand", "value": "spring, duration 0.5s, bounce 0.12", "purpose": "Shared-element expand from a photo frame into the viewer." },
-      { "name": "viewer-swap", "value": "x 40px, blur(6px), opacity; 0.3s ease-out", "purpose": "Changing photos inside the viewer, direction-aware." },
-      { "name": "fade", "value": "0.25s ease-out", "purpose": "Viewer scrim and FAQ answer open/close." },
-      { "name": "reduced-motion", "value": "transitions 0.001ms; entrances removed; viewer swap opacity only", "purpose": "prefers-reduced-motion: reduce." }
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Base curve for every transition."
+      },
+      {
+        "name": "state",
+        "value": "300ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Color, background, border and transform changes."
+      },
+      {
+        "name": "press",
+        "value": "transform: scale(0.98)",
+        "purpose": "Every button on :active."
+      },
+      {
+        "name": "hero-entrance",
+        "value": "opacity 0 to 1, y 24px to 0; 0.8s; delay 0.08s per item",
+        "purpose": "Hero heading, lede, CTA and deal sheet, once on load."
+      },
+      {
+        "name": "section-reveal",
+        "value": "opacity 0 to 1, y 32px to 0; 0.7s; once; viewport margin -64px",
+        "purpose": "Every section on first view (landing-page-design B7)."
+      },
+      {
+        "name": "tagline-word",
+        "value": "color rgba(11,15,20,0.28) to #0B0F14; 600ms",
+        "purpose": "Each tagline word lights once it crosses 40% from the viewport bottom (B11)."
+      },
+      {
+        "name": "pill-slide",
+        "value": "spring, duration 0.45s, bounce 0.12",
+        "purpose": "Shared-layout active deal tab and selected choice pill."
+      },
+      {
+        "name": "case-progress",
+        "value": "scaleX 0 to 1, 7s linear",
+        "purpose": "Deal tab progress line; case advances every 7s, paused on hover or focus."
+      },
+      {
+        "name": "case-swap",
+        "value": "opacity plus y 8px, 0.35s",
+        "purpose": "Deal sheet content change."
+      },
+      {
+        "name": "photo-zoom",
+        "value": "transform: scale(1.03) 500ms",
+        "purpose": "Delivery photo on fine-pointer hover."
+      },
+      {
+        "name": "viewer",
+        "value": "backdrop fade 0.3s; panel y 24px 0.5s; photo swap x 40px 0.5s",
+        "purpose": "Photo viewer open and photo changes."
+      },
+      {
+        "name": "faq-expand",
+        "value": "height 0 to auto plus opacity, 0.5s",
+        "purpose": "FAQ answer; plus icon rotates 45deg."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "560px" },
-      { "name": "md", "value": "900px" },
-      { "name": "lg", "value": "1080px" }
+      {
+        "name": "page-lg",
+        "value": "@container page (max-width: 1080px)"
+      },
+      {
+        "name": "page-md",
+        "value": "@container page (max-width: 860px)"
+      },
+      {
+        "name": "page-sm",
+        "value": "@container page (max-width: 600px)"
+      },
+      {
+        "name": "viewer-stack",
+        "value": "@media (max-width: 860px)"
+      }
     ]
   },
   "components": [
     {
-      "name": "Primary Button (Send)",
+      "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "The one blue action: send the budget on WhatsApp.",
-      "html": "<button class=\"ds-btn ds-btn-primary\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M4 20l1.3-3.9A8 8 0 1 1 8 19z\"/></svg>Send on WhatsApp</button>",
-      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 20px; border-radius: 10px; font-family: Geist, 'Anek Bangla', system-ui, sans-serif; font-weight: 600; font-size: 16px; white-space: nowrap; border: 0; cursor: pointer; transition: transform 160ms cubic-bezier(0.23,1,0.32,1), background-color 160ms ease, border-color 160ms ease; } .ds-btn:active { transform: scale(0.97); } .ds-btn:focus-visible { outline: 2px solid #1f6bff; outline-offset: 3px; } .ds-btn-primary { background: #1f6bff; color: #fff; } .ds-btn-primary:hover { background: #1656d6; }"
+      "description": "WhatsApp action; Action Blue, 12px radius, presses to 0.98.",
+      "html": "<button class=\"ds-btn-primary\"><svg viewBox=\"0 0 256 256\" width=\"20\" height=\"20\" fill=\"currentColor\"><path d=\"M221.66 133.66l-72 72a8 8 0 0 1-11.32-11.32L196.69 136H40a8 8 0 0 1 0-16h156.69l-58.35-58.34a8 8 0 0 1 11.32-11.32l72 72a8 8 0 0 1 0 11.32Z\"/></svg>Send your budget</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:0;border-radius:12px;background:var(--blue,#1f6bff);color:#fff;font:600 16px/24px Geist,system-ui,sans-serif;cursor:pointer;transition:background-color 300ms cubic-bezier(0.22, 1, 0.36, 1),transform 300ms cubic-bezier(0.22, 1, 0.36, 1)}.ds-btn-primary:hover{background:var(--blue-press,#1656d6)}.ds-btn-primary:active{transform:scale(0.98)}.ds-btn-primary:focus-visible{outline:2px solid var(--blue,#1f6bff);outline-offset:2px}"
     },
     {
       "name": "Line Button",
       "kind": "button",
       "refersTo": "button-line",
-      "description": "Secondary and header actions; ink on paper with a hairline border.",
-      "html": "<button class=\"ds-btn-line\">Message on Facebook</button>",
-      "css": ".ds-btn-line { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 20px; border-radius: 10px; border: 1px solid #d6d6cf; background: #fff; color: #0b0f14; font-family: Geist, 'Anek Bangla', system-ui, sans-serif; font-weight: 600; font-size: 16px; cursor: pointer; transition: transform 160ms cubic-bezier(0.23,1,0.32,1), border-color 160ms ease; } .ds-btn-line:hover { border-color: #0b0f14; } .ds-btn-line:active { transform: scale(0.97); } .ds-btn-line:focus-visible { outline: 2px solid #1f6bff; outline-offset: 3px; }"
+      "description": "Secondary contact action; white with Hairline Strong border.",
+      "html": "<button class=\"ds-btn-line\">Messenger</button>",
+      "css": ".ds-btn-line{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid var(--line-2,#d6d6cf);border-radius:12px;background:#fff;color:var(--ink,#0b0f14);font:600 16px/24px Geist,system-ui,sans-serif;cursor:pointer;transition:border-color 300ms cubic-bezier(0.22, 1, 0.36, 1),transform 300ms cubic-bezier(0.22, 1, 0.36, 1)}.ds-btn-line:hover{border-color:var(--ink,#0b0f14)}.ds-btn-line:active{transform:scale(0.98)}.ds-btn-line:focus-visible{outline:2px solid var(--blue,#1f6bff);outline-offset:2px}"
     },
     {
-      "name": "Use Chips",
+      "name": "Nav Pill",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "Floating translucent nav with links, language switch and CTA.",
+      "html": "<nav class=\"ds-nav\"><b class=\"ds-nav-brand\">Rifath's Gadget</b><a class=\"ds-nav-link ds-on\" href=\"#\">How it works</a><a class=\"ds-nav-link\" href=\"#\">Deliveries</a><span class=\"ds-lang\"><button aria-pressed=\"true\">বাংলা</button><button aria-pressed=\"false\">EN</button></span><a class=\"ds-nav-cta\" href=\"#\">WhatsApp</a></nav>",
+      "css": ".ds-nav{display:inline-flex;align-items:center;gap:24px;padding:8px 8px 8px 16px;border-radius:9999px;background:rgba(255,255,255,.72);backdrop-filter:saturate(1.6) blur(16px);border:1px solid var(--line,#e6e6e1);box-shadow:0 8px 24px rgba(11,15,20,.06);font:500 14px/20px Geist,system-ui,sans-serif}.ds-nav-brand{font:600 16px/24px Geist,system-ui,sans-serif;color:var(--ink,#0b0f14)}.ds-nav-link{padding:8px 12px;border-radius:9999px;color:var(--muted,#5b6470);text-decoration:none;transition:color 300ms cubic-bezier(0.22, 1, 0.36, 1)}.ds-nav-link:hover{color:var(--ink,#0b0f14)}.ds-nav-link.ds-on{background:var(--tint,#f2f2ed);color:var(--ink,#0b0f14)}.ds-lang{display:flex;padding:2px;border-radius:9999px;background:var(--tint,#f2f2ed)}.ds-lang button{padding:8px 12px;border:0;border-radius:9999px;background:none;color:var(--muted,#5b6470);font:inherit;cursor:pointer}.ds-lang button[aria-pressed=true]{background:#fff;color:var(--ink,#0b0f14);box-shadow:0 1px 2px rgba(11,15,20,.08)}.ds-nav-cta{padding:8px 16px;border-radius:9999px;background:var(--blue,#1f6bff);color:#fff;font-weight:600;text-decoration:none}.ds-nav-cta:hover{background:var(--blue-press,#1656d6)}"
+    },
+    {
+      "name": "Chip and Saving Badge",
       "kind": "chip",
       "refersTo": "chip",
-      "description": "Single-choice chips; the selected one carries an ink pill.",
-      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\">Study</button><button class=\"ds-chip ds-chip-on\" aria-pressed=\"true\">Office</button><button class=\"ds-chip\">Design</button></div>",
-      "css": ".ds-chips { display: flex; flex-wrap: wrap; gap: 6px; } .ds-chip { min-height: 40px; padding: 0 12px; border-radius: 8px; border: 1px solid #d6d6cf; background: transparent; color: #2a3038; font-family: Geist, 'Anek Bangla', system-ui, sans-serif; font-size: 15px; cursor: pointer; transition: border-color 160ms ease, color 160ms ease, transform 160ms cubic-bezier(0.23,1,0.32,1); } .ds-chip:hover { border-color: #0b0f14; } .ds-chip:active { transform: scale(0.97); } .ds-chip:focus-visible { outline: 2px solid #1f6bff; outline-offset: 3px; } .ds-chip-on { background: #0b0f14; border-color: #0b0f14; color: #fff; }"
+      "description": "Delivery facts as Bone Tint chips; saving as a Blue Wash pill.",
+      "html": "<div class=\"ds-chips\"><span class=\"ds-chip\">8 GB DDR5</span><span class=\"ds-chip\">36 battery cycles</span><span class=\"ds-badge\">৳20,000 below market</span></div>",
+      "css": ".ds-chips{display:flex;flex-wrap:wrap;gap:4px;align-items:center}.ds-chip{padding:2px 8px;border-radius:8px;background:var(--tint,#f2f2ed);color:var(--ink-2,#2a3038);font:500 12px/16px Geist,system-ui,sans-serif}.ds-badge{padding:4px 12px;border-radius:9999px;background:var(--blue-tint,#eaf1ff);color:var(--blue-press,#1656d6);font:600 14px/20px Geist,system-ui,sans-serif;font-variant-numeric:tabular-nums}"
     },
     {
-      "name": "Order Slip",
-      "kind": "custom",
-      "refersTo": "order-slip",
-      "description": "Signature first-screen form: budget figure, ink-filled slider, chips, send.",
-      "html": "<form class=\"ds-slip\"><div class=\"ds-slip-top\"><label>Budget</label><output>৳65,000</output></div><input class=\"ds-range\" type=\"range\" min=\"40000\" max=\"120000\" value=\"65000\" style=\"--pct:31%\"><button type=\"button\" class=\"ds-slip-send\">Send on WhatsApp</button><p class=\"ds-slip-note\">Free suggestion. Pay at handover.</p></form>",
-      "css": ".ds-slip { display: flex; flex-direction: column; gap: 14px; padding: 20px; border: 1px solid #e6e6e1; border-radius: 14px; background: #fff; font-family: Geist, 'Anek Bangla', system-ui, sans-serif; color: #0b0f14; max-width: 420px; } .ds-slip-top { display: flex; justify-content: space-between; align-items: baseline; } .ds-slip-top label { font-size: 15px; font-weight: 600; color: #2a3038; } .ds-slip-top output { font-size: 36px; font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; line-height: 1; } .ds-range { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; margin: -12px 0; background: linear-gradient(90deg, #0b0f14 var(--pct), #e6e6e1 var(--pct)) center / 100% 6px no-repeat; cursor: pointer; } .ds-range::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 2px solid #0b0f14; } .ds-range:focus-visible { outline: 2px solid #1f6bff; outline-offset: 3px; } .ds-slip-send { min-height: 48px; border: 0; border-radius: 10px; background: #1f6bff; color: #fff; font: 600 16px Geist, system-ui, sans-serif; cursor: pointer; transition: transform 160ms cubic-bezier(0.23,1,0.32,1), background-color 160ms ease; } .ds-slip-send:hover { background: #1656d6; } .ds-slip-send:active { transform: scale(0.97); } .ds-slip-note { margin: -6px 0 0; font-size: 14px; color: #5b6470; text-align: center; }"
-    },
-    {
-      "name": "Photo Frame",
+      "name": "Benefit Card",
       "kind": "card",
-      "refersTo": "photo-frame",
-      "description": "Clickable delivery photo with caption; zooms on hover, opens the viewer.",
-      "html": "<figure class=\"ds-photo\"><button class=\"ds-frame\"><span class=\"ds-img\"></span><span class=\"ds-count\">7 photos</span></button><figcaption><b>Lenovo ThinkPad</b><span>Battery cycles: 41</span></figcaption></figure>",
-      "css": ".ds-photo { margin: 0; width: 220px; display: flex; flex-direction: column; gap: 12px; font-family: Geist, 'Anek Bangla', system-ui, sans-serif; } .ds-frame { position: relative; display: block; width: 100%; aspect-ratio: 3 / 4; padding: 0; border: 0; overflow: hidden; border-radius: 14px; background: #f2f2ed; cursor: pointer; transition: transform 160ms cubic-bezier(0.23,1,0.32,1); } .ds-img { position: absolute; inset: 0; background: #e6e6e1; transition: transform 500ms cubic-bezier(0.23,1,0.32,1); } .ds-frame:hover .ds-img { transform: scale(1.03); } .ds-frame:active { transform: scale(0.99); } .ds-frame:focus-visible { outline: 2px solid #1f6bff; outline-offset: 3px; } .ds-count { position: absolute; right: 10px; bottom: 10px; padding: 4px 10px; border-radius: 999px; background: rgba(11,15,20,0.72); color: #fff; font-size: 13px; } .ds-photo figcaption { display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 1.45; } .ds-photo b { font-size: 15px; font-weight: 600; color: #0b0f14; } .ds-photo figcaption span { color: #5b6470; }"
+      "refersTo": "benefit-card",
+      "description": "White hairline card with Blue Wash icon box.",
+      "html": "<div class=\"ds-card\"><span class=\"ds-icon\"><svg viewBox=\"0 0 256 256\" width=\"24\" height=\"24\" fill=\"currentColor\"><path d=\"M173.66 98.34a8 8 0 0 1 0 11.32l-56 56a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L112 148.69l50.34-50.35a8 8 0 0 1 11.32 0ZM232 128A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104Zm-16 0a88 88 0 1 0-88 88 88.1 88.1 0 0 0 88-88Z\"/></svg></span><h3>Checked before we buy</h3><p>Cash memo, motherboard, RAM, SSD health and battery cycles.</p></div>",
+      "css": ".ds-card{display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:16px;background:#fff;border:1px solid var(--line,#e6e6e1);max-width:280px;font-family:Geist,system-ui,sans-serif}.ds-icon{width:40px;height:40px;display:grid;place-items:center;margin-bottom:12px;border-radius:12px;background:var(--blue-tint,#eaf1ff);color:var(--blue,#1f6bff)}.ds-card h3{margin:0;font:600 20px/28px inherit;font-family:inherit;color:var(--ink,#0b0f14)}.ds-card p{margin:0;font:400 16px/24px Geist,system-ui,sans-serif;color:var(--muted,#5b6470)}"
     },
     {
-      "name": "Header Navigation",
-      "kind": "nav",
-      "refersTo": "lang-toggle-on",
-      "description": "Sticky header: brand, muted links, segmented language toggle, line CTA.",
-      "html": "<header class=\"ds-header\"><span class=\"ds-brand\">Rifath's Gadget</span><nav class=\"ds-nav\"><a href=\"#\">How it works</a><a href=\"#\">Delivered</a><a href=\"#\">FAQ</a></nav><div class=\"ds-lang\"><button aria-pressed=\"true\">বাং</button><button>EN</button></div></header>",
-      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; padding: 0 20px; background: #fafaf7; border-bottom: 1px solid #e6e6e1; font-family: Geist, 'Anek Bangla', system-ui, sans-serif; } .ds-brand { font-weight: 600; font-size: 17px; letter-spacing: -0.01em; color: #0b0f14; } .ds-nav { display: flex; gap: 4px; } .ds-nav a { padding: 10px 12px; border-radius: 8px; color: #5b6470; font-size: 15px; text-decoration: none; transition: color 160ms ease, background-color 160ms ease; } .ds-nav a:hover { color: #0b0f14; background: #f2f2ed; } .ds-nav a:focus-visible { outline: 2px solid #1f6bff; outline-offset: 3px; } .ds-lang { display: flex; padding: 3px; border: 1px solid #d6d6cf; border-radius: 10px; background: #fff; } .ds-lang button { min-height: 40px; min-width: 52px; padding: 0 10px; border: 0; border-radius: 7px; background: transparent; font-size: 14px; color: #5b6470; cursor: pointer; } .ds-lang button[aria-pressed=\"true\"] { background: #0b0f14; color: #fff; }"
+      "name": "Choice Pills",
+      "kind": "input",
+      "refersTo": "choice-pill",
+      "description": "Use-case choice; selected pill is solid ink.",
+      "html": "<div class=\"ds-choices\"><button aria-pressed=\"true\">Study</button><button aria-pressed=\"false\">Office</button><button aria-pressed=\"false\">Design</button></div>",
+      "css": ".ds-choices{display:flex;flex-wrap:wrap;gap:8px}.ds-choices button{padding:9px 15px;border-radius:9999px;border:1px solid var(--line-2,#d6d6cf);background:none;color:var(--ink-2,#2a3038);font:500 14px/20px Geist,system-ui,sans-serif;cursor:pointer;transition:color 300ms cubic-bezier(0.22, 1, 0.36, 1),border-color 300ms cubic-bezier(0.22, 1, 0.36, 1)}.ds-choices button:hover{border-color:var(--ink,#0b0f14)}.ds-choices button[aria-pressed=true]{background:var(--ink,#0b0f14);border-color:var(--ink,#0b0f14);color:#fff}.ds-choices button:focus-visible{outline:2px solid var(--blue,#1f6bff);outline-offset:2px}"
     },
     {
-      "name": "Phone Send Bar",
+      "name": "Budget Range",
+      "kind": "input",
+      "refersTo": "form-card",
+      "description": "Budget slider with blue fill and ringed thumb.",
+      "html": "<div class=\"ds-range\"><div class=\"ds-range-row\"><label>Budget</label><output>৳60,000</output></div><input type=\"range\" min=\"0\" max=\"100\" value=\"25\"></div>",
+      "css": ".ds-range{width:320px;font-family:Geist,system-ui,sans-serif}.ds-range-row{display:flex;justify-content:space-between;align-items:baseline;color:var(--ink,#0b0f14)}.ds-range-row label{font:500 16px/24px inherit;font-family:inherit}.ds-range-row output{font:600 30px/36px Geist,system-ui,sans-serif;font-variant-numeric:tabular-nums}.ds-range input{-webkit-appearance:none;appearance:none;width:100%;height:24px;margin:8px 0 0;background:linear-gradient(90deg,var(--blue,#1f6bff) 25%,var(--line,#e6e6e1) 25%) center/100% 4px no-repeat;cursor:pointer}.ds-range input::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:9999px;background:#fff;box-shadow:inset 0 0 0 2px var(--blue,#1f6bff),0 1px 3px rgba(11,15,20,.16)}.ds-range input:active::-webkit-slider-thumb{transform:scale(1.1)}"
+    },
+    {
+      "name": "Deal Sheet",
       "kind": "custom",
-      "refersTo": "send-bar",
-      "description": "Fixed bottom bar on phones: live budget and the send button.",
-      "html": "<div class=\"ds-sendbar\"><span><small>Budget</small><b>৳65,000</b></span><button class=\"ds-sendbar-btn\">Send</button></div>",
-      "css": ".ds-sendbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; background: #fff; border-top: 1px solid #e6e6e1; font-family: Geist, 'Anek Bangla', system-ui, sans-serif; max-width: 390px; } .ds-sendbar span { display: flex; flex-direction: column; line-height: 1.2; } .ds-sendbar small { font-size: 13px; color: #5b6470; } .ds-sendbar b { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; color: #0b0f14; } .ds-sendbar-btn { min-height: 48px; padding: 0 20px; border: 0; border-radius: 10px; background: #1f6bff; color: #fff; font-weight: 600; font-size: 16px; cursor: pointer; transition: transform 160ms cubic-bezier(0.23,1,0.32,1); } .ds-sendbar-btn:active { transform: scale(0.97); }"
-    },
-    {
-      "name": "FAQ Row",
-      "kind": "custom",
-      "description": "Hairline-ruled question with a plus that rotates to a minus.",
-      "html": "<div class=\"ds-q\"><button aria-expanded=\"false\">Do you keep laptops in stock?<i></i></button></div>",
-      "css": ".ds-q { border-top: 1px solid #d6d6cf; border-bottom: 1px solid #d6d6cf; font-family: Geist, 'Anek Bangla', system-ui, sans-serif; max-width: 560px; } .ds-q button { width: 100%; min-height: 64px; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 0; border: 0; background: none; text-align: left; font-size: 18px; font-weight: 600; color: #0b0f14; cursor: pointer; } .ds-q button:focus-visible { outline: 2px solid #1f6bff; outline-offset: 3px; } .ds-q i { position: relative; flex: none; width: 14px; height: 14px; } .ds-q i::before, .ds-q i::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; margin-top: -0.75px; background: #0b0f14; border-radius: 2px; transition: transform 200ms cubic-bezier(0.23,1,0.32,1); } .ds-q i::after { transform: rotate(90deg); } .ds-q button:hover i::after { transform: rotate(0deg); }"
+      "refersTo": "deal-sheet",
+      "description": "Signature hero sheet: case tabs with progress line, request panel, arrow, found panel with saving.",
+      "html": "<div class=\"ds-deal\"><div class=\"ds-tabs\"><span class=\"ds-tab ds-on\">Rabbani<i></i></span><span class=\"ds-tab\">Case 2</span></div><div class=\"ds-deal-body\"><div class=\"ds-ask\"><small>Asked for</small><p>A budget laptop for office work</p></div><span class=\"ds-arrow\">&rarr;</span><div class=\"ds-found\"><small>We found</small><p>Lenovo IdeaPad Slim 3i</p><b>৳20,000</b> <span>below market</span></div></div></div>",
+      "css": ".ds-deal{max-width:640px;padding:8px;border-radius:24px;background:#fff;border:1px solid var(--line,#e6e6e1);box-shadow:0 24px 48px rgba(11,15,20,.06);font-family:Geist,system-ui,sans-serif;color:var(--ink,#0b0f14)}.ds-tabs{display:flex;gap:4px;padding:4px;border-radius:16px;background:var(--tint,#f2f2ed)}.ds-tab{position:relative;flex:1;padding:8px 16px;border-radius:12px;color:var(--muted,#5b6470);font:600 14px/20px inherit;font-family:inherit}.ds-tab.ds-on{background:#fff;color:var(--ink,#0b0f14);box-shadow:0 1px 2px rgba(11,15,20,.08)}.ds-tab.ds-on i{position:absolute;left:16px;right:40%;bottom:4px;height:2px;border-radius:9999px;background:var(--blue,#1f6bff)}.ds-deal-body{display:grid;grid-template-columns:5fr auto 7fr;gap:8px;margin-top:8px;align-items:stretch}.ds-ask{padding:24px;border-radius:16px;background:var(--tint,#f2f2ed)}.ds-found{padding:24px;border-radius:16px;border:1px solid var(--line,#e6e6e1)}.ds-deal small{color:var(--muted,#5b6470);font:500 14px/20px inherit;font-family:inherit}.ds-deal p{margin:8px 0;font:600 20px/28px inherit;font-family:inherit}.ds-arrow{align-self:center;width:40px;height:40px;display:grid;place-items:center;border-radius:9999px;background:var(--ink,#0b0f14);color:#fff}.ds-found b{font:600 36px/40px Geist,system-ui,sans-serif;font-variant-numeric:tabular-nums}.ds-found span{color:var(--muted,#5b6470)}"
     }
   ],
   "narrative": {
-    "northStar": "The Handover Table",
-    "overview": "The page is an off-white table with real laptops laid on it. Every image is a photograph from an actual delivery: pink bedroom walls, yellow bedsheets, battery-cycle screens. Those photographs are the only colour on the page. Around them sits ink-black type on a warm off-white ground, held together by 1px hairlines. Nothing is decorated, lit or layered; the evidence does the persuading.\n\nDensity is calm and editorial. The first screen pairs a working order slip (budget slider, use chips, screen size, send) with a three-photo wall, so the visitor can act before scrolling. Below, sections alternate between the page ground and a slightly darker tint band, separated only by space and hairlines. On phones, a fixed bottom bar keeps the current budget and the send action reachable.\n\nBangla reads first. Every type role has a Bangla counterpart in Anek Bangla with looser leading and near-zero tracking. Motion is small and earned: a single blur-fade entrance for the hero, a pressed scale on every tap, a slow zoom on photo hover, and a shared-element expand when a photo opens into its set.",
+    "northStar": "The Deal Sheet",
+    "overview": "The page reads like a clear receipt of one real job: what a buyer asked for, what was found, how far below market it came, and what the buyer said. Everything else is quiet paper around that sheet. A warm off-white page, white surfaces edged with 1px hairlines, near-black ink, and one confident blue reserved for actions, savings and checks. Density is calm: one idea per section, 96px between sections, a centered 680px column for every promise.\n\nThe system is built on the landing-page-design skill's fixed scales. Type comes from a closed set of named styles (heading, title, body, button, caption), spacing from twelve tokens, corners from the Tailwind radius scale with nested corners computed from their parent. Geist carries Latin; Anek Bangla carries Bangla, which reads first. Phosphor icons are the only icon set. Motion is soft and once-only: sections rise 32px into place, tagline words light up as they are read, pills slide between choices.\n\nTrust is carried by evidence, never by decoration. Every delivery fact, saving and review shown on a surface comes from that delivery's `public/deliveries/<id>/description.md`. Nothing is invented to fill a layout.",
     "keyCharacteristics": [
-      "Off-white ground, ink type, hairline structure; photographs supply all colour.",
-      "One blue (#1f6bff) reserved for the send action, focus and text selection.",
-      "Flat surfaces: no shadows, gradients, glass or glows.",
-      "Square-ish corners: 8px controls, 10px buttons, 14px cards and photos.",
-      "Geist 600 for Latin display with tight negative tracking; Anek Bangla for Bangla.",
-      "Bilingual by default, with per-language type adjustments."
+      "Light, warm-neutral paper with white hairline-bordered surfaces.",
+      "One accent (blue) for actions, savings and check icons; ink for selection and numbering.",
+      "Closed named type styles on the Tailwind scale, Bangla line heights loosened.",
+      "Rounded, nested corners (8 / 12 / 16 / 24 / full).",
+      "Floating translucent nav pill; the hero heading gradient is the only gradient.",
+      "Soft, once-only motion on cubic-bezier(0.22, 1, 0.36, 1)."
     ],
     "rules": [
-      { "name": "The One Blue Rule", "body": "Blue appears only on the send action, focus and selection. Header CTA, nav links and body links stay ink. If a second thing on screen is blue, one of them is wrong.", "section": "colors" },
-      { "name": "The Photographs Bring The Colour Rule", "body": "No colour is added to the interface to make it lively. Warmth and variety come from the delivery photos alone.", "section": "colors" },
-      { "name": "The Two Scripts Rule", "body": "Every heading style has a `lang-bn` counterpart: looser line-height, tracking near 0. Never apply Latin negative tracking to Bangla.", "section": "typography" },
-      { "name": "The Tabular Money Rule", "body": "Budgets, counts and step numbers use tabular numerals so the figure does not jitter while the slider moves.", "section": "typography" },
-      { "name": "The Hairline Not Shadow Rule", "body": "To separate a surface, change its tone or give it a 1px line. Never lift it with a shadow.", "section": "elevation" }
+      {
+        "name": "The One Accent Rule",
+        "body": "Blue appears only where the visitor can act or where a saving or check is proven. Selection states that are not actions use ink, not blue.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Gradient Rule",
+        "body": "The hero heading carries a 90deg gradient from #000000 to #666666 (landing-page-design rule B5, a recorded detector exception for `src/styles.css`). No other text, surface or button carries a gradient. The range input's two-stop fill is a hard-edged progress fill, not a gradient.",
+        "section": "colors"
+      },
+      {
+        "name": "The Named Style Rule",
+        "body": "Text uses one of the named styles above and nothing else. No ad-hoc font sizes; the only overrides are the documented phone sizes for headings 1 to 3, the hero lede and the deal-sheet request.",
+        "section": "typography"
+      },
+      {
+        "name": "The Bangla Room Rule",
+        "body": "Bangla needs space for vowel signs above and below the line. Under `lang-bn`, headings 1 to 4 set line-height 1.3 and letter-spacing 0, headings 5 and 6 set 1.45 and 0, title 1 to 3 and body 1 to 3 set 1.6. This is a recorded script exception to the fixed Tailwind line heights.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Figure Rule",
+        "body": "Money and counts (saving, saving badge, budget output) use tabular numerals.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hairline First Rule",
+        "body": "A new card is a white surface with a 1px Hairline border and no shadow. Shadows are reserved for things that float over content (nav, deal sheet) and for the active segment of a track.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Nested Corner Rule",
+        "body": "An inner radius equals the outer radius minus the padding between them. The deal sheet (24px radius, 8px padding) holds 16px panels; the delivery card (24px, 8px) holds a 16px photo; on phones the sheet (16px, 4px) holds 12px panels.",
+        "section": "shapes"
+      }
     ],
     "dos": [
-      "Do use real delivery photographs for every image; the colour on the page comes from them.",
-      "Do keep Send Blue (#1f6bff) on the send action, focus outline and selection only.",
-      "Do separate surfaces with tone (Paper, Tint) and 1px hairlines (#e6e6e1, #d6d6cf).",
-      "Do use 8 / 10 / 14px corners for chips / buttons / cards and photos.",
-      "Do give every heading a Bangla variant with looser leading and tracking near 0.",
-      "Do use the out-expo ease cubic-bezier(0.23, 1, 0.32, 1): press 0.97 over 160ms, photo zoom 1.03 over 500ms, hero blur-fade (12px, 16px rise, 0.9s, 90ms stagger) once on load.",
-      "Do honour reduced motion: entrances and slides drop to plain fades or nothing.",
-      "Do render the reviews section only from real customer words."
+      "Do use only the named text styles, the twelve spacing tokens (2 to 96px) and the Tailwind radii (8, 12, 16, 24, full).",
+      "Do compute inner corners as outer radius minus padding.",
+      "Do keep hero heading and subheading at max 680px.",
+      "Do use Phosphor icons at 16, 20 or 24px.",
+      "Do keep Action Blue for actions, savings and checks; use ink for non-action selection.",
+      "Do loosen Bangla line heights (1.3 large headings, 1.45 heading 5 and 6, 1.6 body and titles).",
+      "Do take every delivery fact, saving and review from `public/deliveries/<id>/description.md`, and show one name per buyer.",
+      "Do reveal sections once with a 32px rise on cubic-bezier(0.22, 1, 0.36, 1), and press buttons to scale 0.98.",
+      "Do write breakpoints as container queries on `.page` at 1080, 860 and 600px."
     ],
     "donts": [
-      "Don't use gradients, glass, glows or backdrop blur on any surface. The range track's two-stop hard fill is the only gradient and it is a progress fill, not decoration.",
-      "Don't add drop shadows to cards, buttons or photos.",
-      "Don't put eyebrow or kicker labels above headings.",
-      "Don't use stock photos, device renders or illustrations in place of delivery photos.",
-      "Don't colour links, nav items or headings blue.",
-      "Don't animate on scroll; nothing moves except the hero entrance, presses, hovers, chips, FAQ and the viewer.",
-      "Don't write or imply reviews, prices or guarantees that do not exist."
+      "Don't add any gradient beyond the hero heading's #000 to #666.",
+      "Don't invent reviews, prices, savings, specs or model details that the delivery's description.md does not state.",
+      "Don't put shadows on ordinary cards; use a 1px Hairline border.",
+      "Don't set text in ad-hoc sizes or weights outside the named styles.",
+      "Don't use any icon set other than Phosphor."
     ]
   }
 }
