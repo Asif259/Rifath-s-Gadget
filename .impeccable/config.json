@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/styles.css"
+        ],
+        "createdAt": "2026-11-17T08:15:20.642Z",
+        "reason": "landing-page-design skill B5 (invoked by the user as /landing-page-design) requires the light-theme hero heading gradient #000000 to #666666; only .hero h1 uses it"
+      }
+    ]
+  }
+}
