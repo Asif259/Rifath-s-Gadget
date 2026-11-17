@@ -1,266 +1,418 @@
 ---
 name: Rifath's Gadget
-description: Laptop sourcing in Dhaka. Light, photo-led page where real handover photos carry the trust and one blue action sends the budget.
+description: A laptop found for one budget, checked before purchase, paid for at handover.
 colors:
-  page: "#fafaf7"
-  paper: "#ffffff"
-  tint: "#f2f2ed"
-  ink: "#0b0f14"
-  ink-2: "#2a3038"
-  muted: "#5b6470"
-  line: "#e6e6e1"
-  line-2: "#d6d6cf"
-  send-blue: "#1f6bff"
-  send-blue-press: "#1656d6"
+  page: "#FAFAF7"
+  surface: "#FFFFFF"
+  tint: "#F2F2ED"
+  line: "#E6E6E1"
+  line-2: "#D6D6CF"
+  ink: "#0B0F14"
+  ink-2: "#2A3038"
+  muted: "#5B6470"
+  blue: "#1F6BFF"
+  blue-press: "#1656D6"
+  blue-tint: "#EAF1FF"
 typography:
-  display:
+  heading-1:
     fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
-    fontSize: "clamp(30px, 3.2vw, 48px)"
+    fontSize: "60px"
     fontWeight: 600
-    lineHeight: 1.04
-    letterSpacing: "-0.035em"
-  display-bn:
-    fontFamily: "Anek Bangla, Geist, system-ui, sans-serif"
-    fontSize: "clamp(32px, 3.4vw, 50px)"
-    fontWeight: 600
-    lineHeight: 1.18
-    letterSpacing: "-0.01em"
-  headline:
-    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
-    fontSize: "clamp(28px, 3.3vw, 44px)"
-    fontWeight: 600
-    lineHeight: 1.12
+    lineHeight: "60px"
     letterSpacing: "-0.03em"
-  title:
+  heading-2:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "48px"
+    fontWeight: 600
+    lineHeight: "48px"
+    letterSpacing: "-0.025em"
+  heading-3:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "36px"
+    fontWeight: 600
+    lineHeight: "40px"
+    letterSpacing: "-0.02em"
+  heading-4:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "30px"
+    fontWeight: 600
+    lineHeight: "36px"
+    letterSpacing: "-0.015em"
+  heading-5:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "24px"
+    fontWeight: 600
+    lineHeight: "32px"
+    letterSpacing: "-0.01em"
+  heading-6:
     fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
     fontSize: "20px"
     fontWeight: 600
-    lineHeight: 1.3
-    letterSpacing: "-0.015em"
-  figure:
+    lineHeight: "28px"
+  title-1:
     fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
-    fontSize: "clamp(30px, 3vw, 40px)"
-    fontWeight: 600
-    lineHeight: 1
-    letterSpacing: "-0.03em"
-    fontFeature: "tnum"
-  body:
+    fontSize: "20px"
+    fontWeight: 500
+    lineHeight: "28px"
+  title-2:
     fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
-    fontSize: "17px"
-    fontWeight: 400
-    lineHeight: 1.6
-  body-bn:
-    fontFamily: "Anek Bangla, Geist, system-ui, sans-serif"
     fontSize: "18px"
-    fontWeight: 400
-    lineHeight: 1.7
-  label:
+    fontWeight: 500
+    lineHeight: "28px"
+  title-3:
     fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
-    fontSize: "15px"
+    fontSize: "16px"
+    fontWeight: 500
+    lineHeight: "24px"
+  title-4:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "14px"
+    fontWeight: 500
+    lineHeight: "20px"
+  body-1:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "16px"
     fontWeight: 600
-    lineHeight: 1.45
-  caption:
+    lineHeight: "24px"
+  body-2:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "16px"
+    fontWeight: 500
+    lineHeight: "24px"
+  body-3:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "16px"
+    fontWeight: 400
+    lineHeight: "24px"
+  body-4:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "14px"
+    fontWeight: 600
+    lineHeight: "20px"
+  body-6:
     fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
     fontSize: "14px"
     fontWeight: 400
-    lineHeight: 1.45
+    lineHeight: "20px"
+  button-lg:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "18px"
+    fontWeight: 600
+    lineHeight: "28px"
+  button-md:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "16px"
+    fontWeight: 600
+    lineHeight: "24px"
+  button-sm:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "14px"
+    fontWeight: 600
+    lineHeight: "20px"
+  caption-1:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "14px"
+    fontWeight: 500
+    lineHeight: "20px"
+  caption-2:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "14px"
+    fontWeight: 400
+    lineHeight: "20px"
+  caption-3:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "12px"
+    fontWeight: 600
+    lineHeight: "16px"
+  caption-4:
+    fontFamily: "Geist, Anek Bangla, system-ui, sans-serif"
+    fontSize: "12px"
+    fontWeight: 500
+    lineHeight: "16px"
 rounded:
-  sm: "8px"
-  md: "10px"
-  lg: "14px"
-  pill: "999px"
+  lg: "8px"
+  xl: "12px"
+  2xl: "16px"
+  3xl: "24px"
+  full: "9999px"
 spacing:
-  gutter: "clamp(16px, 4.5vw, 56px)"
-  max: "1240px"
-  slip: "20px"
-  card: "24px"
-  section: "clamp(72px, 10vw, 128px)"
+  s-25: "2px"
+  s-50: "4px"
+  s-75: "8px"
+  s-100: "12px"
+  s-200: "16px"
+  s-300: "24px"
+  s-400: "32px"
+  s-500: "40px"
+  s-600: "48px"
+  s-700: "64px"
+  s-800: "80px"
+  s-900: "96px"
 components:
   button-primary:
-    backgroundColor: "{colors.send-blue}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.md}"
-    padding: "0 20px"
-    height: "48px"
+    backgroundColor: "{colors.blue}"
+    textColor: "{colors.surface}"
+    typography: "{typography.button-md}"
+    rounded: "{rounded.xl}"
+    padding: "8px 12px"
   button-primary-hover:
-    backgroundColor: "{colors.send-blue-press}"
+    backgroundColor: "{colors.blue-press}"
+  button-primary-big:
+    backgroundColor: "{colors.blue}"
+    textColor: "{colors.surface}"
+    typography: "{typography.button-lg}"
+    rounded: "{rounded.2xl}"
+    padding: "12px 24px"
   button-line:
-    backgroundColor: "{colors.paper}"
+    backgroundColor: "{colors.surface}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.md}"
-    padding: "0 20px"
-    height: "48px"
-  button-line-small:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.md}"
-    padding: "0 14px"
-    height: "44px"
-  chip:
-    textColor: "{colors.ink-2}"
-    rounded: "{rounded.sm}"
-    padding: "0 12px"
-    height: "40px"
-  chip-selected:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.sm}"
-  order-slip:
-    backgroundColor: "{colors.paper}"
-    rounded: "{rounded.lg}"
-    padding: "20px"
-  photo-frame:
+    rounded: "{rounded.xl}"
+    padding: "7px 11px"
+  link:
+    textColor: "{colors.blue}"
+  nav-pill:
+    rounded: "{rounded.full}"
+    padding: "8px 8px 8px 16px"
+  lang-switch:
     backgroundColor: "{colors.tint}"
-    rounded: "{rounded.lg}"
-  review-card:
-    backgroundColor: "{colors.paper}"
-    rounded: "{rounded.lg}"
+    textColor: "{colors.muted}"
+    typography: "{typography.caption-1}"
+    rounded: "{rounded.full}"
+    padding: "2px"
+  lang-switch-active:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+  deal-sheet:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.3xl}"
+    padding: "8px"
+  deal-request-panel:
+    backgroundColor: "{colors.tint}"
+    rounded: "{rounded.2xl}"
+    padding: "32px"
+  deal-found-panel:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.2xl}"
+    padding: "32px"
+  benefit-card:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.2xl}"
     padding: "24px"
-  send-bar:
-    backgroundColor: "{colors.paper}"
-    padding: "10px 16px"
-  lang-toggle-on:
+  icon-box:
+    backgroundColor: "{colors.blue-tint}"
+    textColor: "{colors.blue}"
+    rounded: "{rounded.xl}"
+    size: "40px"
+  step-number:
     backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-    height: "40px"
+    textColor: "{colors.surface}"
+    rounded: "{rounded.full}"
+    size: "32px"
+  delivery-card:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.3xl}"
+    padding: "8px"
+  chip:
+    backgroundColor: "{colors.tint}"
+    textColor: "{colors.ink-2}"
+    rounded: "{rounded.lg}"
+    padding: "2px 8px"
+  badge-saving:
+    backgroundColor: "{colors.blue-tint}"
+    textColor: "{colors.blue-press}"
+    rounded: "{rounded.full}"
+    padding: "4px 12px"
+  choice-pill:
+    textColor: "{colors.ink-2}"
+    typography: "{typography.caption-1}"
+    rounded: "{rounded.full}"
+    padding: "9px 15px"
+  choice-pill-selected:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.surface}"
+  form-card:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.3xl}"
+    padding: "32px"
+  faq-item:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.2xl}"
+    padding: "16px 24px"
+  viewer-side:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.3xl}"
+    padding: "24px"
 ---
 
 # Design System: Rifath's Gadget
 
 ## Overview
 
-**Creative North Star: "The Handover Table"**
+**Creative North Star: "The Deal Sheet"**
 
-The page is an off-white table with real laptops laid on it. Every image is a photograph from an actual delivery: pink bedroom walls, yellow bedsheets, battery-cycle screens. Those photographs are the only colour on the page. Around them sits ink-black type on a warm off-white ground, held together by 1px hairlines. Nothing is decorated, lit or layered; the evidence does the persuading.
+The page reads like a clear receipt of one real job: what a buyer asked for, what was found, how far below market it came, and what the buyer said. Everything else is quiet paper around that sheet. A warm off-white page, white surfaces edged with 1px hairlines, near-black ink, and one confident blue reserved for actions, savings and checks. Density is calm: one idea per section, 96px between sections, a centered 680px column for every promise.
 
-Density is calm and editorial. The first screen pairs a working order slip (budget slider, use chips, screen size, send) with a three-photo wall, so the visitor can act before scrolling. Below, sections alternate between the page ground and a slightly darker tint band, separated only by space and hairlines. On phones, a fixed bottom bar keeps the current budget and the send action reachable.
+The system is built on the landing-page-design skill's fixed scales. Type comes from a closed set of named styles (heading, title, body, button, caption), spacing from twelve tokens, corners from the Tailwind radius scale with nested corners computed from their parent. Geist carries Latin; Anek Bangla carries Bangla, which reads first. Phosphor icons are the only icon set. Motion is soft and once-only: sections rise 32px into place, tagline words light up as they are read, pills slide between choices.
 
-Bangla reads first. Every type role has a Bangla counterpart in Anek Bangla with looser leading and near-zero tracking. Motion is small and earned: a single blur-fade entrance for the hero, a pressed scale on every tap, a slow zoom on photo hover, and a shared-element expand when a photo opens into its set.
+Trust is carried by evidence, never by decoration. Every delivery fact, saving and review shown on a surface comes from that delivery's `public/deliveries/<id>/description.md`. Nothing is invented to fill a layout.
 
 **Key Characteristics:**
-- Off-white ground, ink type, hairline structure; photographs supply all colour.
-- One blue (#1f6bff) reserved for the send action, focus and text selection.
-- Flat surfaces: no shadows, gradients, glass or glows.
-- Square-ish corners: 8px controls, 10px buttons, 14px cards and photos.
-- Geist 600 for Latin display with tight negative tracking; Anek Bangla for Bangla.
-- Bilingual by default, with per-language type adjustments.
+- Light, warm-neutral paper with white hairline-bordered surfaces.
+- One accent (blue) for actions, savings and check icons; ink for selection and numbering.
+- Closed named type styles on the Tailwind scale, Bangla line heights loosened.
+- Rounded, nested corners (8 / 12 / 16 / 24 / full).
+- Floating translucent nav pill; the hero heading gradient is the only gradient.
+- Soft, once-only motion on cubic-bezier(0.22, 1, 0.36, 1).
 
 ## Colors
 
-A near-neutral, warm off-white palette with a single saturated blue that marks the one action.
+A warm off-white neutral family with one saturated blue; ink does the work of contrast, blue does the work of action.
 
 ### Primary
-- **Send Blue** (#1f6bff): The WhatsApp send button (slip, phone send bar, closing section), the focus outline, range and checkbox accent, caret, and the 18% selection tint. It never fills a surface, a section or a headline.
-- **Send Blue Pressed** (#1656d6): Hover state of the primary button on pointer devices.
+- **Action Blue** (#1F6BFF): every primary button (WhatsApp), links, check and seal icons, the deal-tab progress line, the range fill, focus rings.
+- **Action Blue Pressed** (#1656D6): primary button hover; text on the saving badge, where it holds contrast on Blue Wash.
+- **Blue Wash** (#EAF1FF): saving badge fill, benefit icon box fill, text selection.
 
 ### Neutral
-- **Handover Off-White** (#fafaf7): Page ground, header background, theme colour.
-- **Paper** (#ffffff): Raised working surfaces: the order slip, line buttons, the language toggle, review cards, the closing section, the phone send bar, the viewer side panel.
-- **Table Tint** (#f2f2ed): Alternate section bands, photo-frame placeholder while an image loads, nav hover fill.
-- **Ink** (#0b0f14): All primary text, the selected chip pill, the active language button, range fill and thumb ring, FAQ plus/minus, viewer scrim at 88% and photo-count pill at 72%.
-- **Ink Soft** (#2a3038): Form legends and unselected chip text.
-- **Muted Slate** (#5b6470): Second headline line, ledes, captions, body copy under titles, step numbers, footer text.
-- **Hairline** (#e6e6e1): Header rule, slip and card borders, range track, footer rules.
-- **Hairline Strong** (#d6d6cf): Interactive borders (line buttons, chips, language toggle) and list rules (steps, FAQ), scrollbar thumb.
+- **Warm Paper** (#FAFAF7): page background and browser theme color.
+- **Surface White** (#FFFFFF): cards, deal sheet, form card, FAQ items, viewer side panel, active tab and language segment.
+- **Bone Tint** (#F2F2ED): recessed areas: the request panel, tab track, language switch track, chips, photo placeholders, current nav link.
+- **Hairline** (#E6E6E1): 1px borders on every surface, section and footer dividers, range track.
+- **Hairline Strong** (#D6D6CF): line-button border, choice-pill border, dividers sitting on Bone Tint (review rule, step top rule).
+- **Ink** (#0B0F14): body text, step numbers, the deal arrow disc, selected choice pill, selected thumbnail ring, skip link.
+- **Ink Soft** (#2A3038): quoted reviews, spec lists, chip text.
+- **Muted Slate** (#5B6470): secondary copy, ledes, labels, inactive nav and tab text.
 
 ### Named Rules
-**The One Blue Rule.** Blue appears only on the send action, focus and selection. Header CTA, nav links and body links stay ink. If a second thing on screen is blue, one of them is wrong.
+**The One Accent Rule.** Blue appears only where the visitor can act or where a saving or check is proven. Selection states that are not actions use ink, not blue.
 
-**The Photographs Bring The Colour Rule.** No colour is added to the interface to make it lively. Warmth and variety come from the delivery photos alone.
+**The One Gradient Rule.** The hero heading carries a 90deg gradient from #000000 to #666666 (landing-page-design rule B5, a recorded detector exception for `src/styles.css`). No other text, surface or button carries a gradient. The range input's two-stop fill is a hard-edged progress fill, not a gradient.
 
 ## Typography
 
-**Display Font:** Geist (with Anek Bangla, system-ui)
-**Body Font:** Geist for Latin, Anek Bangla for Bangla (each falls back to the other, then system-ui)
+**Latin Font:** Geist (with Anek Bangla, system-ui, sans-serif)
+**Bangla Font:** Anek Bangla (with Geist, system-ui, sans-serif), applied by the `lang-bn` root class.
 
-**Character:** Geist at 600 with tight negative tracking gives a crisp, product-catalogue voice. Anek Bangla carries the Bangla first read with taller leading and no tracking, so both languages feel equally native.
+**Character:** a precise neo-grotesk paired with a wide, open Bangla face; both set in 400 to 600, never lighter, never heavier.
 
 ### Hierarchy
-- **Display** (600, clamp(30px, 3.2vw, 48px), 1.04, -0.035em): Hero promise in two lines; the second line drops to Muted Slate. Bangla: clamp(32px, 3.4vw, 50px), 1.18, -0.01em. Closing title scales to clamp(32px, 4.4vw, 56px) at 16ch.
-- **Headline** (600, clamp(28px, 3.3vw, 44px), 1.12, -0.03em): Section titles, max 22ch (26ch for wide variants). Bangla line-height 1.3.
-- **Title** (600, 20px, 1.3, -0.015em): Benefit and card titles; 18px in steps and FAQ questions.
-- **Figure** (600, clamp(30px, 3vw, 40px), 1, -0.03em, tabular numerals): The live budget amount in the slip; 20px in the phone send bar.
-- **Body** (400, 17px, 1.6): Running copy. Bangla 18px at 1.7. Ledes clamp(16px, 1.2vw, 18px), max 52ch; FAQ answers max 62ch.
-- **Label** (600, 15px): Form legends, caption names, buttons at 16px.
-- **Caption** (400, 14px, 1.45): Photo facts in Muted Slate, footer, slip note; 13px for range ends and the photo count.
+- **Heading 1** (600, 60px / 60px, -0.03em): the hero promise only, two lines, max 680px. 36/40px under 600px container width (the hero heading itself drops to 30/36px).
+- **Heading 2** (600, 48px / 48px, -0.025em): section titles, the tagline sentence and the closing title. 30/36px on phones.
+- **Heading 3** (600, 36px / 40px): the saving amount on the deal sheet.
+- **Heading 4** (600, 30px / 36px): the buyer's request on the deal sheet, the live budget figure.
+- **Heading 5 / 6** (600, 24/32px and 20/28px): model names and card titles.
+- **Title 1 to 4** (500, 20/28, 18/28, 16/24, 14/20): ledes (title-2), form labels and legends (title-3), FAQ questions (title-2).
+- **Body 1 to 6** (600 / 500 / 400 at 16/24; 600 / 400 at 14/20): running copy is body-3; names are body-4; review quotes in cards are body-6.
+- **Button lg / md / sm** (600, 18/28, 16/24, 14/20): hero CTA, standard buttons, nav CTA.
+- **Caption 1 to 4** (500 / 400 at 14/20; 600 / 500 at 12/16): nav links, language switch, choice pills, proof line, photo facts, footer.
 
 ### Named Rules
-**The Two Scripts Rule.** Every heading style has a `lang-bn` counterpart: looser line-height, tracking near 0. Never apply Latin negative tracking to Bangla.
+**The Named Style Rule.** Text uses one of the named styles above and nothing else. No ad-hoc font sizes; the only overrides are the documented phone sizes for headings 1 to 3, the hero lede and the deal-sheet request.
 
-**The Tabular Money Rule.** Budgets, counts and step numbers use tabular numerals so the figure does not jitter while the slider moves.
+**The Bangla Room Rule.** Bangla needs space for vowel signs above and below the line. Under `lang-bn`, headings 1 to 4 set line-height 1.3 and letter-spacing 0, headings 5 and 6 set 1.45 and 0, title 1 to 3 and body 1 to 3 set 1.6. This is a recorded script exception to the fixed Tailwind line heights.
+
+**The Tabular Figure Rule.** Money and counts (saving, saving badge, budget output) use tabular numerals.
 
 ## Layout
 
-A centered column of min(100% - 2 × gutter, 1240px) with a fluid gutter of clamp(16px, 4.5vw, 56px). The hero is a 5.4fr / 6.6fr grid: copy and slip left, photo wall right (one tall photo spanning two rows beside two stacked, min-height 480px, 14px gaps). Content sections use clamp(72px, 10vw, 128px) vertical padding; "how it works" and FAQ use a 4fr / 8fr title-left grid; benefits are three columns of 4:5 photos; delivered laptops are a four-column grid of 3:4 photos (two below 1080px).
+A centered single column, max 1200px with 48px gutters (16px under 600px container width). Sections are separated by 96px of padding (64px on phones; the hero uses 96px top on desktop, 48px on phones). Section heads cap at 680px with 16px between title and lede; centered heads center their text.
 
-Below 900px everything stacks: promise, lede, a horizontally scroll-snapped strip of 150px photos bleeding to the screen edge, then the slip. The fixed send bar appears and the body gains 76px bottom padding. Below 560px the brand wordmark hides, the close actions go full width, and the first chip row wraps. The desktop nav hides below 1080px. The sticky header is 68px tall; scroll padding is 84px.
+Spacing uses only the twelve tokens: 2, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96px. Inner card padding is 24px or 32px; gaps inside cards are 8, 12 or 24px; grids sit 48px below their section head.
+
+Grids: benefits 4 columns, delivery cards 2, steps 3, finder and FAQ split 1:1 and 4:8 with 48px gutters. The deal sheet splits 5fr / arrow / 7fr.
+
+Breakpoints are container queries on `.page` (`container: page / inline-size`), so the live site and fixed-width mocks share rules:
+- **1080px:** benefits 2 columns, deliveries 1 column.
+- **860px:** nav links hide; deal sheet, finder, FAQ and steps stack; the deal arrow rotates 90deg.
+- **600px:** phone sizes for headings, brand name hides, nav CTA becomes an icon, deal sheet tightens (4px padding, 16px radius, 24px panels with 12px radius), spec list and cards go single column, primary big buttons and close actions go full width.
+
+The photo viewer uses a viewport media query at 860px to stack its photo above its side panel.
 
 ## Elevation & Depth
 
-The system is flat. No element has a drop shadow. Depth comes from tone (Paper over Off-White, Tint bands) and 1px hairlines. The only layered surfaces are the photo viewer, which sits on an 88% ink scrim, and the photo-count pill on a 72% ink fill. The selected viewer thumbnail uses a 2px ink ring (`box-shadow: 0 0 0 2px`), which is an outline, not elevation.
+Depth is mostly tonal: white surfaces on warm paper, edged with 1px hairlines, with Bone Tint for recessed areas. Soft ink-tinted shadows appear on only three floating layers and two small active indicators.
+
+### Shadow Vocabulary
+- **Nav float** (`box-shadow: 0 8px 24px rgba(11, 15, 20, 0.06)`): the floating nav pill, together with a 72% white fill and `backdrop-filter: saturate(1.6) blur(16px)`.
+- **Sheet float** (`box-shadow: 0 24px 48px rgba(11, 15, 20, 0.06)`): the hero deal sheet only.
+- **Segment lift** (`box-shadow: 0 1px 2px rgba(11, 15, 20, 0.08)`): the active deal tab and active language segment.
+- **Range thumb** (`box-shadow: inset 0 0 0 2px #1F6BFF, 0 1px 3px rgba(11, 15, 20, 0.16)`): the budget slider thumb.
+- **Thumb ring** (`box-shadow: 0 0 0 2px #0B0F14`): selected viewer thumbnail; an outline, not elevation.
 
 ### Named Rules
-**The Hairline Not Shadow Rule.** To separate a surface, change its tone or give it a 1px line. Never lift it with a shadow.
+**The Hairline First Rule.** A new card is a white surface with a 1px Hairline border and no shadow. Shadows are reserved for things that float over content (nav, deal sheet) and for the active segment of a track.
 
 ## Shapes
 
-Corners are square-ish and consistent: 8px on chips and nav items, 10px on buttons, the language toggle and small controls, 14px on the order slip, photo frames, review cards and viewer panels. Circles appear only on the logo, range thumb and viewer arrow buttons; the photo count is a full pill. Photos are always clipped by a frame with `object-fit: cover` (contain inside the viewer). Borders are 1px; there are no thick strokes.
+Rounded and friendly, on the Tailwind radius scale: 8px (chips, thumbnails), 12px (buttons, tabs, icon boxes), 16px (inner panels, benefit cards, FAQ items, photo frames, big primary button), 24px (outer containers: deal sheet, delivery card, form card, viewer panels), full (nav pill, nav links, language switch, choice pills, badges, avatars, step numbers, progress line).
+
+**The Nested Corner Rule.** An inner radius equals the outer radius minus the padding between them. The deal sheet (24px radius, 8px padding) holds 16px panels; the delivery card (24px, 8px) holds a 16px photo; on phones the sheet (16px, 4px) holds 12px panels.
+
+Photos are clipped to 3:4 portrait in delivery cards (4:3 on phones) and shown uncropped (`object-fit: contain`) on black in the viewer.
 
 ## Components
 
 ### Buttons
-Solid, compact and tactile.
-- **Shape:** gently squared (10px), 48px tall, 0 20px padding, 600 at 16px, icon gap 10px.
-- **Primary:** Send Blue fill, white text, WhatsApp glyph. Used only for sending the budget.
-- **Line:** Paper fill, 1px Hairline Strong border, ink text. Header CTA and secondary actions; border turns ink on hover.
-- **Small:** 44px tall, 0 14px, 15px.
-- **States:** hover only on fine pointers (primary darkens to Send Blue Pressed); press scales to 0.97 over 160ms with the out-expo ease; focus is a 2px blue outline offset 3px.
-
-### Chips
-- **Style:** 40px tall, 8px corners, 1px Hairline Strong border, Ink Soft text at 15px, transparent fill.
-- **Selected:** an ink pill slides between options as a shared layout element (spring 0.35s, bounce 0.15); label turns white. Unselected chips take an ink border on hover; all press to 0.97.
-
-### Order Slip (signature)
-Paper card, 1px Hairline, 14px corners, 20px padding (18px on phones), 14px internal gap. Top row: label left, the budget as a large tabular figure right. Below: a range input with a 6px ink-filled track over Hairline and a 26px white thumb ringed in ink that scales to 1.12 while dragged; min/max under it at 13px. Then two chip groups (use, screen size), the full-width primary button, and a centered 14px muted note.
-
-### Photo Frame
-Tint placeholder, 14px corners, overflow clipped. Each frame is a button that opens the viewer. On fine-pointer hover the image zooms to 1.03 over 500ms; on press the frame scales to 0.99. Caption under it: name in 15px 600 ink, one fact in 14px muted. Delivered-laptop frames carry a photo-count pill bottom-right.
-
-### Viewer (signature)
-A full-screen dialog on an 88% ink scrim, fading in over 250ms. The tapped frame expands into place as a shared element (spring 0.5s, bounce 0.12). Photo area left on black with arrow buttons (48px white circles at 92%), a 300px Paper side panel right with name, facts, a 4-column 3:4 thumbnail grid (5 on phones; inactive at 55% opacity), and a tabular counter. Photos change with a 40px slide plus 6px blur over 300ms; arrow keys, swipe and Esc work. Stacks to one column below 900px.
+Quiet, solid, unadorned.
+- **Shape:** gently rounded (12px); big variant 16px; inside the nav pill, fully round.
+- **Primary:** Action Blue fill, white text, 8px 12px padding (big: 12px 24px, button-lg), a 20px Phosphor icon with an 8px gap. Primary always means WhatsApp.
+- **Hover / Active:** fine pointers darken to Action Blue Pressed over 300ms; every button presses to `scale(0.98)`. Focus is a 2px Action Blue outline offset 2px.
+- **Line:** white fill, 1px Hairline Strong border, ink text; hover turns the border ink. Used for the Facebook / Messenger alternative.
+- **Link:** Action Blue text with a 16px arrow that nudges 2px right on hover.
 
 ### Navigation
-Sticky 68px header on the page ground with a bottom Hairline. Brand mark (circular logo + wordmark, 600 at 17px). Nav links are muted 15px with 10px 12px padding, 8px corners, turning ink on a Tint fill at hover. A segmented language toggle (Paper, Hairline Strong border, 3px inset) shows the active language as an ink pill. A small line button carries the WhatsApp CTA.
+A floating translucent pill, sticky 16px from the top, centered. Brand (28px round logo plus body-1 name), three anchor links in caption-1 (muted, current link gets Bone Tint fill and ink text), the language switch, and the WhatsApp primary button. The language switch is a Bone Tint track with 2px padding; the active segment is white with Segment lift. Under 860px the links hide; under 600px the brand name and CTA label hide.
 
-### Phone Send Bar
-Below 900px only: fixed to the bottom, Paper with a top Hairline, safe-area padded. Left: muted "budget" label over the live amount at 20px tabular. Right: the primary send button.
+### Hero Deal Sheet (signature)
+A white 24px sheet with Sheet float, 8px padding. Top: a Bone Tint tab track of real buyer cases; the active tab is a white segment that slides between tabs (shared layout, spring 0.45s, bounce 0.12) with a 2px Action Blue progress line that fills over the 7-second case interval. Cases advance automatically; hover or focus pauses. Body: the request panel (Bone Tint, 32px padding: the buyer's request in heading-4, then the buyer's review above a Hairline Strong rule with avatar and name), an ink arrow disc, and the found panel (white with Hairline border, 32px padding: model, two-column spec list with blue check icons, then the saving in heading-3 and a link to all specs and photos). Case content crossfades with an 8px vertical shift over 0.35s.
 
-### Lists and FAQ
-Steps sit in a two-column grid, each item a top Hairline Strong rule with a muted tabular number in a 36px column. FAQ rows are 64px-minimum buttons, 18px 600, with a hairline plus that rotates to a minus (200ms); answers open by height and opacity over 250ms.
+### Tagline Reveal
+One heading-2 sentence, max 880px, centered. Each word starts at 28% ink and turns full ink (600ms) once it crosses a line 40% up from the bottom of the viewport. Reduced motion shows it fully lit.
 
-### Reviews
-Paper cards, 1px Hairline, 14px corners, 24px padding, quote at 18px, name muted at 15px. The section renders only when real customer reviews exist in content; it is hidden while the list is empty.
+### Cards / Containers
+- **Benefit card:** white, Hairline border, 16px radius, 24px padding; a 40px Blue Wash icon box with a 24px blue Phosphor icon, heading-6 title, body-3 muted text.
+- **Step:** no card; a Hairline Strong top rule, a 32px ink number disc, heading-6 and body-3.
+- **Delivery card:** white, Hairline border, 24px radius, 8px padding; a 200px photo column (3:4, hover zooms the image to 1.03 over 500ms, a dark translucent photo count pill) beside heading-6 model, chips, saving badge, the buyer's full review (body-6 in Ink Soft above a Hairline rule, name in body-4, "translated" note in English), and a footer link.
+- **FAQ item:** white, Hairline border, 16px radius; title-2 question with a plus icon that rotates 45deg when open; the answer expands by height over 0.5s.
+
+### Chips and Badges
+- **Chip:** Bone Tint fill, Ink Soft text, 8px radius, 2px 8px padding; facts from the delivery only.
+- **Saving badge:** Blue Wash fill, Action Blue Pressed text, fully round, 4px 12px, with a 16px icon and tabular numerals.
+
+### Inputs / Fields
+- **Form card:** white, Hairline border, 24px radius, 32px padding, 24px gaps.
+- **Budget range:** a 4px track filled Action Blue up to the value over Hairline; a 24px white thumb ringed in Action Blue that scales to 1.1 while dragged. The value shows in heading-4 tabular numerals.
+- **Choice pills:** caption-1, fully round, 1px Hairline Strong border, Ink Soft text; hover turns the border ink; the selected pill is solid ink with white text, and the ink pill slides between options (spring 0.45s, bounce 0.12).
+
+### Photo Viewer
+Full-screen over 88% ink. A 24px-radius black photo stage (photos swap with a 40px horizontal slide over 0.5s, swipe or 40px round white arrow buttons) beside a 360px white side panel: heading-5 model, a spec list with 16px blue checks, the review, a five-column grid of 3:4 thumbnails (50% opacity, selected at full with an ink ring), and a live photo counter. The panel enters with a 24px rise over 0.5s. Focus is trapped inside.
 
 ### Close and Footer
-Paper band with a top Hairline: large closing title left, action buttons right, then a footer row of brand and muted 14px text above another Hairline.
+The close section repeats the centered heading-2 promise with primary and line actions. The footer sits on a Hairline top rule with the brand and contact meta.
+
+### Motion
+- **Base curve:** cubic-bezier(0.22, 1, 0.36, 1) for every transition.
+- **Hero entrance:** opacity plus 24px rise, 0.8s, staggered 0.08s per item, once on load.
+- **Section reveal:** opacity plus 32px rise, 0.7s, once, when 64px inside the viewport.
+- **State changes:** 300ms on color, background, border and transform.
+- **Reduced motion:** transitions collapse to near zero; the tagline is fully lit; the hero renders without its entrance; case and viewer swaps become plain fades.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** use real delivery photographs for every image; the colour on the page comes from them.
-- **Do** keep Send Blue (#1f6bff) on the send action, focus outline and selection only.
-- **Do** separate surfaces with tone (Paper, Tint) and 1px hairlines (#e6e6e1, #d6d6cf).
-- **Do** use 8 / 10 / 14px corners for chips / buttons / cards and photos.
-- **Do** give every heading a Bangla variant with looser leading and tracking near 0.
-- **Do** use the out-expo ease cubic-bezier(0.23, 1, 0.32, 1): press 0.97 over 160ms, photo zoom 1.03 over 500ms, hero blur-fade (12px, 16px rise, 0.9s, 90ms stagger) once on load.
-- **Do** honour reduced motion: entrances and slides drop to plain fades or nothing.
-- **Do** render the reviews section only from real customer words.
+- **Do** use only the named text styles, the twelve spacing tokens (2 to 96px) and the Tailwind radii (8, 12, 16, 24, full).
+- **Do** compute inner corners as outer radius minus padding.
+- **Do** keep hero heading and subheading at max 680px.
+- **Do** use Phosphor icons at 16, 20 or 24px.
+- **Do** keep Action Blue for actions, savings and checks; use ink for non-action selection.
+- **Do** loosen Bangla line heights (1.3 large headings, 1.45 heading 5 and 6, 1.6 body and titles).
+- **Do** take every delivery fact, saving and review from `public/deliveries/<id>/description.md`, and show one name per buyer.
+- **Do** reveal sections once with a 32px rise on cubic-bezier(0.22, 1, 0.36, 1), and press buttons to scale 0.98.
+- **Do** write breakpoints as container queries on `.page` at 1080, 860 and 600px.
 
 ### Don't:
-- **Don't** use gradients, glass, glows or backdrop blur on any surface. The range track's two-stop hard fill is the only gradient and it is a progress fill, not decoration.
-- **Don't** add drop shadows to cards, buttons or photos.
-- **Don't** put eyebrow or kicker labels above headings.
-- **Don't** use stock photos, device renders or illustrations in place of delivery photos.
-- **Don't** colour links, nav items or headings blue.
-- **Don't** animate on scroll; nothing moves except the hero entrance, presses, hovers, chips, FAQ and the viewer.
-- **Don't** write or imply reviews, prices or guarantees that do not exist.
+- **Don't** add any gradient beyond the hero heading's #000 to #666.
+- **Don't** invent reviews, prices, savings, specs or model details that the delivery's description.md does not state.
+- **Don't** put shadows on ordinary cards; use a 1px Hairline border.
+- **Don't** set text in ad-hoc sizes or weights outside the named styles.
+- **Don't** use any icon set other than Phosphor.
