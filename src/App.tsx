@@ -21,12 +21,14 @@ import {
   WHATSAPP_DISPLAY,
   copy,
   deliveries,
+  featuredReviews,
   heroCases,
   money,
   num,
   reviewCount,
   reviewer,
   savingRange,
+  totalPhotos,
   waLink,
   type Copy,
   type Delivery,
@@ -81,6 +83,7 @@ export default function App() {
           <main id="main">
             <Hero t={t} lang={lang} show={show} />
             <Tagline text={t.tagline} />
+            <SocialProof t={t} lang={lang} show={show} />
             <Benefits t={t} />
             <How t={t} lang={lang} />
             <Sold t={t} lang={lang} show={show} />
@@ -348,6 +351,56 @@ function Tagline({ text }: { text: string }) {
   );
 }
 
+/* ------------------------------------------------------------------ social proof strip */
+
+function SocialProof({ t, lang, show }: { t: Copy; lang: Lang; show: (id: number) => void }) {
+  const featured = featuredReviews.map((id) => byId(id));
+  return (
+    <section className="section social-proof" id="reviews">
+      <div className="wrap">
+        <motion.div className="section-head" {...reveal}>
+          <span className="badge-saving caption-3">
+            <SealCheck weight="fill" />
+            {t.socialProof.badge}
+          </span>
+          <h2 className="heading-2">{t.socialProof.title}</h2>
+          <p className="body-3 muted">{t.socialProof.sub}</p>
+        </motion.div>
+        <motion.div className="social-proof-grid" {...reveal}>
+          {featured.map((d) => (
+            <article key={d.id} className="social-card">
+              <div className="social-card-head">
+                <span className="avatar body-4" aria-hidden="true">
+                  {d.buyer[lang].slice(0, 1)}
+                </span>
+                <div className="social-card-meta">
+                  <h3 className="body-1">{reviewer(d, lang)}</h3>
+                  <p className="caption-2 muted">{d.model}</p>
+                </div>
+                <span className="badge-saving caption-4">
+                  <Tag />
+                  {money(d.saving, lang)} {t.hero.below}
+                </span>
+              </div>
+              {d.review && (
+                <blockquote className="body-3 social-quote">
+                  “{d.review.text[lang]}”
+                </blockquote>
+              )}
+              <div className="social-card-foot">
+                <button type="button" className="link button-sm" onClick={() => show(d.id)}>
+                  {t.socialProof.viewDeal}
+                  <ArrowRight />
+                </button>
+              </div>
+            </article>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 /* ------------------------------------------------------------------ benefits + how */
 
 const benefitIcons = [Wallet, Tag, ShieldCheck, HandCoins];
@@ -410,6 +463,17 @@ function Sold({ t, lang, show }: { t: Copy; lang: Lang; show: (id: number) => vo
         <motion.div className="section-head" {...reveal}>
           <h2 className="heading-2">{t.sold.title}</h2>
           <p className="body-3 muted">{t.sold.body}</p>
+          <div className="proof-pills">
+            <span className="proof-pill caption-3">
+              <SealCheck weight="fill" />
+              {t.sold.stats(
+                num(deliveries.length, lang),
+                money(savingRange.min, lang),
+                money(savingRange.max, lang),
+                num(totalPhotos, lang),
+              )}
+            </span>
+          </div>
         </motion.div>
         <div className="sold-grid">
           {deliveries.map((d) => (
@@ -625,14 +689,17 @@ function Finder({ t, lang }: { t: Copy; lang: Lang }) {
             <h2 className="heading-2">{f.title}</h2>
             <p className="body-3 muted">{f.body}</p>
           </div>
-          <ul className="risk-list body-2" aria-label={t.risk.title}>
-            {t.risk.items.map((r) => (
-              <li key={r}>
-                <CheckCircle weight="fill" />
-                {r}
-              </li>
-            ))}
-          </ul>
+          <div className="risk-wrap">
+            <h3 className="heading-6 risk-title">{t.risk.title}</h3>
+            <ul className="risk-list body-2" aria-label={t.risk.title}>
+              {t.risk.items.map((r) => (
+                <li key={r}>
+                  <CheckCircle weight="fill" />
+                  {r}
+                </li>
+              ))}
+            </ul>
+          </div>
         </motion.div>
         <motion.form className="form-card" onSubmit={(e) => e.preventDefault()} {...reveal}>
           <div>

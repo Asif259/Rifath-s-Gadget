@@ -249,12 +249,16 @@ export const savingRange = {
 /** Buyer name shown with a review: always the "Sold to" name, in the page language. */
 export const reviewer = (d: Delivery, lang: Lang) => d.buyer[lang];
 export const reviewCount = deliveries.filter((d) => d.review).length;
+export const totalPhotos = deliveries.reduce((sum, d) => sum + d.count, 0);
+
+/** Featured 3 deliveries for the social proof strip */
+export const featuredReviews = [1, 4, 2];
 
 const bn = {
   nav: { how: "কিভাবে কাজ করি", sold: "ডেলিভারি", faq: "প্রশ্ন", cta: "বাজেট পাঠান" },
   hero: {
     title: ["ল্যাপটপ স্টক করি না,", "আপনার বাজেটে খুঁজে আনি"],
-    body: "বাজেট আর কাজ জানান। আমরা স্পেক সাজেস্ট করি, ২ থেকে ৩ দিনে খুঁজি, কেনার আগে ৫টি চেক করি। টাকা দেন হাতে পেয়ে।",
+    body: "বাজেট আর কাজ জানান। স্পেক সাজেশন থেকে শুরু করে, খুঁজে এনে ৫টি চেক করে হাতে দিই। টাকা দেন হাতে পেয়ে।",
     cta: "হোয়াটসঅ্যাপে বাজেট পাঠান",
     proof: (min: string, max: string, n: string) => `শেষ ৮টি ডেলিভারিতে মার্কেট প্রাইস থেকে ${min} থেকে ${max} কম · ${n} জন ক্রেতার রিভিউ`,
     asked: "চেয়েছিলেন",
@@ -262,27 +266,34 @@ const bn = {
     below: "মার্কেট প্রাইস থেকে কম",
     buyer: "ক্রেতা",
   },
-  tagline: "স্টক নেই, তাই কোনো ল্যাপটপ গছিয়ে দেওয়ার তাড়াও নেই। আপনার বাজেট আর কাজ দেখে খুঁজি, চেক করে কিনি।",
+  tagline: "একটাই ল্যাপটপ, আপনার জন্য খোঁজা। কেনার আগে চেক। হাতে পেয়ে টাকা।",
+  socialProof: {
+    badge: "যাচাইকৃত ক্রেতা রিভিউ",
+    title: "৭ জন ক্রেতা আমাদের মাধ্যমে ল্যাপটপ পেয়েছেন",
+    sub: "প্রতিটি পোস্টে আমরা ক্রেতাকে মেনশন করি — যাতে যে কেউ সরাসরি তাঁদের অভিজ্ঞতা জানতে পারেন।",
+    viewDeal: "ল্যাপটপ ও ছবি দেখুন",
+  },
   benefits: {
-    title: "কেন আমাদের দিয়ে খোঁজাবেন",
+    title: "আমাদের দিয়ে খোঁজালে কী পান",
     items: [
-      { t: "বাজেট থেকে শুরু", d: "আপনার বাজেট আর কাজ দেখে স্পেক ঠিক করি। পছন্দ না হওয়া পর্যন্ত ল্যাপটপ দেখাই।" },
+      { t: "বাজেট থেকে শুরু", d: "৳৬০,০০০ আর 'কোডিং' বলুন। স্পেক সাজেশন দেব, তারপর পছন্দ না হওয়া পর্যন্ত দেখাব — স্টক শেষ না হওয়া পর্যন্ত না।" },
       { t: "মার্কেট প্রাইসের চেয়ে কম", d: "শেষ ৮টি ডেলিভারিতে ক্রেতারা মার্কেট প্রাইস থেকে ৳২০,০০০ থেকে ৳৩৬,০০০ কমে পেয়েছেন।" },
       { t: "কেনার আগে ৫টি চেক", d: "ক্যাশ মেমো, মাদারবোর্ড, র‍্যাম, এসএসডি হেলথ আর ব্যাটারি সাইকেল। চেকিং রিস্ক আমাদের।" },
-      { t: "হাতে পেয়ে টাকা", d: "হ্যান্ডওভারের সময় সব দেখে নিন, তারপর টাকা দিন। ঢাকায় হাতে হাতে, অন্য জেলায় কুরিয়ারে।" },
+      { t: "হাতে পেয়ে টাকা", d: "হ্যান্ডওভারের সময় ব্যাটারি হেলথ ও এসএসডি স্ক্রিনসহ সব দেখে নিন। পছন্দ হলে টাকা দিন। ঢাকায় হাতে হাতে, অন্য জেলায় কুরিয়ারে।" },
     ],
   },
   how: {
     title: "তিন ধাপে আপনার ল্যাপটপ",
     steps: [
       { t: "বাজেট আর কাজ জানান", d: "হোয়াটসঅ্যাপে লিখুন বাজেট কত আর কী কাজে লাগবে। আমরা স্পেক সাজেস্ট করি।" },
-      { t: "আমরা খুঁজি আর চেক করি", d: "আপনি কনফার্ম করলে ২ থেকে ৩ দিন, কখনো বেশি সময় নিয়ে খুঁজি। পছন্দ হলে ৫টি চেক করে কিনি।" },
-      { t: "দেখে নিয়ে টাকা দিন", d: "হ্যান্ডওভারের সময় নিজে সব দেখে নিন। তারপর টাকা দিয়ে ল্যাপটপ নিয়ে যান।" },
+      { t: "আমরা খুঁজি আর চেক করি", d: "আপনি কনফার্ম করলে ২ থেকে ৩ দিন, কখনো বেশি সময় নিয়ে খুঁজি। পছন্দ হলে ৫টি চেক — ক্যাশ মেমো, মাদারবোর্ড, র‍্যাম, এসএসডি হেলথ, ব্যাটারি সাইকেল করে কেবল পাস করলেই কিনি।" },
+      { t: "দেখে নিয়ে টাকা দিন", d: "হ্যান্ডওভারের সময় নিজে সব দেখে নিন — ল্যাপটপ অন করে ব্যাটারি হেলথ স্ক্রিন আর চার্জার চেক করুন। তারপর টাকা দিয়ে ল্যাপটপ নিয়ে যান।" },
     ],
   },
   sold: {
     title: "যাদের জন্য খুঁজে এনেছি",
     body: "প্রতিটি ডেলিভারির আসল ছবি, স্পেক আর ক্রেতার নিজের কথা। প্রতিটি পোস্টে আমরা ক্রেতাকে মেনশন করি, যাতে যে কেউ তাঁর কাছে অভিজ্ঞতা জানতে পারেন।",
+    stats: (n: string, min: string, max: string, p: string) => `${n}টি ডেলিভারি · প্রতিটিতে ${min} থেকে ${max} বাঁচানো · ${p}টি আসল ছবি`,
     below: "কম",
     photos: "টি ছবি",
     details: "সব স্পেক আর ছবি",
@@ -309,11 +320,11 @@ const bn = {
   faq: {
     title: "যা জানতে চান",
     items: [
+      { q: "টাকা কখন দিতে হয়?", a: "হ্যান্ডওভারের সময়, সবকিছু নিজে দেখে নেওয়ার পর।" },
+      { q: "কেনার আগে কী কী চেক করেন?", a: "ক্যাশ মেমো, মাদারবোর্ড, র‍্যাম, এসএসডি হেলথ আর ব্যাটারি সাইকেল। কোনো চেকে সমস্যা পেলে কিনি না।" },
+      { q: "দাম কম হয় কিভাবে?", a: "আমরা নতুন কেনা, কম ব্যবহৃত ল্যাপটপ খুঁজি। শেষ ৮টি ডেলিভারিতে দাম মার্কেট প্রাইস থেকে ৳২০,০০০ থেকে ৳৩৬,০০০ কম ছিল।" },
       { q: "আপনাদের কাছে কি ল্যাপটপ স্টকে আছে?", a: "না। বাজেট আর কাজ জানার পর আমরা ল্যাপটপ খুঁজি।" },
       { q: "ল্যাপটপ পেতে কত দিন লাগে?", a: "সাধারণত ২ থেকে ৩ দিন, কখনো বেশি। পছন্দ না হলে আরও দেখাই।" },
-      { q: "দাম কম হয় কিভাবে?", a: "আমরা নতুন কেনা, কম ব্যবহৃত ল্যাপটপ খুঁজি। শেষ ৮টি ডেলিভারিতে দাম মার্কেট প্রাইস থেকে ৳২০,০০০ থেকে ৳৩৬,০০০ কম ছিল।" },
-      { q: "কেনার আগে কী কী চেক করেন?", a: "ক্যাশ মেমো, মাদারবোর্ড, র‍্যাম, এসএসডি হেলথ আর ব্যাটারি সাইকেল। কোনো চেকে সমস্যা পেলে কিনি না।" },
-      { q: "টাকা কখন দিতে হয়?", a: "হ্যান্ডওভারের সময়, সবকিছু নিজে দেখে নেওয়ার পর।" },
       { q: "ওয়ারেন্টি থাকে?", a: "বাজেট আর ল্যাপটপ অনুযায়ী ওয়ারেন্টি ভিন্ন হয়। যে ল্যাপটপ দেখাই, সেটার ওয়ারেন্টি তখনই জানাই।" },
       { q: "ঢাকার বাইরে দেন?", a: "হ্যাঁ। ঢাকায় হাতে হাতে দিই, অন্য জেলায় কুরিয়ারে পাঠাই।" },
       { q: "না কিনে শুধু সাজেশন নেওয়া যাবে?", a: "হ্যাঁ। যে কেউ ল্যাপটপ সাজেশনের জন্য মেসেজ দিতে পারেন।" },
@@ -328,7 +339,7 @@ const bn = {
     ],
   },
   close: {
-    title: ["কোন ল্যাপটপ নেবেন,", "আমাদের বলুন"],
+    title: ["আপনার ল্যাপটপ খুঁজতে প্রস্তুত?", "বাজেট আর কাজ জানান"],
     body: "বাজেট আর কাজ লিখে পাঠান। স্পেক সাজেশন দিয়ে শুরু করব।",
     facebook: "ফেসবুক পেজ",
     area: "ঢাকায় হাতে হাতে, অন্য জেলায় কুরিয়ার",
@@ -340,7 +351,7 @@ const en: typeof bn = {
   nav: { how: "How it works", sold: "Deliveries", faq: "Questions", cta: "Send budget" },
   hero: {
     title: ["We don't stock laptops.", "We find yours."],
-    body: "Tell us your budget and what it's for. We suggest the specs, search for 2 to 3 days and run 5 checks before we buy. You pay when it's in your hands.",
+    body: "You tell us your budget and your work. We handle the search, check the laptop against 5 points before we buy it, and hand it over in person. You pay only once it's in your hands.",
     cta: "Send your budget on WhatsApp",
     proof: (min: string, max: string, n: string) => `${min} to ${max} below market price on our last 8 deliveries · ${n} buyer reviews`,
     asked: "Asked for",
@@ -348,27 +359,34 @@ const en: typeof bn = {
     below: "below market price",
     buyer: "Buyer",
   },
-  tagline: "No stock, so nothing to push on you. We search for your budget and your work, and check every laptop before we buy it.",
+  tagline: "One laptop, found for you. Checked before we buy. Paid for when it's in your hands.",
+  socialProof: {
+    badge: "Verified Buyer Stories",
+    title: "7 buyers found their laptop through us",
+    sub: "We tag them in every post — anyone can ask them about their experience directly.",
+    viewDeal: "View laptop & photos",
+  },
   benefits: {
-    title: "Why let us do the search",
+    title: "What you get when we search for you",
     items: [
-      { t: "It starts from your budget", d: "We set the specs from your budget and your work, then keep showing laptops until one suits you." },
+      { t: "Starts from your budget", d: "Tell us ৳60,000 and 'coding'. We suggest the specs, then show options until one fits — not until our stock runs out." },
       { t: "Below market price", d: "On our last 8 deliveries, buyers paid ৳20,000 to ৳36,000 less than the market price." },
       { t: "Five checks before we buy", d: "Cash memo, motherboard, RAM, SSD health and battery cycles. The checking risk is ours." },
-      { t: "Pay when it's in your hands", d: "Check everything at handover, then pay. In person in Dhaka, by courier to other districts." },
+      { t: "Pay when it's in your hands", d: "Inspect every spec at handover — battery health screen, SSD health, the lot. Pay only when you're satisfied. In person in Dhaka, courier to other districts." },
     ],
   },
   how: {
     title: "Your laptop in three steps",
     steps: [
-      { t: "Send budget and use", d: "Message us on WhatsApp with your budget and what the laptop is for. We suggest the specs." },
-      { t: "We search and check", d: "Once you confirm, we search for 2 to 3 days, sometimes longer. When you like one, we run 5 checks and buy it." },
-      { t: "Check it, then pay", d: "Look everything over at handover. Then pay and take the laptop home." },
+      { t: "Tell us your budget and your work", d: "Message us on WhatsApp with your budget and what the laptop is for. We suggest the specs." },
+      { t: "We search and check", d: "Once you confirm, we search for 2 to 3 days, sometimes longer. When you like one, we check 5 points — cash memo, motherboard, RAM, SSD health, battery cycles — and only buy if everything passes." },
+      { t: "Check it, then pay", d: "Look everything over at handover — open it, check the battery health screen, plug in the charger. Then pay and take the laptop home." },
     ],
   },
   sold: {
     title: "Who we have found laptops for",
     body: "Real photos, specs and the buyer's own words for every delivery. We mention each buyer in our posts, so anyone can ask them about their experience.",
+    stats: (n: string, min: string, max: string, p: string) => `${n} deliveries · ${min} to ${max} saved each · ${p} real photos`,
     below: "below market",
     photos: " photos",
     details: "All specs and photos",
@@ -395,11 +413,11 @@ const en: typeof bn = {
   faq: {
     title: "What people ask",
     items: [
+      { q: "When do I pay?", a: "At handover, after you have checked everything yourself." },
+      { q: "What do you check before buying?", a: "Cash memo, motherboard, RAM, SSD health and battery cycles. If any check fails, we don't buy it." },
+      { q: "How is the price lower?", a: "We look for laptops bought new and lightly used. On our last 8 deliveries the price was ৳20,000 to ৳36,000 below market price." },
       { q: "Do you have laptops in stock?", a: "No. We search after we know your budget and use." },
       { q: "How long does it take?", a: "Usually 2 to 3 days, sometimes longer. If you don't like the options, we show more." },
-      { q: "How is the price lower?", a: "We look for laptops bought new and lightly used. On our last 8 deliveries the price was ৳20,000 to ৳36,000 below market price." },
-      { q: "What do you check before buying?", a: "Cash memo, motherboard, RAM, SSD health and battery cycles. If any check fails, we don't buy it." },
-      { q: "When do I pay?", a: "At handover, after you have checked everything yourself." },
       { q: "Is there a warranty?", a: "Warranty varies with budget and with each laptop. We tell you for every laptop we show." },
       { q: "Do you deliver outside Dhaka?", a: "Yes. We hand over in person in Dhaka and send by courier to other districts." },
       { q: "Can I just ask for advice?", a: "Yes. Anyone can message us for a laptop suggestion." },
@@ -414,7 +432,7 @@ const en: typeof bn = {
     ],
   },
   close: {
-    title: ["Not sure which laptop?", "Tell us"],
+    title: ["Ready to find yours?", "Tell us your budget and work"],
     body: "Send your budget and what it's for. We'll start with a spec suggestion.",
     facebook: "Facebook page",
     area: "In person in Dhaka, courier to other districts",
