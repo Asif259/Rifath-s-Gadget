@@ -27,11 +27,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .eq("id", userId)
         .maybeSingle();
 
-      if (error || !data) {
+      if (error) {
+        console.warn("[Auth] Failed to check admin status:", error.message);
         return false;
       }
-      return true;
-    } catch {
+      return Boolean(data);
+    } catch (err) {
+      console.warn("[Auth] Exception checking admin status:", err);
       return false;
     }
   };
@@ -39,46 +41,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let mounted = true;
 
-    // 1. Initial session check
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (!mounted) return;
-
-      if (session?.user) {
-        setSession(session);
-        setUser(session.user);
-        const adminStatus = await checkAdminStatus(session.user.id);
+    const syncSession = async (currentSession: Session | null) => {
+      if (!currentSession?.user) {
         if (mounted) {
-          setIsAdmin(adminStatus);
+          setSession(null);
+          setUser(null);
+          setIsAdmin(false);
           setLoading(false);
         }
-      } else {
-        setSession(null);
-        setUser(null);
-        setIsAdmin(false);
+        return;
+      }
+
+      setLoading(true);
+      const adminStatus = await checkAdminStatus(currentSession.user.id);
+      if (mounted) {
+        setSession(currentSession);
+        setUser(currentSession.user);
+        setIsAdmin(adminStatus);
         setLoading(false);
       }
+    };
+
+    // 1. Initial session check
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      syncSession(session);
     });
 
     // 2. Listen to auth changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, currentSession) => {
-      if (!mounted) return;
-
-      if (currentSession?.user) {
-        setSession(currentSession);
-        setUser(currentSession.user);
-        const adminStatus = await checkAdminStatus(currentSession.user.id);
-        if (mounted) {
-          setIsAdmin(adminStatus);
-          setLoading(false);
-        }
-      } else {
-        setSession(null);
-        setUser(null);
-        setIsAdmin(false);
-        setLoading(false);
-      }
+      syncSession(currentSession);
     });
 
     return () => {
@@ -99,7 +92,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (!adminStatus) {
           await supabase.auth.signOut();
           return {
-            error: new Error("Access Denied: Your account is not authorized as an administrator."),
+            error: new Error(
+              "Access Denied: Your account is authenticated, but is not registered in public.admin_users."
+            ),
           };
         }
       }

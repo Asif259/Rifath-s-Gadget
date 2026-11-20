@@ -1,25 +1,17 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { SignIn } from "@phosphor-icons/react";
 import { useAuth } from "../../context/AuthContext";
 import "../../styles/admin.css";
 
 export default function AdminLogin() {
-  const { session, isAdmin, loading: authLoading, signIn, signOut } = useAuth();
+  const { session, isAdmin, user, loading: authLoading, signIn, signOut } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
-  // Automatically sign out any unauthorized non-admin session
-  useEffect(() => {
-    if (!authLoading && session && !isAdmin) {
-      signOut();
-      setErrorMsg("Access Denied: Your account is not authorized as an administrator.");
-    }
-  }, [authLoading, session, isAdmin, signOut]);
 
   // If already authenticated as admin, redirect to deliveries
   if (!authLoading && session && isAdmin) {
@@ -61,6 +53,36 @@ export default function AdminLogin() {
           <h1 className="admin-login-title">Admin Dashboard</h1>
           <p className="admin-login-sub">Sign in to manage deliveries and reviews</p>
         </div>
+
+        {session && !isAdmin && (
+          <div
+            className="admin-alert-error"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "16px",
+            }}
+          >
+            <span>
+              Signed in as <strong>{user?.email}</strong> (Not in admin_users).
+            </span>
+            <button
+              type="button"
+              onClick={() => signOut()}
+              style={{
+                background: "none",
+                border: "none",
+                color: "inherit",
+                textDecoration: "underline",
+                cursor: "pointer",
+                fontWeight: 600,
+              }}
+            >
+              Sign Out
+            </button>
+          </div>
+        )}
 
         {errorMsg && <div className="admin-alert-error">{errorMsg}</div>}
 

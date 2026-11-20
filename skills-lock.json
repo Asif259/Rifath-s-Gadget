@@ -1,6 +1,20 @@
 {
   "version": 2,
   "skills": {
+    "editorial-taste-new-site": {
+      "source": "iamshakibali/editorial-taste",
+      "commit": "d8bd4d18c49937cc6775aa70e137d6be49e5789a",
+      "sourceType": "github",
+      "skillPath": "skills/editorial-taste-new-site/SKILL.md",
+      "computedHash": "89ca084fd179228be2a3e82d3f4c1292e47e9145cd582e419af239cd27d6c9d5"
+    },
+    "editorial-taste-redesign": {
+      "source": "iamshakibali/editorial-taste",
+      "commit": "d8bd4d18c49937cc6775aa70e137d6be49e5789a",
+      "sourceType": "github",
+      "skillPath": "skills/editorial-taste-redesign/SKILL.md",
+      "computedHash": "2887613759d23e4e9b1f2724c991e85651e88d3a1691b287628486c6f4a584e6"
+    },
     "supabase": {
       "source": "supabase/agent-skills",
       "commit": "c9be0e931b7930f7d02126d04774d904c381e7d7",
