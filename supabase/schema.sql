@@ -69,9 +69,15 @@ create index if not exists idx_deliveries_published_sort on public.deliveries (i
 create index if not exists idx_deliveries_hero on public.deliveries (is_hero) where is_published = true;
 create index if not exists idx_deliveries_featured on public.deliveries (is_featured) where is_published = true;
 
--- 6. Row Level Security (RLS)
+-- 6. Row Level Security (RLS) & Table Grants
 alter table public.admin_users enable row level security;
 alter table public.deliveries enable row level security;
+
+-- Grant API roles access to tables (RLS will filter which specific rows they can read/write)
+grant usage on schema public to anon, authenticated;
+grant select on table public.deliveries to anon, authenticated;
+grant insert, update, delete on table public.deliveries to authenticated;
+grant select on table public.admin_users to authenticated;
 
 -- Admin Users Policies
 drop policy if exists "Allow admins to select their own admin record" on public.admin_users;
