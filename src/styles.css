@@ -24,6 +24,7 @@
   --r-lg: 8px; --r-xl: 12px; --r-2xl: 16px; --r-3xl: 24px; --r-full: 9999px;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --latin: "Geist", "Anek Bangla", system-ui, sans-serif;
   --bangla: "Anek Bangla", "Geist", system-ui, sans-serif;
   --max: 1200px;
@@ -87,9 +88,9 @@ p, li, blockquote { text-wrap: pretty; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--s-75);
   padding: var(--s-75) var(--s-100); border-radius: var(--r-xl); white-space: nowrap;
-  transition: background-color 300ms var(--ease), transform 300ms var(--ease), box-shadow 300ms var(--ease);
+  transition: background-color 200ms var(--ease), transform 160ms var(--ease), box-shadow 200ms var(--ease);
 }
-.btn:active { transform: scale(0.98); }
+.btn:active, button:active { transform: scale(0.97); }
 .btn-primary { background: var(--blue); color: #fff; }
 .btn-primary.big { padding: var(--s-100) var(--s-300); border-radius: var(--r-2xl); }
 .btn-line { background: var(--surface); color: var(--ink); border: 1px solid var(--line-2); padding: 7px 11px; }
@@ -345,3 +346,9 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: 2px s
   .deal-tab { flex: 1 0 auto; align-items: center; }
 }
 .nowrap { white-space: nowrap; }
+
+/* ---------- Lenis smooth scroll overrides ---------- */
+html.lenis, html.lenis body { height: auto; }
+html.lenis { scroll-behavior: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto; }
+.viewer-inner { transform-origin: center; }

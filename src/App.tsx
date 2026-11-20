@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowRight,
   CaretLeft,
@@ -35,18 +38,11 @@ import {
   type Lang,
 } from "./content";
 
-const ease = [0.22, 1, 0.36, 1] as const;
+gsap.registerPlugin(ScrollTrigger);
+
 const photo = (id: number, n: number, thumb = false) => `/deliveries/${id}/${thumb ? "t" : ""}${n}.jpg`;
 const byId = (id: number) => deliveries.find((d) => d.id === id)!;
 const firstName = (s: string) => s.replace(/^(মো\.|Md\.)\s*/, "").split(" ")[0];
-
-/** Section entrance: rise 32px and fade in once (landing-page-design B7). */
-const reveal = {
-  initial: { opacity: 0, y: 32 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-64px" },
-  transition: { duration: 0.7, ease },
-};
 
 type Open = { id: number; i: number } | null;
 
@@ -60,41 +56,139 @@ export default function App() {
   });
   const t = copy[lang];
   const [open, setOpen] = useState<Open>(null);
+  const lenisRef = useRef<Lenis | null>(null);
 
+  // Synchronize document language & storage
   useEffect(() => {
     document.documentElement.lang = lang;
     try {
       localStorage.setItem("lang", lang);
     } catch {
-      /* storage blocked: the switch still works for this visit */
+      /* storage blocked: switch still works for this visit */
     }
+  }, [lang]);
+
+  // Initialize Lenis smooth scroll and connect to GSAP ticker
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (time) => Math.min(1, 1.001 - Math.pow(2, -10 * time)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      touchMultiplier: 1.5,
+    });
+    lenisRef.current = lenis;
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const tickerCb = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(tickerCb);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(tickerCb);
+      lenisRef.current = null;
+    };
+  }, []);
+
+  // Stop/resume Lenis when photo viewer modal is open
+  useEffect(() => {
+    if (open) {
+      lenisRef.current?.stop();
+    } else {
+      lenisRef.current?.start();
+    }
+  }, [open]);
+
+  // Global GSAP ScrollTrigger reveals and staggered card entrances
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 60);
+
+    const ctx = gsap.context(() => {
+      // Single elements entrance
+      const reveals = gsap.utils.toArray<HTMLElement>(".gsap-reveal");
+      reveals.forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 32 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              once: true,
+            },
+          }
+        );
+      });
+
+      // Staggered card groups
+      const staggerGroups = gsap.utils.toArray<HTMLElement>(".gsap-stagger-group");
+      staggerGroups.forEach((group) => {
+        gsap.fromTo(
+          group.children,
+          { opacity: 0, y: 28 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.06, // 60ms Emil stagger guideline
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: group,
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
+      });
+    });
+
+    return () => {
+      clearTimeout(timer);
+      ctx.revert();
+    };
   }, [lang]);
 
   const show = (id: number) => setOpen({ id, i: byId(id).cover });
 
   return (
-    <LayoutGroup>
-      <div className={`site lang-${lang}`}>
-        <a className="skip button-sm" href="#main">
-          {lang === "bn" ? "মূল অংশে যান" : "Skip to content"}
-        </a>
-        <div className="page">
-          <Nav t={t} lang={lang} setLang={setLang} />
-          <main id="main">
-            <Hero t={t} lang={lang} show={show} />
-            <Tagline text={t.tagline} />
-            <SocialProof t={t} lang={lang} show={show} />
-            <Benefits t={t} />
-            <How t={t} lang={lang} />
-            <Sold t={t} lang={lang} show={show} />
-            <Finder t={t} lang={lang} />
-            <Faq t={t} />
-          </main>
-          <Close t={t} lang={lang} />
-        </div>
-        <AnimatePresence>{open && <Viewer t={t} lang={lang} open={open} setOpen={setOpen} />}</AnimatePresence>
+    <div className={`site lang-${lang}`}>
+      <a className="skip button-sm" href="#main">
+        {lang === "bn" ? "মূল অংশে যান" : "Skip to content"}
+      </a>
+      <div className="page">
+        <Nav t={t} lang={lang} setLang={setLang} />
+        <main id="main">
+          <Hero t={t} lang={lang} show={show} />
+          <Tagline text={t.tagline} />
+          <SocialProof t={t} lang={lang} show={show} />
+          <Benefits t={t} />
+          <How t={t} lang={lang} />
+          <Sold t={t} lang={lang} show={show} />
+          <Finder t={t} lang={lang} />
+          <Faq t={t} />
+        </main>
+        <Close t={t} lang={lang} />
       </div>
-    </LayoutGroup>
+      {open && <Viewer t={t} lang={lang} open={open} setOpen={setOpen} />}
+    </div>
   );
 }
 
@@ -116,13 +210,15 @@ function Nav({ t, lang, setLang }: { t: Copy; lang: Lang; setLang: (l: Lang) => 
     });
     return () => io.disconnect();
   }, []);
+
   const links: [string, string][] = [
     ["how", t.nav.how],
     ["sold", t.nav.sold],
     ["faq", t.nav.faq],
   ];
+
   return (
-    <div className="nav-bar">
+    <header className="nav-bar">
       <nav className="nav" aria-label={lang === "bn" ? "মেনু" : "Menu"}>
         <a className="brand" href="#main" aria-label="Rifath's Gadget">
           <img src="/favicon.png" width="28" height="28" alt="" />
@@ -149,7 +245,7 @@ function Nav({ t, lang, setLang }: { t: Copy; lang: Lang; setLang: (l: Lang) => 
           </a>
         </div>
       </nav>
-    </div>
+    </header>
   );
 }
 
@@ -158,33 +254,85 @@ function Nav({ t, lang, setLang }: { t: Copy; lang: Lang; setLang: (l: Lang) => 
 const CASE_MS = 7000;
 
 function Hero({ t, lang, show }: { t: Copy; lang: Lang; show: (id: number) => void }) {
-  const reduce = useReducedMotion();
   const [k, setK] = useState(0);
   const [paused, setPaused] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+  const timerRef = useRef<HTMLSpanElement>(null);
+  const dealBodyRef = useRef<HTMLDivElement>(null);
   const d = byId(heroCases[k]);
 
+  // Hero entrance animation
   useEffect(() => {
-    if (reduce || paused) return;
-    const id = setTimeout(() => setK((x) => (x + 1) % heroCases.length), CASE_MS);
-    return () => clearTimeout(id);
-  }, [k, paused, reduce]);
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !heroRef.current) return;
 
-  const enter = (i: number) =>
-    reduce ? {} : { initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.8, ease, delay: 0.08 * i } };
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".hero-anim",
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.08,
+          ease: "power3.out",
+        }
+      );
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, [lang]);
+
+  // Deal tab timer animation
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || paused || !timerRef.current) return;
+
+    const tween = gsap.fromTo(
+      timerRef.current,
+      { scaleX: 0 },
+      {
+        scaleX: 1,
+        duration: CASE_MS / 1000,
+        ease: "none",
+        transformOrigin: "left center",
+        onComplete: () => {
+          setK((x) => (x + 1) % heroCases.length);
+        },
+      }
+    );
+
+    return () => {
+      tween.kill();
+    };
+  }, [k, paused]);
+
+  // Case panel crossfade on switch
+  useEffect(() => {
+    if (!dealBodyRef.current) return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    gsap.fromTo(
+      dealBodyRef.current,
+      { opacity: 0, y: 8 },
+      { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }
+    );
+  }, [k]);
 
   return (
-    <section className="hero" id="top">
+    <section className="hero" id="top" ref={heroRef}>
       <div className="wrap">
         <div className="hero-head">
-          <motion.h1 className="heading-1" key={lang} {...enter(0)}>
+          <h1 className="heading-1 hero-anim" key={lang}>
             {t.hero.title.map((l) => (
               <span key={l}>{l}</span>
             ))}
-          </motion.h1>
-          <motion.p className="lede title-2 muted" {...enter(1)}>
+          </h1>
+          <p className="lede title-2 muted hero-anim">
             {t.hero.body}
-          </motion.p>
-          <motion.div className="hero-cta" {...enter(2)}>
+          </p>
+          <div className="hero-cta hero-anim">
             <a className="btn btn-primary big button-lg" href={waLink()} target="_blank" rel="noreferrer">
               <WhatsappLogo />
               {t.hero.cta}
@@ -193,12 +341,11 @@ function Hero({ t, lang, show }: { t: Copy; lang: Lang; show: (id: number) => vo
               <SealCheck weight="fill" />
               {t.hero.proof(money(savingRange.min, lang), money(savingRange.max, lang), num(reviewCount, lang))}
             </p>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div
-          className="deal"
-          {...enter(3)}
+        <div
+          className="deal hero-anim"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
           onFocus={() => setPaused(true)}
@@ -219,10 +366,8 @@ function Hero({ t, lang, show }: { t: Copy; lang: Lang; show: (id: number) => vo
                   className="deal-tab"
                   onClick={() => setK(i)}
                 >
-                  {on && <motion.span layoutId="case-tab" className="tab-bg" transition={{ type: "spring", duration: 0.45, bounce: 0.12 }} />}
-                  {on && !reduce && !paused && (
-                    <motion.span key={`t${k}`} className="timer" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: CASE_MS / 1000, ease: "linear" }} />
-                  )}
+                  {on && <span className="tab-bg" />}
+                  {on && !paused && <span ref={timerRef} className="timer" />}
                   <span className="body-4 tab-name">
                     <span className="full">{c.buyer[lang]}</span>
                     <span className="short">{firstName(c.buyer[lang])}</span>
@@ -233,115 +378,108 @@ function Hero({ t, lang, show }: { t: Copy; lang: Lang; show: (id: number) => vo
             })}
           </div>
 
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={d.id}
-              id="case-panel"
-              role="tabpanel"
-              aria-labelledby={`case-${d.id}`}
-              className="deal-body"
-              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
-              transition={{ duration: 0.35, ease }}
-            >
-              <div className="deal-ask">
-                <p className="heading-4">
-                  <span className="muted">{t.hero.asked} </span>
-                  {d.asked?.[lang]}
+          <div
+            key={d.id}
+            ref={dealBodyRef}
+            id="case-panel"
+            role="tabpanel"
+            aria-labelledby={`case-${d.id}`}
+            className="deal-body"
+          >
+            <div className="deal-ask">
+              <p className="heading-4">
+                <span className="muted">{t.hero.asked} </span>
+                {d.asked?.[lang]}
+              </p>
+              {d.review && (
+                <figure className="deal-review">
+                  <blockquote className="body-3">“{d.review.text[lang]}”</blockquote>
+                  <figcaption className="deal-buyer">
+                    <span className="avatar body-4" aria-hidden="true">
+                      {d.buyer[lang].slice(0, 1)}
+                    </span>
+                    <div>
+                      <p className="body-4">{reviewer(d, lang)}</p>
+                      <p className="caption-2 muted">
+                        {t.hero.buyer} · {d.model}
+                        {lang === "en" && d.review.translated ? ` · ${t.sold.translated}` : ""}
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              )}
+            </div>
+            <div className="deal-arrow" aria-hidden="true">
+              <span>
+                <ArrowRight />
+              </span>
+            </div>
+            <div className="deal-found">
+              <p className="heading-5">
+                <span className="muted">{t.hero.found} </span>
+                <span className="nowrap">{d.model}</span>
+              </p>
+              <ul className="spec-list body-6">
+                {d.specs.slice(0, 6).map((s) => (
+                  <li key={s.en}>
+                    <CheckCircle />
+                    <span>{s[lang]}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="deal-saving">
+                <p className="saving">
+                  <b className="heading-3">{money(d.saving, lang)}</b>
+                  <span className="body-2 muted">{t.hero.below}</span>
                 </p>
-                {d.review && (
-                  <figure className="deal-review">
-                    <blockquote className="body-3">“{d.review.text[lang]}”</blockquote>
-                    <figcaption className="deal-buyer">
-                      <span className="avatar body-4" aria-hidden="true">
-                        {d.buyer[lang].slice(0, 1)}
-                      </span>
-                      <div>
-                        <p className="body-4">{reviewer(d, lang)}</p>
-                        <p className="caption-2 muted">
-                          {t.hero.buyer} · {d.model}
-                          {lang === "en" && d.review.translated ? ` · ${t.sold.translated}` : ""}
-                        </p>
-                      </div>
-                    </figcaption>
-                  </figure>
-                )}
-              </div>
-              <div className="deal-arrow" aria-hidden="true">
-                <span>
+                <button type="button" className="link button-sm" onClick={() => show(d.id)}>
+                  {t.sold.details}
                   <ArrowRight />
-                </span>
+                </button>
               </div>
-              <div className="deal-found">
-                <p className="heading-5">
-                  <span className="muted">{t.hero.found} </span>
-                  <span className="nowrap">{d.model}</span>
-                </p>
-                <ul className="spec-list body-6">
-                  {d.specs.slice(0, 6).map((s) => (
-                    <li key={s.en}>
-                      <CheckCircle />
-                      <span>{s[lang]}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="deal-saving">
-                  <p className="saving">
-                    <b className="heading-3">{money(d.saving, lang)}</b>
-                    <span className="body-2 muted">{t.hero.below}</span>
-                  </p>
-                  <button type="button" className="link button-sm" onClick={() => show(d.id)}>
-                    {t.sold.details}
-                    <ArrowRight />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </motion.div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
-/* ------------------------------------------------------------------ tagline reveal (B11) */
+/* ------------------------------------------------------------------ tagline reveal */
 
 function Tagline({ text }: { text: string }) {
   const ref = useRef<HTMLParagraphElement>(null);
-  const reduce = useReducedMotion();
   const words = text.split(" ");
-  const [lit, setLit] = useState(reduce ? words.length : 0);
 
   useEffect(() => {
-    if (reduce) {
-      setLit(words.length);
-      return;
-    }
-    setLit(0);
-    const els = ref.current ? Array.from(ref.current.querySelectorAll<HTMLElement>(".w")) : [];
-    // Each word lights up once it crosses a line 40% up from the bottom of the screen.
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (!e.isIntersecting) continue;
-          const i = Number((e.target as HTMLElement).dataset.i);
-          setLit((n) => Math.max(n, i + 1));
-          io.unobserve(e.target);
-        }
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !ref.current) return;
+
+    const wordEls = ref.current.querySelectorAll(".w");
+    const tween = gsap.to(wordEls, {
+      color: "var(--ink)",
+      stagger: 0.05,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ref.current,
+        start: "top 80%",
+        end: "bottom 50%",
+        scrub: 0.8,
       },
-      { rootMargin: "0px 0px -40% 0px" },
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, [text, reduce, words.length]);
+    });
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
+  }, [text]);
 
   return (
     <section className="tagline">
       <div className="wrap">
         <p ref={ref} className="heading-2" aria-label={text}>
           {words.map((w, i) => (
-            <span key={`${text}-${i}`} data-i={i} className={i < lit ? "w on" : "w"} aria-hidden="true">
+            <span key={`${text}-${i}`} className="w" aria-hidden="true">
               {w}{" "}
             </span>
           ))}
@@ -358,15 +496,15 @@ function SocialProof({ t, lang, show }: { t: Copy; lang: Lang; show: (id: number
   return (
     <section className="section social-proof" id="reviews">
       <div className="wrap">
-        <motion.div className="section-head" {...reveal}>
+        <div className="section-head gsap-reveal">
           <span className="badge-saving caption-3">
             <SealCheck weight="fill" />
             {t.socialProof.badge}
           </span>
           <h2 className="heading-2">{t.socialProof.title}</h2>
           <p className="body-3 muted">{t.socialProof.sub}</p>
-        </motion.div>
-        <motion.div className="social-proof-grid" {...reveal}>
+        </div>
+        <div className="social-proof-grid gsap-stagger-group">
           {featured.map((d) => (
             <article key={d.id} className="social-card">
               <div className="social-card-head">
@@ -395,7 +533,7 @@ function SocialProof({ t, lang, show }: { t: Copy; lang: Lang; show: (id: number
               </div>
             </article>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -409,10 +547,10 @@ function Benefits({ t }: { t: Copy }) {
   return (
     <section className="section" id="benefits">
       <div className="wrap">
-        <motion.div className="section-head" {...reveal}>
+        <div className="section-head gsap-reveal">
           <h2 className="heading-2">{t.benefits.title}</h2>
-        </motion.div>
-        <motion.div className="benefits" {...reveal}>
+        </div>
+        <div className="benefits gsap-stagger-group">
           {t.benefits.items.map((b, i) => {
             const Icon = benefitIcons[i];
             return (
@@ -425,7 +563,7 @@ function Benefits({ t }: { t: Copy }) {
               </article>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -435,10 +573,10 @@ function How({ t, lang }: { t: Copy; lang: Lang }) {
   return (
     <section className="section" id="how">
       <div className="wrap">
-        <motion.div className="section-head" {...reveal}>
+        <div className="section-head gsap-reveal">
           <h2 className="heading-2">{t.how.title}</h2>
-        </motion.div>
-        <motion.ol className="steps" {...reveal}>
+        </div>
+        <ol className="steps gsap-stagger-group">
           {t.how.steps.map((s, i) => (
             <li key={s.t} className="step">
               <span className="step-n body-4" aria-hidden="true">
@@ -448,7 +586,7 @@ function How({ t, lang }: { t: Copy; lang: Lang }) {
               <p className="body-3 muted">{s.d}</p>
             </li>
           ))}
-        </motion.ol>
+        </ol>
       </div>
     </section>
   );
@@ -460,7 +598,7 @@ function Sold({ t, lang, show }: { t: Copy; lang: Lang; show: (id: number) => vo
   return (
     <section className="section" id="sold">
       <div className="wrap">
-        <motion.div className="section-head" {...reveal}>
+        <div className="section-head gsap-reveal">
           <h2 className="heading-2">{t.sold.title}</h2>
           <p className="body-3 muted">{t.sold.body}</p>
           <div className="proof-pills">
@@ -474,8 +612,8 @@ function Sold({ t, lang, show }: { t: Copy; lang: Lang; show: (id: number) => vo
               )}
             </span>
           </div>
-        </motion.div>
-        <div className="sold-grid">
+        </div>
+        <div className="sold-grid gsap-stagger-group">
           {deliveries.map((d) => (
             <SoldCard key={d.id} d={d} t={t} lang={lang} show={show} />
           ))}
@@ -487,7 +625,7 @@ function Sold({ t, lang, show }: { t: Copy; lang: Lang; show: (id: number) => vo
 
 function SoldCard({ d, t, lang, show }: { d: Delivery; t: Copy; lang: Lang; show: (id: number) => void }) {
   return (
-    <motion.article className="sold-card" {...reveal}>
+    <article className="sold-card">
       <button type="button" className="sold-photo" onClick={() => show(d.id)} aria-label={`${d.model}, ${num(d.count, lang)}${t.sold.photos}`}>
         <img src={photo(d.id, d.cover, true)} alt="" loading="lazy" width="480" height="640" />
         <span className="photo-count caption-4">
@@ -529,16 +667,17 @@ function SoldCard({ d, t, lang, show }: { d: Delivery; t: Copy; lang: Lang; show
           </button>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
 function Viewer({ t, lang, open, setOpen }: { t: Copy; lang: Lang; open: NonNullable<Open>; setOpen: (o: Open) => void }) {
   const d = byId(open.id);
-  const reduce = useReducedMotion();
   const [dir, setDir] = useState(1);
   const closeRef = useRef<HTMLButtonElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+  const photoRef = useRef<HTMLImageElement>(null);
 
   const go = (to: number) => {
     const n = ((to - 1 + d.count) % d.count) + 1;
@@ -546,9 +685,57 @@ function Viewer({ t, lang, open, setOpen }: { t: Copy; lang: Lang; open: NonNull
     setOpen({ ...open, i: n });
   };
 
+  const handleClose = () => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !backdropRef.current || !boxRef.current) {
+      setOpen(null);
+      return;
+    }
+    gsap.to(boxRef.current, {
+      opacity: 0,
+      scale: 0.97,
+      y: 8,
+      duration: 0.18,
+      ease: "power2.in",
+    });
+    gsap.to(backdropRef.current, {
+      opacity: 0,
+      duration: 0.2,
+      ease: "power2.in",
+      onComplete: () => setOpen(null),
+    });
+  };
+
+  // Entrance animation
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    if (backdropRef.current && boxRef.current) {
+      gsap.fromTo(backdropRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
+      gsap.fromTo(
+        boxRef.current,
+        { opacity: 0, scale: 0.95, y: 16 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.35, ease: "power3.out" }
+      );
+    }
+  }, []);
+
+  // Photo slide animation on change
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !photoRef.current) return;
+
+    gsap.fromTo(
+      photoRef.current,
+      { opacity: 0, x: dir * 36 },
+      { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }
+    );
+  }, [open.i, dir]);
+
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(null);
+      if (e.key === "Escape") handleClose();
       if (e.key === "ArrowRight") go(open.i + 1);
       if (e.key === "ArrowLeft") go(open.i - 1);
       if (e.key === "Tab" && boxRef.current) {
@@ -579,45 +766,25 @@ function Viewer({ t, lang, open, setOpen }: { t: Copy; lang: Lang; open: NonNull
   }, []);
 
   return (
-    <motion.div
+    <div
+      ref={backdropRef}
       className="viewer"
       role="dialog"
       aria-modal="true"
       aria-label={d.model}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3, ease }}
-      onClick={() => setOpen(null)}
+      onClick={handleClose}
     >
-      <motion.div
+      <div
         ref={boxRef}
         className="viewer-inner"
         onClick={(e) => e.stopPropagation()}
-        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
-        transition={{ duration: 0.5, ease }}
       >
         <div className="viewer-photo">
-          <AnimatePresence initial={false} mode="popLayout" custom={dir}>
-            <motion.img
-              key={open.i}
-              src={photo(d.id, open.i)}
-              alt={`${d.model} · ${num(open.i, lang)}`}
-              initial={reduce ? { opacity: 0 } : { opacity: 0, x: dir * 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={reduce ? { opacity: 0 } : { opacity: 0, x: dir * -40 }}
-              transition={{ duration: 0.5, ease }}
-              drag={reduce ? false : "x"}
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.3}
-              onDragEnd={(_, info) => {
-                if (info.offset.x < -60 || info.velocity.x < -400) go(open.i + 1);
-                else if (info.offset.x > 60 || info.velocity.x > 400) go(open.i - 1);
-              }}
-            />
-          </AnimatePresence>
+          <img
+            ref={photoRef}
+            src={photo(d.id, open.i)}
+            alt={`${d.model} · ${num(open.i, lang)}`}
+          />
           <button type="button" className="viewer-nav prev" onClick={() => go(open.i - 1)} aria-label={t.sold.prev}>
             <CaretLeft />
           </button>
@@ -661,13 +828,13 @@ function Viewer({ t, lang, open, setOpen }: { t: Copy; lang: Lang; open: NonNull
             <span className="caption-2 muted" aria-live="polite">
               {num(open.i, lang)} / {num(d.count, lang)}
             </span>
-            <button type="button" ref={closeRef} className="btn btn-line button-sm" onClick={() => setOpen(null)}>
+            <button type="button" ref={closeRef} className="btn btn-line button-sm" onClick={handleClose}>
               {t.sold.close}
             </button>
           </div>
         </aside>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 
@@ -684,7 +851,7 @@ function Finder({ t, lang }: { t: Copy; lang: Lang }) {
   return (
     <section className="section" id="finder">
       <div className="wrap finder">
-        <motion.div {...reveal}>
+        <div className="gsap-reveal">
           <div className="section-head">
             <h2 className="heading-2">{f.title}</h2>
             <p className="body-3 muted">{f.body}</p>
@@ -700,8 +867,8 @@ function Finder({ t, lang }: { t: Copy; lang: Lang }) {
               ))}
             </ul>
           </div>
-        </motion.div>
-        <motion.form className="form-card" onSubmit={(e) => e.preventDefault()} {...reveal}>
+        </div>
+        <form className="form-card gsap-reveal" onSubmit={(e) => e.preventDefault()}>
           <div>
             <div className="budget-row">
               <label className="title-3" htmlFor="budget">
@@ -734,7 +901,7 @@ function Finder({ t, lang }: { t: Copy; lang: Lang }) {
             {f.send}
           </a>
           <p className="caption-2 muted center-text">{f.note}</p>
-        </motion.form>
+        </form>
       </div>
     </section>
   );
@@ -744,10 +911,9 @@ function Choice({ id, label, options, value, onChange }: { id: string; label: st
   return (
     <fieldset className="choice">
       <legend className="title-3">{label}</legend>
-      <div className="choice-row animated">
+      <div className="choice-row">
         {options.map((o, i) => (
           <button type="button" key={o} className="caption-1" aria-pressed={value === i} onClick={() => onChange(i)}>
-            {value === i && <motion.span layoutId={`choice-${id}`} className="pill" transition={{ type: "spring", duration: 0.45, bounce: 0.12 }} />}
             <span className="lbl">{o}</span>
           </button>
         ))}
@@ -760,31 +926,74 @@ function Choice({ id, label, options, value, onChange }: { id: string; label: st
 
 function Faq({ t }: { t: Copy }) {
   const [open, setOpen] = useState<number | null>(0);
+  const ansRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const toggle = (i: number) => {
+    setOpen((prev) => (prev === i ? null : i));
+  };
+
+  useEffect(() => {
+    ansRefs.current.forEach((el, idx) => {
+      if (!el) return;
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (open === idx) {
+        if (prefersReduced) {
+          gsap.set(el, { height: "auto", opacity: 1 });
+        } else {
+          gsap.fromTo(
+            el,
+            { height: 0, opacity: 0 },
+            { height: "auto", opacity: 1, duration: 0.28, ease: "power2.out" }
+          );
+        }
+      } else {
+        if (prefersReduced) {
+          gsap.set(el, { height: 0, opacity: 0 });
+        } else {
+          gsap.to(el, { height: 0, opacity: 0, duration: 0.2, ease: "power2.inOut" });
+        }
+      }
+    });
+  }, [open]);
+
   return (
     <section className="section" id="faq">
       <div className="wrap faq">
-        <motion.div className="section-head" {...reveal}>
+        <div className="section-head gsap-reveal">
           <h2 className="heading-2">{t.faq.title}</h2>
-        </motion.div>
-        <motion.div className="qa" {...reveal}>
+        </div>
+        <div className="qa gsap-reveal">
           {t.faq.items.map((x, i) => (
             <div key={x.q} className={open === i ? "q open" : "q"}>
               <h3>
-                <button type="button" className="title-2" aria-expanded={open === i} aria-controls={`a${i}`} onClick={() => setOpen(open === i ? null : i)}>
+                <button
+                  type="button"
+                  className="title-2"
+                  aria-expanded={open === i}
+                  aria-controls={`a${i}`}
+                  onClick={() => toggle(i)}
+                >
                   <span>{x.q}</span>
                   <Plus />
                 </button>
               </h3>
-              <AnimatePresence initial={false}>
-                {open === i && (
-                  <motion.div id={`a${i}`} className="a" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.5, ease }}>
-                    <p className="body-3 muted">{x.a}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div
+                id={`a${i}`}
+                ref={(el) => {
+                  ansRefs.current[i] = el;
+                }}
+                className="a"
+                style={{
+                  height: open === i ? "auto" : 0,
+                  opacity: open === i ? 1 : 0,
+                  overflow: "hidden",
+                }}
+              >
+                <p className="body-3 muted">{x.a}</p>
+              </div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -795,7 +1004,7 @@ function Close({ t, lang }: { t: Copy; lang: Lang }) {
     <>
       <section className="close">
         <div className="wrap">
-          <motion.div className="section-head" {...reveal}>
+          <div className="section-head gsap-reveal">
             <h2 className="heading-2">
               {t.close.title.map((l) => (
                 <span key={l} className="block">
@@ -804,8 +1013,8 @@ function Close({ t, lang }: { t: Copy; lang: Lang }) {
               ))}
             </h2>
             <p className="title-2 muted">{t.close.body}</p>
-          </motion.div>
-          <motion.div className="actions" {...reveal}>
+          </div>
+          <div className="actions gsap-reveal">
             <a className="btn btn-primary big button-lg" href={waLink()} target="_blank" rel="noreferrer">
               <WhatsappLogo />
               {t.hero.cta}
@@ -814,7 +1023,7 @@ function Close({ t, lang }: { t: Copy; lang: Lang }) {
               <FacebookLogo />
               {t.close.facebook}
             </a>
-          </motion.div>
+          </div>
         </div>
       </section>
       <footer className="footer">
