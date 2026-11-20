@@ -50,7 +50,7 @@ export default function AdminLogin() {
             alt="Rifath's Gadget"
             className="admin-login-logo"
           />
-          <h1 className="admin-login-title">Admin Dashboard</h1>
+          <h1 className="h2 admin-login-title">Admin Dashboard</h1>
           <p className="admin-login-sub">Sign in to manage deliveries and reviews</p>
         </div>
 

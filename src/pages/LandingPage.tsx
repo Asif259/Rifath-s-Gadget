@@ -211,13 +211,13 @@ export default function LandingPage() {
             savingRange={savingRange}
             reviewCount={reviewCount}
           />
-          <Tagline text={t.tagline} />
           <SocialProof
             t={t}
             lang={lang}
             show={show}
             featuredReviews={featuredReviews}
           />
+          <Tagline text={t.tagline} />
           <Benefits t={t} />
           <How t={t} lang={lang} />
           <Sold
@@ -402,7 +402,7 @@ function Hero({
     <section className="hero" id="top" ref={heroRef}>
       <div className="wrap">
         <div className="hero-head">
-          <h1 className="heading-1 hero-anim" key={lang}>
+          <h1 className="h2 heading-1 hero-anim" key={lang}>
             {t.hero.title.map((l) => (
               <span key={l}>{l}</span>
             ))}
@@ -522,50 +522,6 @@ function Hero({
   );
 }
 
-/* ------------------------------------------------------------------ tagline reveal */
-
-function Tagline({ text }: { text: string }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const words = text.split(" ");
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !ref.current) return;
-
-    const wordEls = ref.current.querySelectorAll(".w");
-    const tween = gsap.to(wordEls, {
-      color: "var(--ink)",
-      stagger: 0.05,
-      ease: "power1.inOut",
-      scrollTrigger: {
-        trigger: ref.current,
-        start: "top 80%",
-        end: "bottom 50%",
-        scrub: 0.8,
-      },
-    });
-
-    return () => {
-      tween.scrollTrigger?.kill();
-      tween.kill();
-    };
-  }, [text]);
-
-  return (
-    <section className="tagline">
-      <div className="wrap">
-        <p ref={ref} className="heading-2" aria-label={text}>
-          {words.map((w, i) => (
-            <span key={`${text}-${i}`} className="w" aria-hidden="true">
-              {w}{" "}
-            </span>
-          ))}
-        </p>
-      </div>
-    </section>
-  );
-}
-
 /* ------------------------------------------------------------------ social proof strip */
 
 function SocialProof({
@@ -620,6 +576,50 @@ function SocialProof({
             </article>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ tagline reveal */
+
+function Tagline({ text }: { text: string }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const words = text.split(" ");
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !ref.current) return;
+
+    const wordEls = ref.current.querySelectorAll(".w");
+    const tween = gsap.to(wordEls, {
+      color: "var(--tone-strong)",
+      stagger: 0.05,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ref.current,
+        start: "top 80%",
+        end: "bottom 50%",
+        scrub: 0.8,
+      },
+    });
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
+  }, [text]);
+
+  return (
+    <section className="tagline" aria-label="Brand statement">
+      <div className="wrap">
+        <p ref={ref} className="h0" data-words aria-label={text}>
+          {words.map((w, i) => (
+            <span key={`${text}-${i}`} className="w" aria-hidden="true">
+              {w}{" "}
+            </span>
+          ))}
+        </p>
       </div>
     </section>
   );
@@ -730,7 +730,7 @@ function SoldCard({ d, t, lang, show }: { d: Delivery; t: Copy; lang: Lang; show
   const photoCount = photos.length || d.count;
 
   return (
-    <article className="sold-card">
+    <article className="card-case sold-card">
       <button
         type="button"
         className="sold-photo"

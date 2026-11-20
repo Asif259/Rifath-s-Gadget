@@ -432,7 +432,7 @@ export default function DeliveryForm() {
           <ArrowLeft size={16} />
           <span>Back to Deliveries</span>
         </Link>
-        <h1 className="admin-title">
+        <h1 className="h2 admin-title">
           {isEdit ? `Edit Delivery: ${model || "Untitled"}` : "Add New Delivery"}
         </h1>
       </div>

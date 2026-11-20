@@ -101,7 +101,7 @@ export default function DeliveriesList() {
       setDeliveries((prev) =>
         prev.map((d) => (d.id === id ? { ...d, [field]: currentVal } : d))
       );
-      alert(`Could not update ${field}: ${error.message}`);
+      setErrorMsg(`Could not update ${field}: ${error.message}`);
     }
   };
 
@@ -146,7 +146,7 @@ export default function DeliveriesList() {
       closeDeleteModal();
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
-      alert(`Failed to delete delivery: ${msg}`);
+      setErrorMsg(`Failed to delete delivery: ${msg}`);
     } finally {
       setIsDeleting(false);
     }
@@ -162,7 +162,7 @@ export default function DeliveriesList() {
     <div className="admin-deliveries-page">
       <div className="admin-page-head">
         <div>
-          <h1 className="admin-title">Deliveries</h1>
+          <h1 className="h2 admin-title">Deliveries</h1>
           <p className="admin-desc">
             Manage live laptop delivery stories, buyer feedback, and specs.
           </p>
