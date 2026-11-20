@@ -1168,17 +1168,33 @@ function Close({ t, lang }: { t: Copy; lang: Lang }) {
         </div>
       </section>
       <footer className="footer">
-        <div className="wrap">
-          <span className="brand">
-            <img src="/favicon.png" width="28" height="28" alt="" />
-            <span className="body-1">Rifath’s Gadget</span>
-          </span>
+        <div className="wrap footer-wrap">
+          <div className="footer-brand-side">
+            <span className="brand">
+              <img src="/favicon.png" width="28" height="28" alt="" />
+              <span className="body-1">Rifath’s Gadget</span>
+            </span>
+            <span className="footer-copy caption-2 muted">
+              © {new Date().getFullYear()} Rifath’s Gadget
+            </span>
+          </div>
           <div className="footer-meta caption-2 muted">
             <a href={waLink()} target="_blank" rel="noreferrer" dir="ltr">
               {WHATSAPP_DISPLAY}
             </a>
             <span>{t.close.area}</span>
             <span>{t.close.tagline}</span>
+          </div>
+          <div className="footer-credit caption-2 muted">
+            <span>Designed &amp; built by </span>
+            <a
+              href="https://ashrafulasif.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="creator-link"
+            >
+              Asif
+            </a>
           </div>
         </div>
       </footer>

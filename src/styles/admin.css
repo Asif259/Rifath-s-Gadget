@@ -907,3 +907,38 @@ dialog.admin-dialog::backdrop {
   justify-content: flex-end;
   gap: 10px;
 }
+
+/* ---------- Admin Footer ---------- */
+.admin-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--neutral-white);
+  padding: 16px 24px;
+}
+
+.admin-footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.admin-footer-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (max-width: 600px) {
+  .admin-footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+}
+

@@ -64,6 +64,23 @@ export default function AdminLayout() {
       <main className="admin-main">
         <Outlet />
       </main>
+
+      <footer className="admin-footer">
+        <div className="admin-footer-inner caption-2 muted">
+          <span>© {new Date().getFullYear()} Rifath’s Gadget</span>
+          <span className="admin-footer-credit">
+            Designed &amp; built by{" "}
+            <a
+              href="https://ashrafulasif.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="creator-link"
+            >
+              Asif
+            </a>
+          </span>
+        </div>
+      </footer>
     </div>
   );
 }
