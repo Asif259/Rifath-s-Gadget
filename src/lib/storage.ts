@@ -81,7 +81,7 @@ export async function deleteStoragePaths(
   if (validPaths.length === 0) return;
 
   const { error } = await supabase.storage.from(BUCKET_NAME).remove(validPaths);
-  if (error) {
+  if (error && import.meta.env.DEV) {
     console.error("[Storage] Failed to delete storage objects:", error.message);
   }
 }

@@ -1,3 +1,11 @@
+export const ALLOWED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+] as const;
+
+export const MAX_IMAGE_FILE_SIZE = 15 * 1024 * 1024; // 15MB
+
 export interface ProcessedImages {
   fullBlob: Blob;
   thumbBlob: Blob;
@@ -71,6 +79,21 @@ function canvasToBlob(canvas: HTMLCanvasElement, mimeType: string, quality: numb
  * - Encodes as WebP with automatic fallback to JPEG
  */
 export async function processImage(file: File): Promise<ProcessedImages> {
+  // Validate file type
+  if (!ALLOWED_IMAGE_TYPES.includes(file.type as any)) {
+    throw new Error(
+      `Invalid image format "${file.type || "unknown"}". Only JPG, PNG, and WebP images are supported.`
+    );
+  }
+
+  // Validate file size (15MB maximum)
+  if (file.size > MAX_IMAGE_FILE_SIZE) {
+    const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+    throw new Error(
+      `File "${file.name}" exceeds the 15MB limit (${sizeMb}MB). Please select a smaller image.`
+    );
+  }
+
   const isWebpSupported = await checkWebpSupport();
   const mimeType = isWebpSupported ? "image/webp" : "image/jpeg";
   const ext: "webp" | "jpg" = isWebpSupported ? "webp" : "jpg";

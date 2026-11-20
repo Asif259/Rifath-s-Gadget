@@ -17,6 +17,10 @@ import {
 } from "@phosphor-icons/react";
 import { supabase } from "../../lib/supabase";
 import { uploadDeliveryPhoto, deleteStoragePaths } from "../../lib/storage";
+import {
+  ALLOWED_IMAGE_TYPES,
+  MAX_IMAGE_FILE_SIZE,
+} from "../../lib/imageProcessor";
 import type { DeliveryRow, DeliveryPhoto, L } from "../../types/delivery";
 
 interface SpecItem {
@@ -30,6 +34,10 @@ export default function DeliveryForm() {
   const isEdit = Boolean(id && id !== "new");
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Track newly uploaded photos in this session to clean up if cancelled/abandoned (SEC-06)
+  const newlyUploadedPathsRef = useRef<string[]>([]);
+  const isSavedRef = useRef<boolean>(false);
 
   // Loading & submission state
   const [loadingInitial, setLoadingInitial] = useState(isEdit);
@@ -131,10 +139,46 @@ export default function DeliveryForm() {
     loadDelivery();
   }, [id, isEdit]);
 
+  // SEC-06: Automatically clean up any newly uploaded, unsaved storage files if navigating away
+  useEffect(() => {
+    return () => {
+      if (!isSavedRef.current && newlyUploadedPathsRef.current.length > 0) {
+        deleteStoragePaths([...newlyUploadedPathsRef.current]);
+      }
+    };
+  }, []);
+
   // ---------- Photo Management ----------
   const handlePhotoSelect = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
+
+    // Validate maximum photos
+    if (photos.length + files.length > 25) {
+      setErrorMsg("A maximum of 25 photos is allowed per delivery.");
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      return;
+    }
+
+    // Pre-validate file formats and sizes before starting upload/canvas pipeline
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (!ALLOWED_IMAGE_TYPES.includes(file.type as any)) {
+        setErrorMsg(
+          `"${file.name}" has an unsupported format (${file.type || "unknown"}). Only JPG, PNG, and WebP images are allowed.`
+        );
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        return;
+      }
+      if (file.size > MAX_IMAGE_FILE_SIZE) {
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+        setErrorMsg(
+          `"${file.name}" exceeds the 15MB size limit (${sizeMb}MB). Please select smaller images.`
+        );
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        return;
+      }
+    }
 
     setUploading(true);
     setErrorMsg(null);
@@ -146,6 +190,9 @@ export default function DeliveryForm() {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const uploaded = await uploadDeliveryPhoto(folderKey, file);
+        if (uploaded.storage_path) newlyUploadedPathsRef.current.push(uploaded.storage_path);
+        if (uploaded.thumb_path) newlyUploadedPathsRef.current.push(uploaded.thumb_path);
+
         const orderNum = photos.length + newPhotos.length + 1;
         const isCover = photos.length === 0 && newPhotos.length === 0;
 
@@ -200,6 +247,9 @@ export default function DeliveryForm() {
 
     // If removing an existing Supabase Storage photo, queue its paths for cleanup on save
     if (photoToRemove.storage_path) {
+      newlyUploadedPathsRef.current = newlyUploadedPathsRef.current.filter(
+        (p) => p !== photoToRemove.storage_path && p !== photoToRemove.thumb_path
+      );
       setQueuedDeletions((prev) => [
         ...prev,
         photoToRemove.storage_path!,
@@ -219,6 +269,10 @@ export default function DeliveryForm() {
 
   // ---------- Specs Management ----------
   const handleAddSpec = () => {
+    if (specs.length >= 25) {
+      setErrorMsg("A maximum of 25 specification rows is allowed.");
+      return;
+    }
     setSpecs((prev) => [...prev, { id: `${Date.now()}-${prev.length}`, bn: "", en: "" }]);
   };
 
@@ -251,39 +305,70 @@ export default function DeliveryForm() {
     setErrorMsg(null);
 
     // Validation
-    if (!model.trim()) {
+    const cleanModel = model.trim();
+    if (!cleanModel) {
       setErrorMsg("Model name is required.");
       return;
     }
-    if (!buyerNameBn.trim() || !buyerNameEn.trim()) {
+    if (cleanModel.length > 150) {
+      setErrorMsg("Model name must be 150 characters or fewer.");
+      return;
+    }
+
+    const cleanBuyerBn = buyerNameBn.trim();
+    const cleanBuyerEn = buyerNameEn.trim();
+    if (!cleanBuyerBn || !cleanBuyerEn) {
       setErrorMsg("Both Bangla and English buyer names are required.");
       return;
     }
-    const savingNum = Number(saving);
-    if (isNaN(savingNum) || savingNum < 0) {
-      setErrorMsg("Savings must be a valid positive number.");
+    if (cleanBuyerBn.length > 100 || cleanBuyerEn.length > 100) {
+      setErrorMsg("Buyer names must be 100 characters or fewer.");
       return;
     }
+
+    const savingNum = Number(saving);
+    if (isNaN(savingNum) || savingNum < 0 || savingNum > 2_000_000_000) {
+      setErrorMsg("Savings must be a valid number between ৳0 and ৳2,000,000,000.");
+      return;
+    }
+
+    const sortOrderNum = Math.max(-100_000, Math.min(100_000, Number(sortOrder) || 0));
+
     if (photos.length === 0) {
       setErrorMsg("Please upload at least one photo for this delivery.");
+      return;
+    }
+
+    if (askedBn.trim().length > 500 || askedEn.trim().length > 500) {
+      setErrorMsg("Customer request notes must be 500 characters or fewer.");
+      return;
+    }
+
+    if (reviewName.trim().length > 100) {
+      setErrorMsg("Reviewer name must be 100 characters or fewer.");
+      return;
+    }
+
+    if (reviewTextBn.trim().length > 2000 || reviewTextEn.trim().length > 2000) {
+      setErrorMsg("Review text must be 2000 characters or fewer.");
       return;
     }
 
     setSubmitting(true);
 
     try {
-      // Clean specs: keep rows where at least one language has text
+      // Clean specs: keep rows where at least one language has text (capped at 150 chars each)
       const cleanSpecs: L[] = specs
-        .map(({ bn, en }) => ({ bn: bn.trim(), en: en.trim() }))
+        .map(({ bn, en }) => ({ bn: bn.trim().slice(0, 150), en: en.trim().slice(0, 150) }))
         .filter((s) => s.bn || s.en);
 
-      // Clean highlights: filter out empty strings
-      const cleanHighlights = highlights.map((h) => h.trim()).filter(Boolean);
+      // Clean highlights: filter out empty strings (capped at 60 chars each)
+      const cleanHighlights = highlights.map((h) => h.trim().slice(0, 60)).filter(Boolean);
 
       const payload = {
-        model: model.trim(),
-        buyer_name_bn: buyerNameBn.trim(),
-        buyer_name_en: buyerNameEn.trim(),
+        model: cleanModel,
+        buyer_name_bn: cleanBuyerBn,
+        buyer_name_en: cleanBuyerEn,
         saving: savingNum,
         highlights: cleanHighlights,
         specs: cleanSpecs,
@@ -297,7 +382,7 @@ export default function DeliveryForm() {
         is_hero: isHero,
         is_featured: isFeatured,
         is_published: isPublished,
-        sort_order: Number(sortOrder) || 0,
+        sort_order: sortOrderNum,
       };
 
       if (isEdit && id) {
@@ -314,6 +399,10 @@ export default function DeliveryForm() {
 
         if (insertError) throw insertError;
       }
+
+      // Mark as saved so unmount cleanup does not delete files
+      isSavedRef.current = true;
+      newlyUploadedPathsRef.current = [];
 
       // Safe storage cleanup: now that the record has saved, remove any queued deleted photos
       if (queuedDeletions.length > 0) {
@@ -366,6 +455,7 @@ export default function DeliveryForm() {
                 placeholder="e.g. HP 15 fd0154wm"
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
+                maxLength={150}
                 required
               />
             </div>
@@ -378,6 +468,7 @@ export default function DeliveryForm() {
                 id="saving"
                 type="number"
                 min="0"
+                max="2000000000"
                 step="500"
                 className="admin-input"
                 placeholder="e.g. 25000"
@@ -396,6 +487,8 @@ export default function DeliveryForm() {
               <input
                 id="sortOrder"
                 type="number"
+                min="-100000"
+                max="100000"
                 className="admin-input"
                 value={sortOrder}
                 onChange={(e) => setSortOrder(Number(e.target.value))}
@@ -451,6 +544,7 @@ export default function DeliveryForm() {
                 placeholder="e.g. লিমন ইসলাম স্বাধীন"
                 value={buyerNameBn}
                 onChange={(e) => setBuyerNameBn(e.target.value)}
+                maxLength={100}
                 required
               />
             </div>
@@ -466,6 +560,7 @@ export default function DeliveryForm() {
                 placeholder="e.g. Limon Islam Shadhin"
                 value={buyerNameEn}
                 onChange={(e) => setBuyerNameEn(e.target.value)}
+                maxLength={100}
                 required
               />
             </div>
@@ -483,6 +578,7 @@ export default function DeliveryForm() {
                 placeholder="e.g. টাচ স্ক্রিন, ভালো ডিসপ্লে আর পারফরম্যান্স"
                 value={askedBn}
                 onChange={(e) => setAskedBn(e.target.value)}
+                maxLength={500}
               />
             </div>
 
@@ -497,6 +593,7 @@ export default function DeliveryForm() {
                 placeholder="e.g. Touch screen, a good display and performance"
                 value={askedEn}
                 onChange={(e) => setAskedEn(e.target.value)}
+                maxLength={500}
               />
             </div>
           </div>
@@ -515,6 +612,7 @@ export default function DeliveryForm() {
                 <input
                   type="text"
                   className="admin-input"
+                  maxLength={60}
                   placeholder={
                     idx === 0
                       ? "Core Ultra 5 125H"
@@ -563,6 +661,7 @@ export default function DeliveryForm() {
                 <input
                   type="text"
                   className="admin-input"
+                  maxLength={150}
                   placeholder="Bangla spec (e.g. 512GB SSD, ১০০% হেলথ)"
                   value={s.bn}
                   onChange={(e) => handleSpecChange(idx, "bn", e.target.value)}
@@ -570,6 +669,7 @@ export default function DeliveryForm() {
                 <input
                   type="text"
                   className="admin-input"
+                  maxLength={150}
                   placeholder="English spec (e.g. 512GB SSD, 100% health)"
                   value={s.en}
                   onChange={(e) => handleSpecChange(idx, "en", e.target.value)}
@@ -621,6 +721,7 @@ export default function DeliveryForm() {
               placeholder="e.g. Limon Islam Shadhin"
               value={reviewName}
               onChange={(e) => setReviewName(e.target.value)}
+              maxLength={100}
             />
           </div>
 
@@ -636,6 +737,7 @@ export default function DeliveryForm() {
                 placeholder="Buyer's words in Bangla..."
                 value={reviewTextBn}
                 onChange={(e) => setReviewTextBn(e.target.value)}
+                maxLength={2000}
               />
             </div>
 
@@ -650,6 +752,7 @@ export default function DeliveryForm() {
                 placeholder="Buyer's words translated to English..."
                 value={reviewTextEn}
                 onChange={(e) => setReviewTextEn(e.target.value)}
+                maxLength={2000}
               />
             </div>
           </div>
@@ -671,7 +774,7 @@ export default function DeliveryForm() {
               <h2 className="admin-section-title">6. Photos & Lightbox Media</h2>
               <p className="admin-desc">
                 Upload real delivery photos. Images are automatically compressed to WebP and
-                thumbnails are generated before saving.
+                thumbnails are generated before saving. (Max 15MB each, JPG/PNG/WebP).
               </p>
             </div>
             <label className="admin-btn-secondary" style={{ cursor: "pointer" }}>
@@ -681,7 +784,7 @@ export default function DeliveryForm() {
                 ref={fileInputRef}
                 type="file"
                 multiple
-                accept="image/*"
+                accept="image/jpeg,image/png,image/webp"
                 style={{ display: "none" }}
                 onChange={handlePhotoSelect}
                 disabled={uploading}

@@ -51,12 +51,16 @@ comment on table public.deliveries is 'Laptop sourcing deliveries, verified buye
 
 -- 4. Automatic updated_at Trigger
 create or replace function public.handle_updated_at()
-returns trigger as $$
+returns trigger
+language plpgsql
+security invoker
+set search_path = ''
+as $$
 begin
-  new.updated_at = timezone('utc'::text, now());
+  new.updated_at = pg_catalog.timezone('utc'::text, pg_catalog.now());
   return new;
 end;
-$$ language plpgsql;
+$$;
 
 drop trigger if exists set_deliveries_updated_at on public.deliveries;
 create trigger set_deliveries_updated_at

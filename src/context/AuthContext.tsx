@@ -89,8 +89,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      return { error: error ? new Error(error.message) : null };
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        return { error: new Error(error.message) };
+      }
+
+      if (data.user) {
+        const adminStatus = await checkAdminStatus(data.user.id);
+        if (!adminStatus) {
+          await supabase.auth.signOut();
+          return {
+            error: new Error("Access Denied: Your account is not authorized as an administrator."),
+          };
+        }
+      }
+
+      return { error: null };
     } catch (err) {
       return { error: err instanceof Error ? err : new Error(String(err)) };
     }
