@@ -1,0 +1,886 @@
+/* ==============================================================================
+   Rifath's Gadget - Admin Dashboard Styles
+   Scoped strictly under .admin-* to isolate from public landing page
+   ============================================================================== */
+
+.admin-shell {
+  min-height: 100vh;
+  background-color: var(--page);
+  color: var(--ink);
+  font-family: var(--latin);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Admin Header / Top Bar ---------- */
+.admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.admin-header-brand img {
+  border-radius: var(--r-lg);
+}
+
+.admin-header-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.admin-badge-role {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--blue-tint);
+  color: var(--blue);
+  padding: 2px 8px;
+  border-radius: var(--r-full);
+}
+
+.admin-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.admin-nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 150ms var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-nav-link:hover,
+.admin-nav-link.active {
+  color: var(--ink);
+}
+
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-user-pill {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.admin-btn-signout {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  transition: all 150ms var(--ease);
+}
+
+.admin-btn-signout:hover {
+  background-color: var(--tint);
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+/* ---------- Admin Content Body ---------- */
+.admin-main {
+  flex: 1;
+  width: min(100% - 32px, 1100px);
+  margin: 32px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-card {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  padding: 24px;
+}
+
+.admin-page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.admin-title {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.admin-desc {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ---------- Login Page Container ---------- */
+.admin-login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: var(--page);
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.admin-login-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.admin-login-logo {
+  margin-bottom: 4px;
+}
+
+.admin-login-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.admin-login-sub {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------- Form Controls ---------- */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.admin-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--ink);
+  background-color: var(--surface);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  outline: none;
+  transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease);
+}
+
+.admin-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-tint);
+}
+
+.admin-btn-primary {
+  width: 100%;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #ffffff;
+  background-color: var(--blue);
+  border: none;
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 150ms var(--ease), transform 100ms var(--ease);
+}
+
+.admin-btn-primary:hover:not(:disabled) {
+  background-color: var(--blue-press);
+}
+
+.admin-btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.admin-alert-error {
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #b91c1c;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--r-lg);
+}
+
+.admin-back-link {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  text-decoration: none;
+  transition: color 150ms var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-back-link:hover {
+  color: var(--ink);
+}
+
+/* ---------- Additional Button Styles ---------- */
+.admin-btn-secondary {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--ink);
+  background-color: var(--surface);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: background-color 150ms var(--ease), border-color 150ms var(--ease);
+}
+
+.admin-btn-secondary:hover:not(:disabled) {
+  background-color: var(--tint);
+  border-color: var(--line);
+}
+
+.admin-btn-danger {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #ffffff;
+  background-color: #dc2626;
+  border: none;
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 150ms var(--ease);
+}
+
+.admin-btn-danger:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+.admin-btn-danger:disabled,
+.admin-btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Deliveries Toolbar & Search ---------- */
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.admin-search-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+}
+
+.admin-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.admin-search-input {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--ink);
+  background-color: var(--surface);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  outline: none;
+  transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease);
+}
+
+.admin-search-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-tint);
+}
+
+.admin-filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.admin-tab-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: all 150ms var(--ease);
+}
+
+.admin-tab-btn:hover {
+  color: var(--ink);
+  background-color: var(--tint);
+}
+
+.admin-tab-btn.active {
+  color: var(--blue);
+  background-color: var(--blue-tint);
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.admin-tab-count {
+  font-size: 11px;
+  padding: 1px 6px;
+  background-color: var(--tint);
+  border-radius: var(--r-full);
+}
+
+/* ---------- Table Container & Grid ---------- */
+.admin-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+
+.admin-table th {
+  background-color: var(--tint);
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tr:hover td {
+  background-color: #fafaf7;
+}
+
+.admin-table-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-lg);
+  object-fit: cover;
+  background-color: var(--tint);
+  display: block;
+}
+
+.admin-table-model {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.admin-table-chips {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.admin-chip {
+  font-size: 11px;
+  padding: 1px 6px;
+  background-color: var(--tint);
+  color: var(--muted);
+  border-radius: var(--r-full);
+}
+
+.admin-buyer-name {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.admin-buyer-bn {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.admin-saving-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #047857;
+  background-color: #ecfdf5;
+  padding: 3px 8px;
+  border-radius: var(--r-full);
+}
+
+.admin-photo-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.admin-toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-status-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--r-full);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 150ms var(--ease);
+}
+
+.admin-status-toggle.active {
+  background-color: #ecfdf5;
+  color: #047857;
+}
+
+.admin-status-toggle.inactive {
+  background-color: var(--tint);
+  color: var(--muted);
+}
+
+.admin-status-toggle.hero-on {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.admin-status-toggle.featured-on {
+  background-color: var(--blue-tint);
+  color: var(--blue);
+}
+
+.admin-actions-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.admin-icon-btn {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  background-color: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 150ms var(--ease);
+}
+
+.admin-icon-btn:hover:not(:disabled) {
+  color: var(--ink);
+  border-color: var(--line-2);
+  background-color: var(--tint);
+}
+
+.admin-icon-btn.delete:hover:not(:disabled) {
+  color: #dc2626;
+  border-color: #fca5a5;
+  background-color: #fef2f2;
+}
+
+.admin-icon-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.admin-empty-state {
+  padding: 48px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ---------- Form Styles & Grid ---------- */
+.admin-form-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-form-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-delivery-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.admin-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.admin-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.admin-flex-between {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.admin-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.admin-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.admin-checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+/* ---------- Specs Repeater ---------- */
+.admin-specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-spec-row {
+  display: grid;
+  grid-template-columns: 36px 1fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.admin-spec-number {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+}
+
+.admin-spec-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---------- Photo Manager ---------- */
+.admin-dropzone {
+  border: 2px dashed var(--line-2);
+  border-radius: var(--r-xl);
+  padding: 36px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 150ms var(--ease);
+}
+
+.admin-dropzone:hover {
+  border-color: var(--blue);
+  background-color: var(--blue-tint);
+}
+
+.admin-dropzone-cta {
+  font-size: 12px;
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.admin-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.admin-photo-card {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  transition: border-color 150ms var(--ease);
+}
+
+.admin-photo-card.is-cover {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 1px var(--blue);
+}
+
+.admin-photo-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background-color: var(--tint);
+}
+
+.admin-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.admin-cover-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background-color: var(--blue);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--r-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.admin-photo-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-photo-order {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.admin-cover-btn {
+  font-size: 11px;
+  color: var(--blue);
+  font-weight: 600;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.admin-cover-btn:hover {
+  text-decoration: underline;
+}
+
+.admin-photo-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  padding-top: 6px;
+}
+
+.admin-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 12px;
+}
+
+/* ---------- Native Dialog & Modal Styles ---------- */
+dialog.admin-dialog {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  background-color: var(--surface);
+  color: var(--ink);
+  max-width: 440px;
+  width: calc(100% - 32px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+dialog.admin-dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog.admin-dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgba(11, 15, 20, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.admin-dialog-body {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.admin-dialog-icon.danger {
+  color: #dc2626;
+  background-color: #fee2e2;
+  padding: 8px;
+  border-radius: var(--r-full);
+  flex-shrink: 0;
+}
+
+.admin-dialog-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.admin-dialog-text {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.admin-dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+

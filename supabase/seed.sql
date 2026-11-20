@@ -1,0 +1,198 @@
+-- ==============================================================================
+-- Rifath's Gadget - Seed Initial Deliveries (1 to 8)
+-- Generated from src/content.ts
+-- ==============================================================================
+
+-- Clean up any existing records with these IDs for clean re-seeding
+DELETE FROM public.deliveries WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8);
+
+INSERT INTO public.deliveries (
+  id,
+  model,
+  buyer_name_bn,
+  buyer_name_en,
+  saving,
+  highlights,
+  specs,
+  asked_bn,
+  asked_en,
+  review_name,
+  review_text_bn,
+  review_text_en,
+  review_translated,
+  photos,
+  is_hero,
+  is_featured,
+  is_published,
+  sort_order
+) VALUES
+(
+  4,
+  'HP 15 fd0154wm',
+  'লিমন ইসলাম স্বাধীন',
+  'Limon Islam Shadhin',
+  36000,
+  ARRAY['Core Ultra 5 125H', '16GB DDR5 · 512GB', 'Touch screen']::text[],
+  '[{"bn":"Intel Core Ultra 5 125H","en":"Intel Core Ultra 5 125H"},{"bn":"16GB DDR5 5600MHz র‍্যাম (Samsung)","en":"16GB DDR5 5600MHz RAM (Samsung)"},{"bn":"512GB SSD, ১০০% হেলথ","en":"512GB SSD, 100% health"},{"bn":"41Wh ব্যাটারি, ১০০% হেলথ, ১৯ চার্জিং সাইকেল","en":"41Wh battery, 100% health, 19 charging cycles"},{"bn":"FHD IPS 300 nits টাচ স্ক্রিন","en":"FHD IPS 300 nits touch screen"},{"bn":"মাত্র ৩ মাস হালকা ব্যবহার, ৯ মাস ওয়ারেন্টি বাকি","en":"Only 3 months of light use, 9 months warranty left"},{"bn":"জেনুইন Windows লাইসেন্স","en":"Genuine Windows licence"},{"bn":"ল্যাপটপ, অরিজিনাল চার্জার, বক্স","en":"Laptop, original charger, box"},{"bn":"বাংলাদেশে নতুন কেনা","en":"Bought new in Bangladesh"}]'::jsonb,
+  'টাচ স্ক্রিন, ভালো ডিসপ্লে আর পারফরম্যান্স',
+  'Touch screen, a good display and performance',
+  'লিমন ইসলাম স্বাধীন',
+  'ধন্যবাদ Rifath''s Gadget কে এত সুন্দর একটি ডিল ম্যানেজ করে দেওয়ার জন্য। ল্যাপটপটির ডিস্পলে কোয়ালিটি, সাউন্ড সিস্টেম, পারফরমেন্স, সবকিছুই টপ নচ। সবমিলিয়ে আমি সন্তুষ্ট, আলহামদুলিল্লাহ।',
+  'Thanks to Rifath''s Gadget for arranging such a good deal. The display quality, sound and performance are all top notch. Overall I''m satisfied, Alhamdulillah.',
+  true,
+  '[{"url":"/deliveries/4/1.jpg","thumb_url":"/deliveries/4/t1.jpg","sort_order":1,"is_cover":false},{"url":"/deliveries/4/2.jpg","thumb_url":"/deliveries/4/t2.jpg","sort_order":2,"is_cover":false},{"url":"/deliveries/4/3.jpg","thumb_url":"/deliveries/4/t3.jpg","sort_order":3,"is_cover":false},{"url":"/deliveries/4/4.jpg","thumb_url":"/deliveries/4/t4.jpg","sort_order":4,"is_cover":false},{"url":"/deliveries/4/5.jpg","thumb_url":"/deliveries/4/t5.jpg","sort_order":5,"is_cover":true}]'::jsonb,
+  true,
+  true,
+  true,
+  80
+),
+
+(
+  7,
+  'ASUS Vivobook 15',
+  'জাহিদুল ইসলাম',
+  'Jahidul Islam',
+  35000,
+  ARRAY['Core 5 120U', '16GB · 512GB', '21 cycles']::text[],
+  '[{"bn":"14th gen Intel Core 5 120U","en":"14th gen Intel Core 5 120U"},{"bn":"16GB DDR4 3200MHz র‍্যাম","en":"16GB DDR4 3200MHz RAM"},{"bn":"512GB SSD, ১০০% হেলথ","en":"512GB SSD, 100% health"},{"bn":"42Wh ব্যাটারি, ৯৯.৯% হেলথ, ২১ চার্জিং সাইকেল","en":"42Wh battery, 99.9% health, 21 charging cycles"},{"bn":"45W Type C চার্জার","en":"45W Type C charger"},{"bn":"FHD IPS 250 nits ডিসপ্লে","en":"FHD IPS 250 nits display"},{"bn":"কোনো দাগ বা স্ক্র্যাচ নেই, কখনো খোলা হয়নি","en":"No dents or scratches, never opened"},{"bn":"মাত্র ৩ মাস হালকা ব্যবহার","en":"Only 3 months of light use"},{"bn":"সৌদি আরবে নতুন কেনা","en":"Bought new in Saudi Arabia"}]'::jsonb,
+  'অনেক দিন টিকে থাকার মতো পারফরম্যান্স',
+  'Performance that lasts for years',
+  'Jahid Khan',
+  'আলহামদুলিল্লাহ, ভাইয়ের কাছ থেকে আমি বেস্ট একটা ল্যাপটপ নিতে পেরেছি। এজন্য আপনাকে আবারো ধন্যবাদ জানাচ্ছি 🥰',
+  'Alhamdulillah, I got the best laptop from bhai. Thank you again for this.',
+  true,
+  '[{"url":"/deliveries/7/1.jpg","thumb_url":"/deliveries/7/t1.jpg","sort_order":1,"is_cover":false},{"url":"/deliveries/7/2.jpg","thumb_url":"/deliveries/7/t2.jpg","sort_order":2,"is_cover":false},{"url":"/deliveries/7/3.jpg","thumb_url":"/deliveries/7/t3.jpg","sort_order":3,"is_cover":false},{"url":"/deliveries/7/4.jpg","thumb_url":"/deliveries/7/t4.jpg","sort_order":4,"is_cover":false},{"url":"/deliveries/7/5.jpg","thumb_url":"/deliveries/7/t5.jpg","sort_order":5,"is_cover":true},{"url":"/deliveries/7/6.jpg","thumb_url":"/deliveries/7/t6.jpg","sort_order":6,"is_cover":false},{"url":"/deliveries/7/7.jpg","thumb_url":"/deliveries/7/t7.jpg","sort_order":7,"is_cover":false}]'::jsonb,
+  true,
+  false,
+  true,
+  70
+),
+
+(
+  5,
+  'HP 15 fd1191tu',
+  'শাহাদাত হোসেন',
+  'Shahadat Hossen',
+  32000,
+  ARRAY['Core 5 120U', '16GB · 512GB', '7 months warranty']::text[],
+  '[{"bn":"Intel Core 5 120U","en":"Intel Core 5 120U"},{"bn":"16GB DDR4 3200MHz র‍্যাম","en":"16GB DDR4 3200MHz RAM"},{"bn":"512GB SSD, ৯৯% হেলথ","en":"512GB SSD, 99% health"},{"bn":"41Wh ব্যাটারি, ৯৬% হেলথ, ৯০ চার্জিং সাইকেল","en":"41Wh battery, 96% health, 90 charging cycles"},{"bn":"FHD 250 nits ডিসপ্লে","en":"FHD 250 nits display"},{"bn":"Ryans থেকে ৭ মাস ওয়ারেন্টি বাকি","en":"7 months warranty left from Ryans"},{"bn":"কোনো দাগ বা স্ক্র্যাচ নেই, ওপেন বক্স","en":"No dents or scratches, open box"},{"bn":"ল্যাপটপ, অরিজিনাল চার্জার, বক্স","en":"Laptop, original charger, box"},{"bn":"উপহার: HP ব্যাগ আর A4tech KRS 82 কিবোর্ড","en":"Gifts: HP bag and A4tech KRS 82 keyboard"}]'::jsonb,
+  'অনেক দিন টিকে থাকার মতো পারফরম্যান্স',
+  'Performance that lasts for years',
+  'Shahadat Hossen',
+  'আলহামদুলিল্লাহ, ল্যাপটপটি পেয়ে আমি সন্তুষ্ট। ল্যাপটপের কন্ডিশনসহ সবকিছু ভালো লেগেছে। ধন্যবাদ আপনাকে এত সুন্দর একটা ডিল সম্পন্ন করার জন্য। আপনার জন্য শুভ কামনা রইল।',
+  'Alhamdulillah, I''m satisfied with the laptop. I liked everything, including its condition. Thank you for completing such a good deal. Best wishes to you.',
+  true,
+  '[{"url":"/deliveries/5/1.jpg","thumb_url":"/deliveries/5/t1.jpg","sort_order":1,"is_cover":false},{"url":"/deliveries/5/2.jpg","thumb_url":"/deliveries/5/t2.jpg","sort_order":2,"is_cover":true},{"url":"/deliveries/5/3.jpg","thumb_url":"/deliveries/5/t3.jpg","sort_order":3,"is_cover":false},{"url":"/deliveries/5/4.jpg","thumb_url":"/deliveries/5/t4.jpg","sort_order":4,"is_cover":false},{"url":"/deliveries/5/5.jpg","thumb_url":"/deliveries/5/t5.jpg","sort_order":5,"is_cover":false}]'::jsonb,
+  true,
+  false,
+  true,
+  60
+),
+
+(
+  6,
+  'Lenovo IdeaPad Slim 3 15ARP10',
+  'শহিদ ইনাম',
+  'Shahid Inam',
+  20000,
+  ARRAY['Ryzen 7 170', '16GB · 512GB', 'Brand new']::text[],
+  '[{"bn":"AMD Ryzen 7 170","en":"AMD Ryzen 7 170"},{"bn":"Radeon 680 গ্রাফিক্স (2GB)","en":"Radeon 680 graphics (2GB)"},{"bn":"16GB DDR5 4800MHz র‍্যাম","en":"16GB DDR5 4800MHz RAM"},{"bn":"512GB SSD","en":"512GB SSD"},{"bn":"50Wh ব্যাটারি, ১ চার্জিং সাইকেল","en":"50Wh battery, 1 charging cycle"},{"bn":"FHD IPS WUXGA 300 nits টাচ স্ক্রিন","en":"FHD IPS WUXGA 300 nits touch screen"},{"bn":"ব্র্যান্ড নিউ, কখনো ব্যবহার হয়নি","en":"Brand new, never used"},{"bn":"ল্যাপটপ আর অরিজিনাল চার্জার","en":"Laptop and original charger"},{"bn":"দেশের বাইরে থেকে নতুন এসেছে","en":"Came new from abroad"}]'::jsonb,
+  'ভালো ডিসপ্লে আর পারফরম্যান্স',
+  'A good display and performance',
+  'Shahid Inam',
+  'Thank you bhai, mon er moto ekta laptop khuje disen 💯',
+  'Thank you bhai, you found exactly the laptop I wanted.',
+  true,
+  '[{"url":"/deliveries/6/1.jpg","thumb_url":"/deliveries/6/t1.jpg","sort_order":1,"is_cover":false},{"url":"/deliveries/6/2.jpg","thumb_url":"/deliveries/6/t2.jpg","sort_order":2,"is_cover":false},{"url":"/deliveries/6/3.jpg","thumb_url":"/deliveries/6/t3.jpg","sort_order":3,"is_cover":false},{"url":"/deliveries/6/4.jpg","thumb_url":"/deliveries/6/t4.jpg","sort_order":4,"is_cover":false},{"url":"/deliveries/6/5.jpg","thumb_url":"/deliveries/6/t5.jpg","sort_order":5,"is_cover":true},{"url":"/deliveries/6/6.jpg","thumb_url":"/deliveries/6/t6.jpg","sort_order":6,"is_cover":false},{"url":"/deliveries/6/7.jpg","thumb_url":"/deliveries/6/t7.jpg","sort_order":7,"is_cover":false},{"url":"/deliveries/6/8.jpg","thumb_url":"/deliveries/6/t8.jpg","sort_order":8,"is_cover":false},{"url":"/deliveries/6/9.jpg","thumb_url":"/deliveries/6/t9.jpg","sort_order":9,"is_cover":false},{"url":"/deliveries/6/10.jpg","thumb_url":"/deliveries/6/t10.jpg","sort_order":10,"is_cover":false}]'::jsonb,
+  true,
+  false,
+  true,
+  50
+),
+
+(
+  8,
+  'Lenovo IdeaPad Slim 3 15IRH10',
+  'জুলেখা আক্তার',
+  'Julekha Akter',
+  25000,
+  ARRAY['Core i5 13420H', '16GB DDR5 · 512GB', 'Backlit keyboard']::text[],
+  '[{"bn":"Intel Core i5 13420H","en":"Intel Core i5 13420H"},{"bn":"16GB DDR5 4800MHz র‍্যাম","en":"16GB DDR5 4800MHz RAM"},{"bn":"512GB SSD, ১০০% হেলথ","en":"512GB SSD, 100% health"},{"bn":"50Wh ব্যাটারি, ১০০% হেলথ, ২১ চার্জিং সাইকেল","en":"50Wh battery, 100% health, 21 charging cycles"},{"bn":"FHD IPS WUXGA 300 nits ডিসপ্লে","en":"FHD IPS WUXGA 300 nits display"},{"bn":"ব্যাকলিট কিবোর্ড","en":"Backlit keyboard"},{"bn":"ওপেন বক্স, কোনো দাগ বা স্ক্র্যাচ নেই","en":"Open box, no dents or scratches"},{"bn":"৪ মাস হালকা ব্যবহার, ৮ মাস ওয়ারেন্টি বাকি","en":"4 months of light use, 8 months warranty left"},{"bn":"পুরো বক্স আর এক্সেসরিজ, উপহার ল্যাপটপ ব্যাগ","en":"Full box and accessories, laptop bag as a gift"}]'::jsonb,
+  NULL,
+  NULL,
+  NULL,
+  NULL,
+  NULL,
+  false,
+  '[{"url":"/deliveries/8/1.jpg","thumb_url":"/deliveries/8/t1.jpg","sort_order":1,"is_cover":true},{"url":"/deliveries/8/2.jpg","thumb_url":"/deliveries/8/t2.jpg","sort_order":2,"is_cover":false},{"url":"/deliveries/8/3.jpg","thumb_url":"/deliveries/8/t3.jpg","sort_order":3,"is_cover":false},{"url":"/deliveries/8/4.jpg","thumb_url":"/deliveries/8/t4.jpg","sort_order":4,"is_cover":false},{"url":"/deliveries/8/5.jpg","thumb_url":"/deliveries/8/t5.jpg","sort_order":5,"is_cover":false},{"url":"/deliveries/8/6.jpg","thumb_url":"/deliveries/8/t6.jpg","sort_order":6,"is_cover":false},{"url":"/deliveries/8/7.jpg","thumb_url":"/deliveries/8/t7.jpg","sort_order":7,"is_cover":false},{"url":"/deliveries/8/8.jpg","thumb_url":"/deliveries/8/t8.jpg","sort_order":8,"is_cover":false},{"url":"/deliveries/8/9.jpg","thumb_url":"/deliveries/8/t9.jpg","sort_order":9,"is_cover":false}]'::jsonb,
+  false,
+  false,
+  true,
+  40
+),
+
+(
+  3,
+  'Lenovo IdeaPad Slim 3i 14IAN8',
+  'মো. আবুল কালাম',
+  'Md. Abul Kalam',
+  20000,
+  ARRAY['Core i3 N305', '8GB DDR5 · 256GB', '15 months warranty']::text[],
+  '[{"bn":"Intel Core i3 N305","en":"Intel Core i3 N305"},{"bn":"8GB DDR5 4800MHz র‍্যাম","en":"8GB DDR5 4800MHz RAM"},{"bn":"256GB SSD, ৯৯% হেলথ","en":"256GB SSD, 99% health"},{"bn":"47Wh ব্যাটারি, ১০০% হেলথ, ৩০ চার্জিং সাইকেল","en":"47Wh battery, 100% health, 30 charging cycles"},{"bn":"ফিঙ্গারপ্রিন্ট আনলক","en":"Fingerprint unlock"},{"bn":"১৫ মাস ইন্টারন্যাশনাল ওয়ারেন্টি","en":"15 months international warranty"},{"bn":"ওপরে আর বাঁ পাশে হালকা স্ক্র্যাচ","en":"Minor scratches on the top and left side"},{"bn":"ল্যাপটপ আর অরিজিনাল চার্জার","en":"Laptop and original charger"},{"bn":"সৌদি আরবে নতুন কেনা","en":"Bought new in Saudi Arabia"}]'::jsonb,
+  NULL,
+  NULL,
+  'Md. Abul Kalam',
+  'Alhamdulillah... Joto ta expectation cilo, tar ceye valo output pacci.',
+  'Alhamdulillah... it''s performing even better than I expected.',
+  true,
+  '[{"url":"/deliveries/3/1.jpg","thumb_url":"/deliveries/3/t1.jpg","sort_order":1,"is_cover":true},{"url":"/deliveries/3/2.jpg","thumb_url":"/deliveries/3/t2.jpg","sort_order":2,"is_cover":false},{"url":"/deliveries/3/3.jpg","thumb_url":"/deliveries/3/t3.jpg","sort_order":3,"is_cover":false},{"url":"/deliveries/3/4.jpg","thumb_url":"/deliveries/3/t4.jpg","sort_order":4,"is_cover":false},{"url":"/deliveries/3/5.jpg","thumb_url":"/deliveries/3/t5.jpg","sort_order":5,"is_cover":false},{"url":"/deliveries/3/6.jpg","thumb_url":"/deliveries/3/t6.jpg","sort_order":6,"is_cover":false},{"url":"/deliveries/3/7.jpg","thumb_url":"/deliveries/3/t7.jpg","sort_order":7,"is_cover":false}]'::jsonb,
+  false,
+  false,
+  true,
+  30
+),
+
+(
+  2,
+  'ASUS Vivobook Go 15 E1504GA',
+  'মো. আবু তাহের',
+  'Md. Abu Taher',
+  25000,
+  ARRAY['Core i3 N305', '8GB · 256GB', 'Battery 93%']::text[],
+  '[{"bn":"Intel Core i3 N305","en":"Intel Core i3 N305"},{"bn":"8GB DDR4 3200MHz র‍্যাম","en":"8GB DDR4 3200MHz RAM"},{"bn":"256GB SSD (Samsung), ৯৮% হেলথ","en":"256GB SSD (Samsung), 98% health"},{"bn":"42Wh ব্যাটারি, ৯৩% হেলথ","en":"42Wh battery, 93% health"},{"bn":"জেনুইন Windows লাইসেন্স","en":"Genuine Windows licence"},{"bn":"কোনো দাগ বা স্ক্র্যাচ নেই","en":"No dents or scratches"},{"bn":"ল্যাপটপ, অরিজিনাল চার্জার, ক্যারিং ব্যাগ","en":"Laptop, original charger, carrying bag"},{"bn":"সৌদি আরবে নতুন কেনা","en":"Bought new in Saudi Arabia"}]'::jsonb,
+  NULL,
+  NULL,
+  'Md. Abu Taher',
+  'আলহামদুলিল্লাহ, ল্যাপটপটি পেয়ে আমি সন্তুষ্ট। ল্যাপটপের কন্ডিশন ভালো এবং আপনাদের ব্যবহার ও সহযোগিতা খুবই ভালো লেগেছে। সুন্দরভাবে পুরো বিষয়টি সম্পন্ন করার জন্য ধন্যবাদ। আপনাদের জন্য শুভকামনা রইল। ❤️',
+  'Alhamdulillah, I''m satisfied with the laptop. Its condition is good, and I really liked how you treated me and helped. Thanks for handling everything so well. Best wishes.',
+  true,
+  '[{"url":"/deliveries/2/1.jpg","thumb_url":"/deliveries/2/t1.jpg","sort_order":1,"is_cover":false},{"url":"/deliveries/2/2.jpg","thumb_url":"/deliveries/2/t2.jpg","sort_order":2,"is_cover":false},{"url":"/deliveries/2/3.jpg","thumb_url":"/deliveries/2/t3.jpg","sort_order":3,"is_cover":false},{"url":"/deliveries/2/4.jpg","thumb_url":"/deliveries/2/t4.jpg","sort_order":4,"is_cover":false},{"url":"/deliveries/2/5.jpg","thumb_url":"/deliveries/2/t5.jpg","sort_order":5,"is_cover":false},{"url":"/deliveries/2/6.jpg","thumb_url":"/deliveries/2/t6.jpg","sort_order":6,"is_cover":false},{"url":"/deliveries/2/7.jpg","thumb_url":"/deliveries/2/t7.jpg","sort_order":7,"is_cover":true}]'::jsonb,
+  false,
+  true,
+  true,
+  20
+),
+
+(
+  1,
+  'Lenovo IdeaPad Slim 3i 15IRU10',
+  'জি এম রাব্বানী',
+  'Gm Rabbani',
+  20000,
+  ARRAY['Core 3 100U', '8GB DDR5 · 512GB', '14 months warranty']::text[],
+  '[{"bn":"14th gen Intel Core 3 100U","en":"14th gen Intel Core 3 100U"},{"bn":"8GB DDR5 4800MHz র‍্যাম","en":"8GB DDR5 4800MHz RAM"},{"bn":"512GB Gen 4 SSD, ১০০% হেলথ","en":"512GB Gen 4 SSD, 100% health"},{"bn":"50Wh ব্যাটারি, ১০০% হেলথ, ৩৬ সাইকেল","en":"50Wh battery, 100% health, 36 cycles"},{"bn":"কোনো দাগ বা স্ক্র্যাচ নেই","en":"No dents or scratches"},{"bn":"Star Tech থেকে ১৪ মাস ওয়ারেন্টি বাকি","en":"14 months warranty left from Star Tech"},{"bn":"অফিসিয়াল ব্যাগ, বক্স, চার্জার","en":"Official bag, box and charger"}]'::jsonb,
+  NULL,
+  NULL,
+  'Gm Rabbani',
+  'আলহামদুলিল্লাহ, আমার মন মত একটি বাজেট ফ্রেন্ডলি ল্যাপটপ আপনাদের মাধ্যমে আমি পেয়েছি। আর ল্যাপটপের গুণগত মান মাশাআল্লাহ অনেক ভালো। আপনারা না থাকলে হয়তোবা আমি এত সুন্দর একটি প্রোডাক্ট এত বাজেট ফ্রেন্ডলি ভাবে পেতাম না। আমাকে এতো সুন্দর ডিল করে দেওয়ার জন্য ধন্যবাদ 🤍',
+  'Alhamdulillah, through you I got a budget friendly laptop that''s just what I wanted, and its quality is very good, MashaAllah. Without you I might not have got such a good product on such a budget. Thank you for such a good deal.',
+  true,
+  '[{"url":"/deliveries/1/1.jpg","thumb_url":"/deliveries/1/t1.jpg","sort_order":1,"is_cover":false},{"url":"/deliveries/1/2.jpg","thumb_url":"/deliveries/1/t2.jpg","sort_order":2,"is_cover":false},{"url":"/deliveries/1/3.jpg","thumb_url":"/deliveries/1/t3.jpg","sort_order":3,"is_cover":true},{"url":"/deliveries/1/4.jpg","thumb_url":"/deliveries/1/t4.jpg","sort_order":4,"is_cover":false},{"url":"/deliveries/1/5.jpg","thumb_url":"/deliveries/1/t5.jpg","sort_order":5,"is_cover":false},{"url":"/deliveries/1/6.jpg","thumb_url":"/deliveries/1/t6.jpg","sort_order":6,"is_cover":false}]'::jsonb,
+  false,
+  true,
+  true,
+  10
+);
+
+-- Synchronize identity sequence so next added delivery gets id >= 9
+SELECT setval(pg_get_serial_sequence('public.deliveries', 'id'), COALESCE((SELECT MAX(id) FROM public.deliveries), 1));
