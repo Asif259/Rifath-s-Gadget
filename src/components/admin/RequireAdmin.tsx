@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuthStore } from "../../stores/authStore";
 
 export default function RequireAdmin() {
-  const { session, isAdmin, loading } = useAuth();
+  const { session, isAdmin, loading } = useAuthStore();
 
   if (loading) {
     return (

@@ -793,6 +793,80 @@ p, li, blockquote, dd { text-wrap: pretty; }
 }
 .proof-pill svg { color: var(--blue); width: 14px; height: 14px; }
 
+/* ---------- Sold Deliveries "See More" Section ---------- */
+.sold-more-section {
+  margin-top: var(--space-40);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.sold-more-trigger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-10);
+  text-align: center;
+}
+.sold-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-10);
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-ui);
+  padding: 10px 24px;
+}
+.sold-more-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--dur-fast) var(--ease);
+}
+.sold-more-hint {
+  color: var(--tone-medium);
+}
+.sold-more-expanded {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInMore 0.3s var(--ease) forwards;
+}
+@keyframes fadeInMore {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.sold-more-divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-15);
+  margin-bottom: var(--space-30);
+}
+.sold-more-divider::before,
+.sold-more-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-subtle);
+}
+.sold-more-grid {
+  margin-top: 0;
+  width: 100%;
+}
+.sold-collapse-trigger {
+  margin-top: var(--space-30);
+  display: flex;
+  justify-content: center;
+}
+
 /* ---------- Finder & Risk (Editorial Form) ---------- */
 .finder {
   display: grid;

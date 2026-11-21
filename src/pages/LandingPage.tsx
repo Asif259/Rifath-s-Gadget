@@ -5,8 +5,10 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowRight,
+  CaretDown,
   CaretLeft,
   CaretRight,
+  CaretUp,
   CheckCircle,
   FacebookLogo,
   HandCoins,
@@ -543,7 +545,7 @@ function SocialProof({
             <SealCheck weight="fill" />
             {t.socialProof.badge}
           </span>
-          <h2 className="heading-2">{t.socialProof.title}</h2>
+          <h2 className="heading-2">{t.socialProof.title(num(deliveries.length, lang))}</h2>
           <p className="body-3 muted">{t.socialProof.sub}</p>
         </div>
         <div className="social-proof-grid gsap-stagger-group">
@@ -695,6 +697,25 @@ function Sold({
   savingRange: { min: number; max: number };
   totalPhotos: number;
 }) {
+  const [showAll, setShowAll] = useState(false);
+  const INITIAL_COUNT = 8;
+  const initialDeliveries = deliveries.slice(0, INITIAL_COUNT);
+  const remainingDeliveries = deliveries.slice(INITIAL_COUNT);
+
+  const toggleShowAll = () => {
+    const nextState = !showAll;
+    setShowAll(nextState);
+    if (!nextState) {
+      const soldSection = document.getElementById("sold");
+      if (soldSection) {
+        soldSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+  };
+
   return (
     <section className="section" id="sold">
       <div className="wrap">
@@ -713,11 +734,62 @@ function Sold({
             </span>
           </div>
         </div>
+
+        {/* Primary 8 Homepage Deliveries */}
         <div className="sold-grid gsap-stagger-group">
-          {deliveries.map((d) => (
+          {initialDeliveries.map((d) => (
             <SoldCard key={d.id} d={d} t={t} lang={lang} show={show} />
           ))}
         </div>
+
+        {/* "See More" section for deliveries beyond the initial 8 */}
+        {remainingDeliveries.length > 0 && (
+          <div className="sold-more-section">
+            {!showAll ? (
+              <div className="sold-more-trigger">
+                <button
+                  type="button"
+                  className="btn btn-line big sold-more-btn"
+                  onClick={toggleShowAll}
+                  aria-expanded="false"
+                >
+                  <span>{t.sold.seeMore(num(remainingDeliveries.length, lang))}</span>
+                  <CaretDown size={18} weight="bold" />
+                </button>
+                <p className="caption-3 muted sold-more-hint">
+                  {t.sold.moreNote(
+                    num(initialDeliveries.length, lang),
+                    num(deliveries.length, lang)
+                  )}
+                </p>
+              </div>
+            ) : (
+              <div className="sold-more-expanded">
+                <div className="sold-more-divider">
+                  <span className="caption-2 muted">
+                    {t.sold.moreHeading(num(remainingDeliveries.length, lang))}
+                  </span>
+                </div>
+                <div className="sold-grid sold-more-grid">
+                  {remainingDeliveries.map((d) => (
+                    <SoldCard key={d.id} d={d} t={t} lang={lang} show={show} />
+                  ))}
+                </div>
+                <div className="sold-collapse-trigger">
+                  <button
+                    type="button"
+                    className="btn btn-line sold-more-btn"
+                    onClick={toggleShowAll}
+                    aria-expanded="true"
+                  >
+                    <span>{t.sold.seeLess}</span>
+                    <CaretUp size={18} weight="bold" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -1193,7 +1265,7 @@ function Close({ t, lang }: { t: Copy; lang: Lang }) {
               rel="noopener noreferrer"
               className="creator-link"
             >
-              Asif
+              Ashraful Asif
             </a>
           </div>
         </div>

@@ -1,11 +1,11 @@
 import { useState, type FormEvent } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { SignIn } from "@phosphor-icons/react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuthStore } from "../../stores/authStore";
 import "../../styles/admin.css";
 
 export default function AdminLogin() {
-  const { session, isAdmin, user, loading: authLoading, signIn, signOut } = useAuth();
+  const { session, isAdmin, user, loading: authLoading, signIn, signOut } = useAuthStore();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");

@@ -1,10 +1,10 @@
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { ArrowSquareOut, SignOut, Package } from "@phosphor-icons/react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuthStore } from "../../stores/authStore";
 import "../../styles/admin.css";
 
 export default function AdminLayout() {
-  const { user, signOut } = useAuth();
+  const { user, signOut } = useAuthStore();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -76,7 +76,7 @@ export default function AdminLayout() {
               rel="noopener noreferrer"
               className="creator-link"
             >
-              Asif
+              Ashraful Asif
             </a>
           </span>
         </div>

@@ -269,7 +269,7 @@ const bn = {
   tagline: "একটাই ল্যাপটপ, আপনার জন্য খোঁজা। কেনার আগে চেক। হাতে পেয়ে টাকা।",
   socialProof: {
     badge: "যাচাইকৃত ক্রেতা রিভিউ",
-    title: "৭ জন ক্রেতা আমাদের মাধ্যমে ল্যাপটপ পেয়েছেন",
+    title: (n: string) => `${n} জন ক্রেতা আমাদের মাধ্যমে ল্যাপটপ পেয়েছেন`,
     sub: "প্রতিটি পোস্টে আমরা ক্রেতাকে মেনশন করি — যাতে যে কেউ সরাসরি তাঁদের অভিজ্ঞতা জানতে পারেন।",
     viewDeal: "ল্যাপটপ ও ছবি দেখুন",
   },
@@ -303,6 +303,10 @@ const bn = {
     buyer: "ক্রেতা",
     translated: "",
     noReview: "রিভিউ এখনো দেননি",
+    seeMore: (count: string) => `আরো ${count}টি ডেলিভারি দেখুন`,
+    seeLess: "কম দেখুন",
+    moreNote: (shown: string, total: string) => `${total}টির মধ্যে শীর্ষ ${shown}টি দেখানো হচ্ছে`,
+    moreHeading: (count: string) => `পূর্বের আরো ${count}টি ডেলিভারি`,
   },
   finder: {
     title: "আপনার বাজেট কত?",
@@ -362,7 +366,7 @@ const en: typeof bn = {
   tagline: "One laptop, found for you. Checked before we buy. Paid for when it's in your hands.",
   socialProof: {
     badge: "Verified Buyer Stories",
-    title: "7 buyers found their laptop through us",
+    title: (n: string) => `${n} buyers found their laptop through us`,
     sub: "We tag them in every post — anyone can ask them about their experience directly.",
     viewDeal: "View laptop & photos",
   },
@@ -396,6 +400,10 @@ const en: typeof bn = {
     buyer: "Buyer",
     translated: "Translated from Bangla",
     noReview: "No review yet",
+    seeMore: (count: string) => `See ${count} more deliveries`,
+    seeLess: "Show less",
+    moreNote: (shown: string, total: string) => `Showing top ${shown} of ${total} deliveries`,
+    moreHeading: (count: string) => `${count} more past deliveries`,
   },
   finder: {
     title: "What is your budget?",

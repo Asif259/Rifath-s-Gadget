@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
 import LandingPage from "./pages/LandingPage";
 import RequireAdmin from "./components/admin/RequireAdmin";
 
@@ -32,7 +31,6 @@ function AdminLoadingFallback() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
         <Suspense fallback={<AdminLoadingFallback />}>
           <Routes>
             {/* Public Landing Page */}
@@ -55,7 +53,6 @@ export default function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
-      </AuthProvider>
     </BrowserRouter>
   );
 }

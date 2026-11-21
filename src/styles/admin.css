@@ -610,6 +610,107 @@
   background-color: var(--neutral-200);
 }
 
+.admin-icon-btn.promote:hover:not(:disabled) {
+  color: var(--blue);
+  border-color: rgba(37, 99, 235, 0.3);
+  background-color: var(--blue-tint);
+}
+
+/* ---------- Homepage Slot Management Banner ---------- */
+.admin-slots-banner {
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  background-color: var(--neutral-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-btn);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-slots-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-slots-tag {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tone-strong);
+  letter-spacing: -0.01em;
+}
+
+.admin-slots-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.admin-slots-pill.active {
+  background-color: var(--blue-tint);
+  color: var(--blue);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.admin-slots-pill.seemore {
+  background-color: var(--dark-8);
+  color: var(--tone-strong);
+  border: 1px solid var(--border-subtle);
+}
+
+.admin-slots-pill.muted {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: 1px dashed var(--border-subtle);
+}
+
+.admin-slots-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Homepage Placement Badges */
+.admin-placement-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+
+.admin-placement-badge.top8 {
+  background-color: var(--blue-tint);
+  color: var(--blue);
+  border-color: rgba(37, 99, 235, 0.25);
+}
+
+.admin-placement-badge.seemore {
+  background-color: var(--dark-8);
+  color: var(--text-muted);
+  border-color: var(--border-subtle);
+}
+
+.admin-placement-badge.draft {
+  background-color: transparent;
+  color: var(--text-muted);
+  border-style: dashed;
+}
+
 .admin-icon-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
