@@ -49,6 +49,7 @@ export default function DeliveryForm() {
   const [model, setModel] = useState("");
   const [saving, setSaving] = useState<string>("25000");
   const [sortOrder, setSortOrder] = useState<number>(0);
+  const [maxSortOrder, setMaxSortOrder] = useState<number>(0);
   const [isPublished, setIsPublished] = useState<boolean>(true);
   const [isHero, setIsHero] = useState<boolean>(false);
   const [isFeatured, setIsFeatured] = useState<boolean>(false);
@@ -81,6 +82,22 @@ export default function DeliveryForm() {
 
   // Load existing data in Edit mode
   useEffect(() => {
+    async function fetchMaxOrder() {
+      try {
+        const { data } = await supabase
+          .from("deliveries")
+          .select("sort_order")
+          .order("sort_order", { ascending: false })
+          .limit(1);
+        if (data && data.length > 0 && typeof data[0].sort_order === "number") {
+          setMaxSortOrder(data[0].sort_order);
+        }
+      } catch {
+        // Fallback gracefully
+      }
+    }
+    fetchMaxOrder();
+
     if (!isEdit || !id) return;
 
     async function loadDelivery() {
@@ -481,9 +498,21 @@ export default function DeliveryForm() {
 
           <div className="admin-grid-2" style={{ marginTop: "16px" }}>
             <div className="admin-form-group">
-              <label className="admin-label" htmlFor="sortOrder">
-                Sort Order (Higher displays first)
-              </label>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
+                <label className="admin-label" htmlFor="sortOrder" style={{ marginBottom: 0 }}>
+                  Sort Order (Higher displays first)
+                </label>
+                <button
+                  type="button"
+                  className="admin-btn-secondary"
+                  style={{ padding: "3px 10px", fontSize: "11px", height: "auto", display: "inline-flex", alignItems: "center", gap: "4px" }}
+                  onClick={() => setSortOrder((maxSortOrder || 0) + 10)}
+                  title="Sets sort order higher than existing deliveries to guarantee Homepage Slot #1"
+                >
+                  <ArrowUp size={12} weight="bold" />
+                  <span>Pin to Homepage #1</span>
+                </button>
+              </div>
               <input
                 id="sortOrder"
                 type="number"
@@ -493,6 +522,9 @@ export default function DeliveryForm() {
                 value={sortOrder}
                 onChange={(e) => setSortOrder(Number(e.target.value))}
               />
+              <p className="admin-field-hint" style={{ marginTop: "6px" }}>
+                The top 8 published deliveries appear directly on the homepage. Deliveries ranked 9+ appear in the &ldquo;See more&rdquo; section.
+              </p>
             </div>
 
             <div className="admin-form-group">

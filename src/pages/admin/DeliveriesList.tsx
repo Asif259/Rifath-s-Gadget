@@ -363,8 +363,31 @@ export default function DeliveriesList() {
                       </span>
                     </td>
 
-                    {/* Quick status toggles */}
+                    {/* Quick status toggles & placement */}
                     <td>
+                      <div style={{ marginBottom: "6px" }}>
+                        {d.is_published ? (
+                          (publishedOrderMap.get(d.id) ?? 999) <= 8 ? (
+                            <span
+                              className="admin-placement-badge top8"
+                              title={`Appears at Slot #${publishedOrderMap.get(d.id)} on the homepage showcase grid`}
+                            >
+                              Top 8 (Slot #{publishedOrderMap.get(d.id)})
+                            </span>
+                          ) : (
+                            <span
+                              className="admin-placement-badge seemore"
+                              title={`Appears at position #${publishedOrderMap.get(d.id)} inside the "See more" section`}
+                            >
+                              In &ldquo;See More&rdquo; (#{publishedOrderMap.get(d.id)})
+                            </span>
+                          )
+                        ) : (
+                          <span className="admin-placement-badge draft" title="Draft (not visible on site)">
+                            Draft (Hidden)
+                          </span>
+                        )}
+                      </div>
                       <div className="admin-toggle-group">
                         <button
                           type="button"
@@ -417,6 +440,14 @@ export default function DeliveriesList() {
                     {/* Action buttons */}
                     <td>
                       <div className="admin-actions-cell">
+                        <button
+                          type="button"
+                          className="admin-icon-btn promote"
+                          title="Promote to Homepage #1 (Top Sort Order)"
+                          onClick={() => handlePromoteToTop(d)}
+                        >
+                          <ArrowUp size={16} />
+                        </button>
                         <Link
                           to={`/admin/deliveries/${d.id}`}
                           className="admin-icon-btn edit"
