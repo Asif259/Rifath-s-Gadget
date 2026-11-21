@@ -218,6 +218,7 @@ export default function LandingPage() {
             lang={lang}
             show={show}
             featuredReviews={featuredReviews}
+            count={deliveries.length}
           />
           <Tagline text={t.tagline} />
           <Benefits t={t} />
@@ -531,11 +532,13 @@ function SocialProof({
   lang,
   show,
   featuredReviews,
+  count,
 }: {
   t: Copy;
   lang: Lang;
   show: (id: number) => void;
   featuredReviews: Delivery[];
+  count: number;
 }) {
   return (
     <section className="section social-proof" id="reviews">
@@ -545,7 +548,7 @@ function SocialProof({
             <SealCheck weight="fill" />
             {t.socialProof.badge}
           </span>
-          <h2 className="heading-2">{t.socialProof.title(num(deliveries.length, lang))}</h2>
+          <h2 className="heading-2">{t.socialProof.title(num(count, lang))}</h2>
           <p className="body-3 muted">{t.socialProof.sub}</p>
         </div>
         <div className="social-proof-grid gsap-stagger-group">

@@ -13,12 +13,13 @@ import {
   Star,
   Sparkle,
   WarningCircle,
+  ArrowUp,
 } from "@phosphor-icons/react";
 import { supabase } from "../../lib/supabase";
 import { deleteStoragePaths } from "../../lib/storage";
 import type { DeliveryRow, DeliveryPhoto } from "../../types/delivery";
 
-type FilterTab = "all" | "published" | "draft" | "hero" | "featured";
+type FilterTab = "all" | "top8" | "seemore" | "published" | "draft" | "hero" | "featured";
 
 export default function DeliveriesList() {
   const [deliveries, setDeliveries] = useState<DeliveryRow[]>([]);
@@ -60,10 +61,44 @@ export default function DeliveriesList() {
     fetchDeliveries();
   }, []);
 
+  // Map of published delivery ID -> rank (1 to N, sorted by sort_order desc, id desc)
+  const publishedOrderMap = useMemo(() => {
+    const published = [...deliveries]
+      .filter((d) => d.is_published)
+      .sort((a, b) => (b.sort_order ?? 0) - (a.sort_order ?? 0) || b.id - a.id);
+
+    const map = new Map<number, number>();
+    published.forEach((d, idx) => {
+      map.set(d.id, idx + 1);
+    });
+    return map;
+  }, [deliveries]);
+
+  const maxSortOrder = useMemo(() => {
+    if (deliveries.length === 0) return 0;
+    return Math.max(...deliveries.map((d) => d.sort_order ?? 0));
+  }, [deliveries]);
+
+  const top8Count = useMemo(() => {
+    return Math.min(8, publishedOrderMap.size);
+  }, [publishedOrderMap]);
+
+  const seeMoreCount = useMemo(() => {
+    return Math.max(0, publishedOrderMap.size - 8);
+  }, [publishedOrderMap]);
+
   // Filtered deliveries list
   const filteredDeliveries = useMemo(() => {
     return deliveries.filter((d) => {
       // 1. Tab filter
+      if (activeTab === "top8") {
+        const rank = publishedOrderMap.get(d.id);
+        return Boolean(d.is_published && rank && rank <= 8);
+      }
+      if (activeTab === "seemore") {
+        const rank = publishedOrderMap.get(d.id);
+        return Boolean(d.is_published && rank && rank > 8);
+      }
       if (activeTab === "published" && !d.is_published) return false;
       if (activeTab === "draft" && d.is_published) return false;
       if (activeTab === "hero" && !d.is_hero) return false;
@@ -77,7 +112,28 @@ export default function DeliveriesList() {
       const matchBuyerBn = d.buyer_name_bn.toLowerCase().includes(q);
       return matchModel || matchBuyerEn || matchBuyerBn;
     });
-  }, [deliveries, activeTab, searchQuery]);
+  }, [deliveries, activeTab, searchQuery, publishedOrderMap]);
+
+  // Quick promote to Top 8 Slot #1
+  const handlePromoteToTop = async (delivery: DeliveryRow) => {
+    const newSortOrder = (maxSortOrder || 0) + 10;
+    // Optimistic UI update
+    setDeliveries((prev) =>
+      prev.map((d) =>
+        d.id === delivery.id ? { ...d, sort_order: newSortOrder, is_published: true } : d
+      )
+    );
+
+    const { error } = await supabase
+      .from("deliveries")
+      .update({ sort_order: newSortOrder, is_published: true } as any)
+      .eq("id", delivery.id);
+
+    if (error) {
+      setErrorMsg(`Failed to promote delivery: ${error.message}`);
+      fetchDeliveries();
+    }
+  };
 
   // Inline toggle for status flags (is_published, is_hero, is_featured)
   const handleToggle = async (
@@ -175,6 +231,29 @@ export default function DeliveriesList() {
 
       {errorMsg && <div className="admin-alert-error">{errorMsg}</div>}
 
+      {/* Homepage Slot Management Banner */}
+      <div className="admin-slots-banner">
+        <div className="admin-slots-left">
+          <span className="admin-slots-tag">Homepage Layout:</span>
+          <span className="admin-slots-pill active">
+            <CheckCircle size={14} weight="fill" />
+            {top8Count} / 8 on Homepage Grid
+          </span>
+          {seeMoreCount > 0 ? (
+            <span className="admin-slots-pill seemore">
+              {seeMoreCount} in &ldquo;See more&rdquo; section
+            </span>
+          ) : (
+            <span className="admin-slots-pill muted">
+              0 in &ldquo;See more&rdquo;
+            </span>
+          )}
+        </div>
+        <p className="admin-slots-hint">
+          The homepage displays the top 8 published deliveries (sorted by highest Sort Order). Any additional published deliveries automatically appear when visitors click &ldquo;See more&rdquo;.
+        </p>
+      </div>
+
       {/* Toolbar: Search input + filter tabs */}
       <div className="admin-toolbar">
         <div className="admin-search-wrap">
@@ -191,21 +270,23 @@ export default function DeliveriesList() {
         <div className="admin-filter-tabs">
           {(
             [
-              { id: "all", label: "All" },
-              { id: "published", label: "Published" },
-              { id: "draft", label: "Drafts" },
-              { id: "hero", label: "Hero Deals" },
-              { id: "featured", label: "Featured" },
+              { id: "all", label: "All", count: deliveries.length },
+              { id: "top8", label: "Homepage (Top 8)", count: `${top8Count}/8` },
+              { id: "seemore", label: `"See More" (9+)`, count: seeMoreCount },
+              { id: "published", label: "Published", count: publishedOrderMap.size },
+              { id: "draft", label: "Drafts", count: deliveries.filter((d) => !d.is_published).length },
+              { id: "hero", label: "Hero Deals", count: deliveries.filter((d) => d.is_hero).length },
+              { id: "featured", label: "Featured", count: deliveries.filter((d) => d.is_featured).length },
             ] as const
           ).map((tab) => (
             <button
               key={tab.id}
               type="button"
               className={`admin-tab-btn ${activeTab === tab.id ? "active" : ""}`}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => setActiveTab(tab.id as FilterTab)}
             >
               {tab.label}
-              {tab.id === "all" && <span className="admin-tab-count">{deliveries.length}</span>}
+              <span className="admin-tab-count">{tab.count}</span>
             </button>
           ))}
         </div>
