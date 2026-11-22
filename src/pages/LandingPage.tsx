@@ -883,15 +883,28 @@ function Viewer({
 
   const photoCount = photos.length;
   const currentPhoto = photos[open.photoIndex] || photos[0];
-  const [dir, setDir] = useState(1);
+  const [prevIndex, setPrevIndex] = useState<number | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
-  const photoRef = useRef<HTMLImageElement>(null);
+
+  // Preload all photos for this delivery to ensure instant crossfades without decode latency
+  useEffect(() => {
+    photos.forEach((p) => {
+      if (p.url) {
+        const img = new Image();
+        img.src = p.url;
+      }
+    });
+  }, [photos]);
 
   const go = (toIndex: number) => {
     const nextIndex = ((toIndex % photoCount) + photoCount) % photoCount;
-    setDir(toIndex > open.photoIndex ? 1 : -1);
+    if (nextIndex === open.photoIndex) return;
+    const prefersReducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!prefersReducedMotion) {
+      setPrevIndex(open.photoIndex);
+    }
     setOpen({ id: d.id, photoIndex: nextIndex });
   };
 
@@ -930,18 +943,6 @@ function Viewer({
       );
     }
   }, []);
-
-  // Photo slide animation on change
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !photoRef.current) return;
-
-    gsap.fromTo(
-      photoRef.current,
-      { opacity: 0, x: dir * 36 },
-      { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }
-    );
-  }, [open.photoIndex, dir]);
 
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
@@ -990,10 +991,23 @@ function Viewer({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="viewer-photo">
+          {prevIndex !== null && photos[prevIndex] && prevIndex !== open.photoIndex && (
+            <img
+              key={`prev-${photos[prevIndex].url}`}
+              src={photos[prevIndex].url}
+              alt=""
+              aria-hidden="true"
+              className="viewer-img-prev"
+              loading="eager"
+            />
+          )}
           <img
-            ref={photoRef}
+            key={`curr-${currentPhoto.url}`}
             src={currentPhoto.url}
             alt={`${d.model} · ${num(open.photoIndex + 1, lang)}`}
+            className={`viewer-img-active${prevIndex !== null ? " viewer-img-fade" : ""}`}
+            loading="eager"
+            onAnimationEnd={() => setPrevIndex(null)}
           />
           <button type="button" className="viewer-nav prev" onClick={() => go(open.photoIndex - 1)} aria-label={t.sold.prev}>
             <CaretLeft />
